@@ -4,6 +4,9 @@
  * Frontend Access Controllers
  * All route names are prefixed with 'frontend.auth'.
  */
+
+//Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
 Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
 
     /*
