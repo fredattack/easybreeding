@@ -1,83 +1,64 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.adminPressHorizontalAuth')
 
-@section('title', app_name() . ' | '.__('labels.frontend.auth.register_box_title'))
+@section('title', app_name() . ' | '.(__('navs.general.register')))
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-8 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        {{ __('labels.frontend.auth.register_box_title') }}
-                    </strong>
-                </div><!--card-header-->
-
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url({{URL::asset('storage/images/registerBackground.jpg')}}">
+            <div class="login-box card">
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
-
-                                    {{ html()->text('first_name')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.first_name'))
-                                        ->attribute('maxlength', 191) }}
-                                </div><!--col-->
-                            </div><!--row-->
-
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
-
-                                    {{ html()->text('last_name')
+                    <form class="form-horizontal form-material" id="loginform" action="{{route('frontend.auth.register.post')}}" method="post">
+                        <h3 class="box-title m-b-20">Sign Up</h3>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                {{ html()->text('first_name')
+                                         ->class('form-control')
+                                         ->placeholder(__('validation.attributes.frontend.first_name'))
+                                         ->attribute('maxlength', 191) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                {{ html()->text('last_name')
                                         ->class('form-control')
                                         ->placeholder(__('validation.attributes.frontend.last_name'))
                                         ->attribute('maxlength', 191) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                {{ html()->email('email')
                                         ->class('form-control')
                                         ->placeholder(__('validation.attributes.frontend.email'))
                                         ->attribute('maxlength', 191)
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                {{ html()->password('password')
                                         ->class('form-control')
                                         ->placeholder(__('validation.attributes.frontend.password'))
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                {{ html()->password('password_confirmation')
+                                    ->class('form-control')
+                                    ->placeholder(__('validation.attributes.frontend.password_confirmation'))
+                                    ->required() }}
+                            </div>
+                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="checkbox checkbox-success">
+                                    <input id="checkbox-signup" type="checkbox">
+                                    <label for="checkbox-signup"> I agree to all <a href="#">Terms</a></label>
+                                </div>
+                            </div>
+                        </div>
                         @if (config('access.captcha.registration'))
                             <div class="row">
                                 <div class="col">
@@ -86,16 +67,17 @@
                                 </div><!--col-->
                             </div><!--row-->
                         @endif
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.register_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
-
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">{{__('labels.frontend.auth.register_button')}}</button>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                <div>Already have an account? <a href="pages-login.html" class="text-info m-l-5"><b>Sign In</b></a></div>
+                            </div>
+                        </div>
+                    </form>
                     <div class="row">
                         <div class="col">
                             <div class="text-center">
@@ -103,15 +85,8 @@
                             </div>
                         </div><!--/ .col -->
                     </div><!-- / .row -->
-                    
-                </div><!-- card-body -->
-            </div><!-- card -->
-        </div><!-- col-md-8 -->
-    </div><!-- row -->
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
-
-@push('after-scripts')
-    @if (config('access.captcha.registration'))
-        {!! Captcha::script() !!}
-    @endif
-@endpush

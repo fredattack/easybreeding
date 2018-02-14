@@ -10,10 +10,16 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+// resources/assets/images
+mix.copyDirectory('resources/assets/img', '/public/img');
+mix.copyDirectory('resources/assets/images', 'public/images');
+mix.copyDirectory('resources/assets/icons', 'public/icons');
 
-mix.sass('resources/assets/sass/frontend/app.scss', 'public/css/frontend.css')
+// .sass('resources/assets/sass/frontend/app/app.scss', 'public/css/appfrontend.css')
+mix.sass('resources/assets/sass/frontend/site/style.scss', 'public/css/sitefrontend.css')
     .sass('resources/assets/sass/backend/app.scss', 'public/css/backend.css')
-    .js('resources/assets/js/frontend/app.js', 'public/js/frontend.js')
+    // .js('resources/assets/js/frontend/app/app.js', 'public/js/appfrontend.js')
+    .js('resources/assets/js/frontend/site/app.js', 'public/js/sitefrontend.js')
     .js([
         'resources/assets/js/backend/before.js',
         'resources/assets/js/backend/app.js',
@@ -23,3 +29,5 @@ mix.sass('resources/assets/sass/frontend/app.scss', 'public/css/frontend.css')
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();
 }
+
+// mix.disableNotifications();

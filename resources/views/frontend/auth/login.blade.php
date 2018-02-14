@@ -1,82 +1,93 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.adminPressHorizontalAuth')
 
-@section('title', app_name() . ' | '.__('labels.frontend.auth.login_box_title'))
+@section('title', app_name() . ' | '.(__('navs.general.login')))
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-8 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        {{ __('labels.frontend.auth.login_box_title') }}
-                    </strong>
-                </div><!--card-header-->
-
+    <section id="wrapper">
+        @php( $x=DIRECTORY_SEPARATOR)
+        <div class="login-register" style="background-image:url({{URL::asset('storage/images/rainbow-lorikeet.jpg')}}">
+            <div class="login-box card">
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.login.post'))->open() }}
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
+                    <form class="form-horizontal form-material" id="loginform" method="post" action="{{route('frontend.auth.login.post')}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <h3 class="box-title m-b-20">Sign In</h3>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                {{ html()  ->email('email')
+                                           ->class('form-control')
+                                           ->placeholder(__('validation.attributes.frontend.email'))
+                                           ->attribute('maxlength', 191)
+                                           ->required() }}
+                                {{--<input class="form-control" type="text" required="" placeholder="Username"> --}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                {{ html()->password('password')
                                         ->class('form-control')
                                         ->placeholder(__('validation.attributes.frontend.password'))
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}
-                                    </div>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.login_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group text-right">
-                                    <a href="{{ route('frontend.auth.password.reset') }}">{{ __('labels.frontend.passwords.forgot_password') }}</a>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                {!! $socialiteLinks !!}
+                                {{--<input class="form-control" type="password" required="" placeholder="Password"> --}}
                             </div>
-                        </div><!--col-->
-                    </div><!--row-->
-                </div><!--card body-->
-            </div><!--card-->
-        </div><!-- col-md-8 -->
-    </div><!-- row -->
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 font-14">
+                                <div class="checkbox checkbox-primary pull-left p-t-0">
+                                    {{--<div class="checkbox">--}}
+                                        {{--{{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}--}}
+                                    {{--</div>--}}
+
+                                    <input id="checkbox-signup" type="checkbox" name="remember" id="remember">
+                                    <label for="checkbox-signup">{{__('labels.frontend.auth.remember_me')}} </label>
+                                </div>
+                                <br/>
+                                <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i>{{ __('labels.frontend.passwords.forgot_password') }}</a>
+                            </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                                <div class="social">
+                                    <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                <div>Don't have an account? <a href="pages-register.html" class="text-info m-l-5"><b>Sign Up</b></a></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" id="recoverform" method="post" action="{{route('frontend.auth.password.email.post') }}">
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <h3>{{ __('labels.frontend.passwords.reset_password_button') }}</h3>
+                                <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                {{ html()->email('email')
+                                       ->class('form-control')
+                                       ->placeholder(__('validation.attributes.frontend.email'))
+                                       ->attribute('maxlength', 191)
+                                       ->required()
+                                       ->autofocus() }}
+                            </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
