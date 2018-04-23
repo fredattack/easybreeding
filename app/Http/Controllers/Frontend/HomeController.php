@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use JavaScript;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class HomeController.
@@ -14,6 +16,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.test');
+//        if(Auth::check()){
+
+//        JavaScript::put([
+//            'name' => Auth::user()->first_name
+//        ]);
+//        }else{
+//            JavaScript::put([
+//                'name' => 'inconnu'
+//            ]);
+//        }
+
+
+        return view('frontend.home');
     }
 }

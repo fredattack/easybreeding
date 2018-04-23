@@ -15,16 +15,20 @@ mix.copyDirectory('resources/assets/img', '/public/img');
 mix.copyDirectory('resources/assets/images', 'public/images');
 mix.copyDirectory('resources/assets/icons', 'public/icons');
 
-// .sass('resources/assets/sass/frontend/app/app.scss', 'public/css/appfrontend.css')
+
+
+
 mix.sass('resources/assets/sass/frontend/site/style.scss', 'public/css/sitefrontend.css')
+    .sass('resources/assets/sass/frontend/app/style.scss', 'public/css/appfrontend.css')
     .sass('resources/assets/sass/backend/app.scss', 'public/css/backend.css')
-    // .js('resources/assets/js/frontend/app/app.js', 'public/js/appfrontend.js')
+    .js('resources/assets/js/frontend/app/app.js', 'public/js/appfrontend.js')
     .js('resources/assets/js/frontend/site/app.js', 'public/js/sitefrontend.js')
     .js([
         'resources/assets/js/backend/before.js',
         'resources/assets/js/backend/app.js',
         'resources/assets/js/backend/after.js'
-    ], 'public/js/backend.js');
+    ], 'public/js/backend.js')
+    .mix.react('resources/assets/js/frontend/site/app.jsx', 'public/js/react.js');
 
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();

@@ -4,9 +4,10 @@
  * Global Routes
  * Routes that are used between both frontend and backend.
  */
+@require('app.php');
 
 // Switch between the included languages
-Route::get('lang/{lang}', 'LanguageController');
+Route::get('lang/{lang}', 'LanguageController')->name('lang');
 
 /*
  * Frontend Routes
@@ -31,3 +32,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      */
     include_route_files(__DIR__.'/backend/');
 });
+
+/*
+ * Frontend Routes
+ * Namespaces indicate folder structure
+ */
+//Route::group(['namespace' => 'App', 'as' => 'frontend.App.'], function () {
+//    include_route_files(__DIR__.'/Frontend/App');
+//});

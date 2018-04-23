@@ -14,7 +14,7 @@ return [
     */
 
     'general' => [
-        'home'   => 'Home',
+        'home'   => 'StartPagina',
         'logout' => 'Uitloggen',
     ],
 

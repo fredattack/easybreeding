@@ -1,6 +1,9 @@
 {
-    "/js/sitefrontend.js": "/js/sitefrontend.js?id=22d2ec0d8704cc4780f6",
+    "/js/appfrontend.js": "/js/appfrontend.js?id=18cd389a0454ecb611da",
     "/css/sitefrontend.css": "/css/sitefrontend.css?id=fc531b8d81bf0b8e85a8",
+    "/css/appfrontend.css": "/css/appfrontend.css?id=743be13e33632d00313b",
     "/css/backend.css": "/css/backend.css?id=ca0d34692d363f200eab",
-    "/js/backend.js": "/js/backend.js?id=680f90f4d2d86851e5b3"
+    "/js/sitefrontend.js": "/js/sitefrontend.js?id=bba3a05a52e4e829084f",
+    "/js/react.js": "/js/react.js?id=53d941a96c34d8dad73f",
+    "/js/backend.js": "/js/backend.js?id=f83d5988f0a97e17e1c9"
 }
