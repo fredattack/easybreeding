@@ -10,9 +10,9 @@
 
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">@lang('custom.birds')</span></a>
-                    {{--<ul aria-expanded="false" class="collapse">--}}
-                        {{--<li><a href="app-calendar.html">Calendar</a></li>--}}
+                    <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.birds')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">@lang('custom.birds')</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="app-calendar.html">Calendar</a></li>
                         {{--<li>--}}
                             {{--<a class="has-arrow" href="#" aria-expanded="false">Inbox</a>--}}
                             {{--<ul aria-expanded="false" class="collapse">--}}
@@ -26,7 +26,7 @@
                         {{--<li><a href="app-contact.html">Contact / Employee</a></li>--}}
                         {{--<li><a href="app-contact2.html">Contact Grid</a></li>--}}
                         {{--<li><a href="app-contact-detail.html">Contact Detail</a></li>--}}
-                    {{--</ul>--}}
+                    </ul>
                 </li>
                 {{--<li class="three-column">--}}
                     {{--<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Ui Elements</span></a>--}}

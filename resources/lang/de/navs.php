@@ -21,6 +21,7 @@ return [
     'frontend' => [
         'contact' => 'Contact',
         'dashboard' => 'Dashboard',
+        'birds' => 'die Vögel',
         'login'     => 'Anmelden',
         'macros'    => 'Makros',
         'register'  => 'Registrieren',

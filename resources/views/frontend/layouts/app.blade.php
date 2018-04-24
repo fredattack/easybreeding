@@ -36,6 +36,8 @@
         <!-- Scripts -->
         @stack('before-scripts')
         {!! script(mix('js/frontend.js')) !!}
+
+        {!! script(mix('js/react.js')) !!}
         @stack('after-scripts')
 
         @include('includes.partials.ga')

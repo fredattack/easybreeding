@@ -21,6 +21,8 @@ return [
     'frontend' => [
         'contact' => 'Contact',
         'dashboard' => 'Tableau de bord',
+        'birds' => 'les Oiseaux',
+        'addbird' => 'Ajouter un Oiseau',
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",

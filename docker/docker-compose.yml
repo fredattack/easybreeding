@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: "2"
+services:
+  easybreeding-dev:
+    build: .
+    ports:
+      - '8050:80'
+    # container name from before
+    volumes:
+      - easybreeding-data-sync:/var/www/html:nocopy
+  easybreeding-db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: database
+    ports:
+      - "8072:3306"
+
+
+# container name from before
+volumes:
+  easybreeding-data-sync:
+    external: true
+
+
+#networks:
+#  default:
+#    external:
+#      name: easyBreeding

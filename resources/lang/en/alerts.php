@@ -40,5 +40,9 @@ return [
         'contact' => [
             'sent' => 'Your information was successfully sent. We will respond back to the e-mail provided as soon as we can.',
         ],
+        'displayList'    => 'DisplayList',
+        'displayBlock'    => 'DisplayBlock',
+        'addBird'    => 'Add a bird',
+        'noBirds'    => "You have not added any bird yet.",
     ],
 ];

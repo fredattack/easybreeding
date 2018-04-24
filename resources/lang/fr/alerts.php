@@ -40,5 +40,10 @@ return [
         'contact' => [
             'sent' => "Votre message a été envoyé avec succès. Nous répondrons à l'adresse email que vous nous avez fourni dès que nous le pourrons.",
         ],
+        'displayList'    => 'Affichage Liste',
+        'displayBlock'    => 'Affichage Bloc',
+        'addBird'    => 'Ajouter un Oiseau',
+        'noBirds'    => "Vous n'avez pas encore ajouter d'oiseau.",
+
     ],
 ];

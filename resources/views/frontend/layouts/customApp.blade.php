@@ -154,7 +154,7 @@
 <!-- Script-->
 <!-- ============================================================== -->
 <script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
-{{--<script src="{{ mix('js/react.js') }}"></script>--}}
+<script src="{{ mix('js/react.js') }}"></script>
 </body>
 
 </html>
