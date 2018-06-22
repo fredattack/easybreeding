@@ -1,0 +1,21 @@
+
+@media screen and (max-width: 500px) {
+  .cardflex{
+    flex-wrap: wrap;
+  }
+  .leftCard,.rightCard{
+    width: 100%;
+    padding: 1em 1em;
+  }
+
+  #displayList{
+    display:none;
+  }
+  #displayBlock{
+    display:block !important;
+  }
+  #btnList, #btnBlock{
+    display:none;
+  }
+
+}

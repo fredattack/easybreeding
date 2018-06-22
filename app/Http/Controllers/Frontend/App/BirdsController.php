@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Frontend\App;
 
 use App\Bird;
+use App\Order;
+use App\Specie;
+use App\Famille;
+use App\BirdsAlpha;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use JavaScript;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PHPUnit\Util\PHP\AbstractPhpProcess;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use DateTime;
 
 /**
  * Class HomeController.
@@ -24,9 +33,9 @@ class BirdsController extends Controller
      */
     public function index()
     {
-        $birds=Bird::get();
+        $birds=Bird::with('specie')->where('userId','=',Auth::id())->get();
 //        dd($birds);
-        return view('frontend.app.birdsIndex',compact('birds'));
+        return view('frontend.app.bird.birdsIndex',compact('birds'));
     }
 
     /**
@@ -36,10 +45,27 @@ class BirdsController extends Controller
      */
     public function create()
     {
-        return view('frontend.app.birdsCreate');
+        $orders=Order::get();
+        $females = Bird::where('sexe','=','female')->get();
+        $males = Bird::where('sexe','=','male')->get();
+
+        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males']));
 
     }
 
+
+
+    public function ajaxData(){
+
+
+        $query =Input::get('query');
+        $columnName='name_FR';
+        $posts = BirdsAlpha::Where($columnName,'LIKE','%'.$query.'%')->get();
+
+
+        return response()->json($posts);
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -47,8 +73,36 @@ class BirdsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
 
+        $bird = new Bird;
+
+        $bird->species_id = $request->speciesId;
+        $bird->sexe = $request->sexe;
+        $bird->sexingMethode = $request->sexingMethode;
+        $bird->origin = $request->origin;
+        $bird->breederId = $request->breederId;
+        $bird->idType = $request->idType;
+        $bird->idNum = $request->idNum;
+        $date = DateTime::createFromFormat('d/m/Y',$request->dateOfBirth );
+        $convertDate=$date->format('d/m/Y');
+        $bird->dateOfBirth = $convertDate;
+        $bird->disponibility = $request->disponibility;
+        $bird->status = $request->status;
+
+        if($request->mother_id !=1)$bird->mother_id = $request->mother_id;
+        if($request->father_id !=1)$bird->father_id = $request->father_id;
+        if($request->mutation !=null)$bird->mutation = $request->mutation;
+        $count = Bird::where('species_id','=',$request->speciesId )
+                        ->where('userId', '=', Auth::id())->count();
+
+        if($request->personal_id == null)$bird->personal_id = str_replace(" ","",$request->usualName). $count+1;
+        else $bird->personal_id = $request->personal_id;
+        $bird->userId=Auth::id();
+//        dd($request);
+
+        $bird->save();
+
+        return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdCreated'));
     }
 
     /**
@@ -70,7 +124,13 @@ class BirdsController extends Controller
      */
     public function edit($id)
     {
+        $bird=Bird::with('specie')->where('id','=',$id)->firstOrFail();
 
+        $famille=Famille::where('id',$bird->specie->Id_famillie)->firstOrFail();
+        $order=Order::where('id',$famille->orderId)->firstOrFail();
+        $orders=Order::get();
+
+        return view('frontend.app.bird.birdsCreate',compact(['bird','order','orders','famille']));
     }
 
     /**
@@ -79,9 +139,24 @@ class BirdsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
+//        dd($request);
+        $bird=Bird::with('specie')->where('id','=',$id)->firstOrFail();
 
+        $bird->sexe=$request->sexe;
+        $bird->sexingMethode=$request->sexingMethode;
+        $bird->dateOfBirth=$request->dateOfBirth;
+        $bird->idType=$request->idType;
+        $bird->idNum=$request->idNum;
+        $bird->personal_id=$request->personal_id;
+        $bird->origin=$request->origin;
+        $bird->breederId=$request->breederId;
+        $bird->disponibility=$request->disponibility;
+        $bird->status=$request->status;
+        $bird->save();
+
+        return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdUpdated'));
     }
 
     /**
@@ -93,5 +168,23 @@ class BirdsController extends Controller
     public function destroy($id)
     {
 
+    }
+    public function generateFamillies(){
+        $orderId = Input::get('orderId');
+        $famillies = Famille::where('orderId','=',$orderId)->get();
+
+        return response()->json($famillies);
+    }
+    public function generateSpecies(){
+        $famillyId = Input::get('famillieId');
+        $species = Specie::where('Id_famillie','=',$famillyId)->get();
+
+        return response()->json($species);
+    }
+    public function generateUsualName(){
+        $specieId = Input::get('specieId');
+        $selectedSpecie = Specie::where('id','=',$specieId)->first();
+
+        return response()->json($selectedSpecie);
     }
 }

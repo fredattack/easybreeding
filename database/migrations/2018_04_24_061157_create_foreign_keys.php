@@ -33,11 +33,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
-		Schema::table('Couples', function(Blueprint $table) {
-			$table->foreign('cage_id')->references('id')->on('Couples')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
+		//Schema::table('Couples', function(Blueprint $table) {
+		//	$table->foreign('cage_id')->references('id')->on('Couples')
+		//				->onDelete('restrict')
+		//				->onUpdate('restrict');
+		//});
 		Schema::table('Hatchings', function(Blueprint $table) {
 			$table->foreign('couple_id')->references('id')->on('Couples')
 						->onDelete('restrict')

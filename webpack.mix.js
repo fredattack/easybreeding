@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+const {mix} = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,9 +11,10 @@ let mix = require('laravel-mix');
  |
  */
 // resources/assets/images
-mix.copyDirectory('resources/assets/img', '/public/img');
+mix.copyDirectory('resources/assets/img', 'public/img');
 mix.copyDirectory('resources/assets/images', 'public/images');
 mix.copyDirectory('resources/assets/icons', 'public/icons');
+
 
 
 
@@ -27,11 +28,31 @@ mix.sass('resources/assets/sass/frontend/site/style.scss', 'public/css/sitefront
         'resources/assets/js/backend/before.js',
         'resources/assets/js/backend/app.js',
         'resources/assets/js/backend/after.js'
-    ], 'public/js/backend.js')
-    .mix.react('resources/assets/js/frontend/site/app.jsx', 'public/js/react.js');
+    ], 'public/js/backend.js');
+    // .mix.react('resources/assets/js/frontend/site/app.jsx', 'public/js/react.js')
+
+    // .mix.react('resources/assets/js/frontend/app/app.jsx', 'public/js/react.js');
 
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();
 }
+//
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    query: {
+                        presets: ['flow']
+                    }
+                }
+            }
+        ]
+    }
+
+});
 
 // mix.disableNotifications();

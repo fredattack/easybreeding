@@ -4,4 +4,3 @@
 
 
 
-require('./reactComponent/Example');

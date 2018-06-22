@@ -23,6 +23,7 @@ return [
         'dashboard' => 'Tableau de bord',
         'birds' => 'les Oiseaux',
         'addbird' => 'Ajouter un Oiseau',
+        'editbird' => "Modifier l' Oiseau",
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",

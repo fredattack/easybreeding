@@ -5,14 +5,20 @@
  */
 
 require('../global/jquery.min.js');
-require('../global/popper.min.js')
+require('../global/popper.min.js');
 require('../global/bootstrap.js');
+
 require('../global/jquery.sparkline.min');
 require('../global/jQuery.style.switcher');
 require('../global/sticky-kit.min');
 require('../global/jquery.slimscroll.js');
 require('../global/waves.js');
 require('../global/sidebarmenu.js');
+require('../global/bootstrap-datepicker.min');
+require('../global/jquery.easy-autocomplete');
+require('../global/jquery.dataTables.min');
+
+
 
 
 
@@ -20,6 +26,8 @@ require('../global/sidebarmenu.js');
 
 
 require('./custom.min.js');
+require('./createBird.js');
+require('./indexBird');
 /*
 *
 * End Starter Kit

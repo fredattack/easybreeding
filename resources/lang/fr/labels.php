@@ -106,7 +106,10 @@ return [
     ],
 
     'frontend' => [
-
+        'date' =>[
+            'year'    => 'an(s)',
+            'month'       => 'mois',
+        ],
         'auth' => [
             'login_box_title'    => 'Connexion',
             'login_button'       => 'Entrer',
@@ -145,6 +148,7 @@ return [
                 'update_information' => 'Mettre à jour les informations',
             ],
         ],
+        //@todo multi language after this
         'birds' => [
             'order'                 => 'Ordre',
             'species'        => 'Espéce',
@@ -157,6 +161,7 @@ return [
             'sexingMethode' => 'Méthode de sexage',
             'mutation' => 'Mutation',
             'birthDate' => 'Date de Naissance',
+            'age' => 'Age',
             'idType' => "Type d'identifiant",
             'idPerso' => 'Identifiant Personnel',
             'idNummer' => "Numéro d'identifiant",
@@ -168,6 +173,26 @@ return [
             'orderFirst' => "Choisissez d'abord un Ordre.",
             'famillyFirst' => 'Choisissez d\'abord une Famille.',
             'speciesFirst' => 'Choisissez d\'abord une Espéce.',
+            'openRings' => 'Bague Ouverte',
+            'closedRings' => 'Bague Fermée',
+            'noOne' => 'Aucune',
+            'other' => 'Autre',
+            'DNA' => 'ADN',
+            'endoscopy' => 'Endoscopie',
+            'supposed'=>'Supposé',
+            'dymorphism'=>'Dymorphisme Sexuelle',
+            'thisElevage'=>'Propre élevage',
+            'advertencie'=>'Petite annonce',
+            'friend'=>'Ami - Contact',
+            'expo'=>'Expo - Bourse' ,
+            'infoBreeder'=>'Éleveur' ,
+            'disponible'=>'Disponible' ,
+            'toBeSale'=>'Á céder' ,
+            'reserved'=>'Réservé' ,
+            'coupled'=>'En couple' ,
+            'single'=>'Seul' ,
+            'rest'=>'Au Repos' ,
+
 
         ],
 

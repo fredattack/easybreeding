@@ -9,6 +9,7 @@ class CreateOrderTable extends Migration {
 	{
 		Schema::create('Order', function(Blueprint $table) {
 			$table->increments('id');
+            $table->string('orderName')->nullable();
 			$table->timestamps();
 		});
 	}

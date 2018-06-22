@@ -12,7 +12,8 @@
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.birds')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">@lang('custom.birds')</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="app-calendar.html">Calendar</a></li>
+                        <li><a href="{{route('frontend.app.birds')}}">@lang('custom.birdsList')</a></li>
+                        <li><a href="{{route('frontend.app.birdCreate')}}">@lang('custom.createBird')</a></li>
                         {{--<li>--}}
                             {{--<a class="has-arrow" href="#" aria-expanded="false">Inbox</a>--}}
                             {{--<ul aria-expanded="false" class="collapse">--}}

@@ -17,7 +17,7 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: database
     ports:
-      - "8072:3306"
+      - "8006:3306"
 
 
 # container name from before

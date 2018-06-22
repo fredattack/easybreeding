@@ -17,8 +17,10 @@
             "browsers": "> 2%",
             "uglify": true
           }
+
         }]
       ]
+
     },
     "production": {
       "presets": [

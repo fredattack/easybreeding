@@ -40,10 +40,16 @@ return [
         'contact' => [
             'sent' => "Votre message a été envoyé avec succès. Nous répondrons à l'adresse email que vous nous avez fourni dès que nous le pourrons.",
         ],
+        //@todo multi language after this
         'displayList'    => 'Affichage Liste',
         'displayBlock'    => 'Affichage Bloc',
         'addBird'    => 'Ajouter un Oiseau',
+        'addCouples'    => 'Ajouter à un couple',
+        'editBird'    => "Modifier l'Oiseau",
         'noBirds'    => "Vous n'avez pas encore ajouter d'oiseau.",
+        'viewSpecie'    => "Voir la fiche de l'éspèce",
+        'birdUpdated' => "l'oiseau à bien été mis à jour",
+        'birdCreated' => "l'oiseau à bien été ajouté",
 
     ],
 ];

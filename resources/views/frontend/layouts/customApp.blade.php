@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
@@ -15,11 +16,14 @@
     <!-- Custom CSS -->
     {{ style(mix('css/appfrontend.css')) }}
     <link href="css/colors/red-dark.css" id="theme" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 </head>
 
@@ -43,22 +47,22 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{url('')}}">
-                    <!-- Logo icon --><b>
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <img src="/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo icon -->
-                        <img src="/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                    </b>
-                    <!--End Logo icon -->
-                    <!-- Logo text --><span>
-                         <!-- dark Logo text -->
-                         <img src="/images/logo-text.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo text -->
-                         <img src="/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
-            </div>
+            {{--<div class="navbar-header">--}}
+                {{--<a class="navbar-brand" href="{{url('')}}">--}}
+                    {{--<!-- Logo icon --><b>--}}
+                        {{--<!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->--}}
+                        {{--<!-- Dark Logo icon -->--}}
+                        {{--<img src="/images/logo-icon.png" alt="homepage" class="dark-logo" />--}}
+                        {{--<!-- Light Logo icon -->--}}
+                        {{--<img src="/images/logo-light-icon.png" alt="homepage" class="light-logo" />--}}
+                    {{--</b>--}}
+                    {{--<!--End Logo icon -->--}}
+                    {{--<!-- Logo text --><span>--}}
+                         {{--<!-- dark Logo text -->--}}
+                         {{--<img src="/images/logo-text.png" alt="homepage" class="dark-logo" />--}}
+                        {{--<!-- Light Logo text -->--}}
+                         {{--<img src="/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>--}}
+            {{--</div>--}}
             <!-- ============================================================== -->
             <!-- End Logo -->
             <!-- ============================================================== -->
@@ -154,7 +158,10 @@
 <!-- Script-->
 <!-- ============================================================== -->
 <script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
-<script src="{{ mix('js/react.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+{{--<script  type="text/javascript" src="{{ mix('/js/react.js') }}"></script>--}}
 </body>
 
 </html>

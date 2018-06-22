@@ -20,6 +20,9 @@ return [
  * */
 
     'birds'         => 'Oiseaux',
+    'birdsList'         => 'Les Oiseaux',
+    'createBird'         =>'Ajouter un oiseau',
+
     'couples'       => 'Couples',
     'hatchings'     => 'Couvées',
     'eggs'          => 'Oeufs',

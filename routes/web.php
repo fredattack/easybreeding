@@ -5,6 +5,7 @@
  * Routes that are used between both frontend and backend.
  */
 @require('app.php');
+@require('ajax.php');
 
 // Switch between the included languages
 Route::get('lang/{lang}', 'LanguageController')->name('lang');
