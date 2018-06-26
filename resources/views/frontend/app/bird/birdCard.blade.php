@@ -6,17 +6,24 @@
             {{$bird->personal_id}}
         </h2>
         <div class="horizonCard text-center" >
-            <a href="{{ route('frontend.app.birdCreate') }}" class="btn btn-circle btn-lg btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom">
+            <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewBird')}}">
+                    <button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-lg btn-circle btn-success"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >
+                        <i class="mdi mdi-linux"></i>
+                    </button>
+            </span>
+            <a href="{{route('frontend.app.editBird',$bird->id)}}" class="btn btn-circle btn-lg btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom">
                 <i class="mdi mdi-grease-pencil"></i>
             </a>
 
-            <a href="{{ route('frontend.app.birdCreate') }}" class="btn btn-circle btn-lg btn-success " data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
+            <button class="btn btn-circle btn-lg btn-success " data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
                 <i class="mdi mdi-infinity"></i>
-            </a>
+            </button>
 
-            <a href="{{ route('frontend.app.birdCreate') }}" class="btn btn-circle btn-lg btn-success " data-toggle="tooltip" title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
-                <i class="mdi  mdi-eye"></i>
-            </a>
+            <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewSpecie')}}">
+                <button href="#" id="showSpecieBtn" type="button" class="btn btn-lg btn-circle btn-success " data-placement="bottom" data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
+                    <i class="mdi  mdi-eye"></i>
+                </button>
+            </span>
         </div>
         <div class="leftCard">
             <label>@lang('labels.frontend.birds.usualName'): </label><p><b>{{$bird->specie->commonName}}</b></p>

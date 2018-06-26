@@ -192,6 +192,13 @@ return [
             'coupled'=>'En couple' ,
             'single'=>'Seul' ,
             'rest'=>'Au Repos' ,
+            'incubation'=>'Durée d\'incubation',
+            'fertilityControl'=>'Contrôle de la fertilité',
+            'girdleDate'=>'Age pour baguer',
+            'outOfNest'=>'Sortie du nid',
+            'weaning'=>'sevrage',
+            'sexualMaturity'=>'Maturité sexuelle',
+            'spawningInterval'=>'Interval de ponte',
 
 
         ],

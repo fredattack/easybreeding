@@ -15,7 +15,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a href="{{route('frontend.app.dashboard')}}">@lang('navs.frontend.dashboard')</a></li>
-                <li class="breadcrumb-item"><a href="#">@lang('navs.frontend.birds')</a></li>
+                <li class="breadcrumb-item"><a href="{{route('frontend.app.birds')}}">@lang('navs.frontend.birds')</a></li>
                @if(isset($bird))
                     <li class="breadcrumb-item active"><a href="#">@lang('navs.frontend.editbird') - {{$bird->personal_id}}</a></li>
                 @else

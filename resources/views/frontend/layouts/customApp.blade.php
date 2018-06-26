@@ -160,7 +160,9 @@
 <script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-
+<script>
+    {{--window.translations = {!! Cache::get('translations') !!};--}}
+</script>
 {{--<script  type="text/javascript" src="{{ mix('/js/react.js') }}"></script>--}}
 </body>
 

@@ -28,6 +28,8 @@ require('../global/jquery.dataTables.min');
 require('./custom.min.js');
 require('./createBird.js');
 require('./indexBird');
+require('./specieModale');
+require('./birdModale');
 /*
 *
 * End Starter Kit

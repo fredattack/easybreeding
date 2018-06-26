@@ -16,7 +16,8 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
 
     Route::get('/autocomplete',"Frontend\App\BirdsController@ajaxData");
 //    Route::get('/createBird', "Frontend\App\BirdsController@create")->name('frontend.app.birdCreate');
-//    Route::post('/storeBird', "Frontend\App\BirdsController@store")->name('frontend.app.storeBird');
+    Route::get('/getBird', "Frontend\App\BirdsController@getBird")->name('frontend.app.getBird');
+    Route::get('/getSpecie', "Frontend\App\BirdsController@getSpecie")->name('frontend.app.getSpecie');
 
 
 });

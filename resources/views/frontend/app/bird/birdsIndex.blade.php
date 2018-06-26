@@ -1,18 +1,17 @@
 @extends('frontend.layouts.customApp')
 
-@section('title', app_name() . ' | '.__('navs.frontend.dashboard'))
+@section('title', app_name() . ' | '.__('navs.frontend.birds'))
 
 @section('content')
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">{{__('navs.frontend.dashboard')}}</h3>
+            <h3 class="text-themecolor">{{__('navs.frontend.birds')}}</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item "><a href="{{route('frontend.app.dashboard')}}">{{__('navs.frontend.dashboard')}}</a></li>
-                <li class="breadcrumb-item active"><a href="#">{{__('navs.frontend.birds')}}</a></li>
-                {{--<li class="breadcrumb-item">pages</li>--}}
-                {{--<li class="breadcrumb-item active">Starter kit</li>--}}
+                <li class="breadcrumb-item active"><a href="{{route('frontend.app.birds')}}">{{__('navs.frontend.birds')}}</a></li>
+
 
 
             </ol>
@@ -36,6 +35,8 @@
                 {{ session('info') }}
             </div>
         @endif
+        @include('frontend.app.bird.modales.bird')
+        @include('frontend.app.bird.modales.specieModale')
         <div class="row">
             <div class="col-12" id="element">
                 <div class="card">
@@ -88,6 +89,7 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -99,6 +101,7 @@
                                             <th>@lang('labels.frontend.birds.idNummer')</th>
                                             <th>@lang('labels.frontend.birds.status'):</th>
                                             <th>@lang('labels.frontend.birds.disponibility'):</th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -119,20 +122,30 @@
                                             <td>@lang('labels.frontend.birds.'.$bird->status)</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>
                                             <td class="text-center">
+                                                <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewBird')}}">
+                                                    <button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-success"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >
+                                                        <i class="mdi mdi-linux"></i>
+                                                    </button>
+                                                </span>
+
+                                            </td>
+                                            <td class="text-center">
                                                 <a href="{{route('frontend.app.editBird',$bird->id)}}" class="btn btn-small btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom">
                                                     <i class="mdi mdi-grease-pencil"></i>
                                                 </a>
 
                                             </td>
                                             <td class="text-center">
-                                                <a href="#" class="btn btn-small btn-circle btn-success " data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
+                                                <button href="#" class="btn btn-small btn-circle btn-success " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
                                                     <i class="mdi mdi-infinity"></i>
-                                                </a>
+                                                </button>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{route('frontend.app.updateBird',$bird->id)}}" class="btn btn-small btn-circle btn-success " data-toggle="tooltip" title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
-                                                    <i class="mdi  mdi-eye"></i>
-                                                </a>
+                                                <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewSpecie')}}">
+                                                    <button href="#" id="showSpecieBtn" type="button" class="btn btn-small btn-circle btn-success " data-placement="bottom" data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
+                                                        <i class="mdi  mdi-eye"></i>
+                                                    </button>
+                                                </span>
                                             </td>
                                         </tr>
                                         @endforeach

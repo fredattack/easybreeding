@@ -187,4 +187,33 @@ class BirdsController extends Controller
 
         return response()->json($selectedSpecie);
     }
+
+    public function getBird(){
+        $id = Input::get('id');
+        $bird = Bird::where('id','=',$id)->firstOrFail();
+        $specie = Specie::where('id','=',$bird->species_id)->firstOrFail();
+        $data=[$bird,$specie];
+        return response()->json($data);
+    }
+
+    public function getSpecie(){
+        $id = Input::get('id');
+//        $specie = Customspecie::where('id','=',$id)
+//                              ->where('userId','=',Auth::id())
+//                              ->firstOrFail();
+//        if(!$specie)
+        $specie = Specie::where('id','=',$id)->firstOrFail();
+        Log::info('Specie: '.$specie);
+
+        $famille=Famille::where('id',$specie->Id_famillie)->firstOrFail();
+        $famillyName= $famille->name;
+        Log::info('famille: '.$famille);
+
+        $order=Order::where('id',$famille->orderId)->firstOrFail();
+        $orderName= $order->orderName ;
+        Log::info('OrderName: '.$orderName);
+
+        $data=[$orderName,$famillyName,$specie];
+        return response()->json($data);
+    }
 }

@@ -14,11 +14,20 @@
 .leftCard,.rightCard{
   width: 50%;
   padding: 1em 1em;
+  @media screen and (max-width:500px) {
+    padding: 0;
+
+  }
 }
 
 .horizonCard{
   width:100%;
   padding: 1em 1em;
+
+  @media screen and (max-width:500px) {
+    padding: 0;
+
+  }
 }
 .btn-small{
   width: 20px !important;

@@ -42115,6 +42115,8 @@ __webpack_require__("./resources/assets/js/frontend/global/jquery.dataTables.min
 __webpack_require__("./resources/assets/js/frontend/app/custom.min.js");
 __webpack_require__("./resources/assets/js/frontend/app/createBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
+__webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
+__webpack_require__("./resources/assets/js/frontend/app/birdModale.js");
 /*
 *
 * End Starter Kit
@@ -42143,6 +42145,47 @@ __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
 // require('../global/perfect-scrollbar.min.js');
 // require('../global/widget-charts.js');
 // require('../global/widget-data.js');
+
+/***/ }),
+
+/***/ "./resources/assets/js/frontend/app/birdModale.js":
+/***/ (function(module, exports) {
+
+jQuery(document).ready(function ($) {
+    console.log('reloadax');
+
+    $('#birdModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var birdId = button.val(); // Extract info from data-* attributes
+        console.log('alert: ' + birdId);
+        getBird(birdId);
+    });
+});
+
+function getBird(id) {
+
+    $.get('/ajax/getBird?id=' + id, function (data) {
+        // console.log(data);
+        setText(data);
+    });
+    //
+}
+
+function setText(data) {
+    var bird = data['0'];
+    var specie = data['1'];
+    console.log(bird);
+    $('#idPersoText').text(bird['personal_id']);
+    $('#usualNameText').text(specie['commonName']);
+    $('#dateOfBirthText').text(bird['dateOfBirth']);
+    $('#speciesText').text(specie['scientificName']);
+    $('#genderText').text(bird['sexe']);
+    $('#sexingMethodeText').text('sexingMethod');
+    $('#idNumText').text(bird['idNum']);
+    $('#idTypeText').text(bird['idType']);
+    $('#breederText').text(bird['breederId']);
+    $('#statusText').text(bird['status']);
+}
 
 /***/ }),
 
@@ -42483,6 +42526,48 @@ $('#btnList').on('click', function () {
     $('#displayBlock').hide();
     $('#displayList').show();
 });
+
+/***/ }),
+
+/***/ "./resources/assets/js/frontend/app/specieModale.js":
+/***/ (function(module, exports) {
+
+jQuery(document).ready(function ($) {
+    console.log('reloadax');
+
+    $('#specieModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var birdId = button.val(); // Extract info from data-* attributes
+        console.log('alert: ' + birdId);
+        getSpecie(birdId);
+    });
+});
+
+function getSpecie(id) {
+
+    $.get('/ajax/getSpecie?id=' + id, function (data) {
+        console.log(data);
+        setText(data);
+    });
+    //
+}
+
+function setText(data) {
+    var specie = data['2'];
+    console.log('sguen ' + specie['commonName']);
+    console.log('pépite ' + specie['scientificName']);
+    $('#orderText').text(data['0']);
+    $('#famillyText').text(data['1']);
+    $('#NameText').text(specie['commonName']);
+    $('#scienceText').text(specie['scientificName']);
+    $('#incubationText').text(specie['incubation']);
+    $('#fertilityControlText').text(specie['fertilityControl']);
+    $('#spawningIntervalText').text(specie['spawningInterval']);
+    $('#outOfNestText').text(specie['outOfNest']);
+    $('#weaningText').text(specie['weaning']);
+    $('#sexMatText').text(specie['sexualMaturity']);
+    $('#girdleDateText').text(specie['girdleDate']);
+}
 
 /***/ }),
 

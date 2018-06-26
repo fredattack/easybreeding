@@ -194,6 +194,7 @@ return [
         App\Providers\ComposerServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+//        App\Providers\TranslationServiceProvider::class,
 
     ],
 
