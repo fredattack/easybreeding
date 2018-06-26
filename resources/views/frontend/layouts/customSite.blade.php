@@ -154,6 +154,8 @@
 <!-- Script-->
 <!-- ============================================================== -->
 <script type="text/javascript" src="{{mix('/js/sitefrontend.js')}}"></script>
+<script type="text/javascript" src="{{asset('/messages.js')}}"></script>
+
 {{--<script src="{{ mix('js/react.js') }}"></script>--}}
 </body>
 

@@ -176,6 +176,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
         /*
          * Package Service Providers...

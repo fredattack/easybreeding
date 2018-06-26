@@ -32,7 +32,8 @@
     "simple-line-icons": "^2.4.1",
     "sweetalert2": "^7.0.7",
     "tether": "^1.4.0",
-    "vue": "^2.5.7"
+    "vue": "^2.5.7",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "jest": {
     "roots": [

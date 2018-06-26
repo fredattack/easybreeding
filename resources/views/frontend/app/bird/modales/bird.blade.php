@@ -45,29 +45,29 @@
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.usualName')</label>
-                            <h4 id="usualNameText">@lang('labels.frontend.birds.usualName')</h4>
+                            <h4 id="usualNameText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.species')</label>
-                            <h4 id="speciesText">@lang('labels.frontend.birds.species')</h4>
+                            <h4 id="speciesText"></h4>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.sexingMethode')</label>
-                            <h4 id="sexingMethodeText">@lang('labels.frontend.birds.female')</h4>
+                            <h4 id="sexingMethodeText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.gender')</label>
-                            <h4 id="genderText">@lang('labels.frontend.birds.closedRings')</h4>
+                            <h4 id="genderText"></h4>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idType')</label>
-                            <h4 id="idTypeText">@lang('labels.frontend.birds.openRings')</h4>
+                            <h4 id="idTypeText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idNummer')</label>
@@ -78,7 +78,7 @@
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>
-                            <h4 id="originText">@lang('labels.frontend.birds.thisElevage')</h4>
+                            <h4 id="originText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>
@@ -89,11 +89,11 @@
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.disponibility')</label>
-                            <h4 id="Text">Disponible</h4>
+                            <h4 id="disponibilityText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.status')</label>
-                            <h4 id="statusText">coupled</h4>
+                            <h4 id="statusText"></h4>
                         </div>
                     </div>
                 </div>
