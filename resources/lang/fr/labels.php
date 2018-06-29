@@ -106,9 +106,15 @@ return [
     ],
 
     'frontend' => [
+        //@todo multi language after this
         'date' =>[
-            'year'    => 'an(s)',
+            'year'    => 'an',
+            'years'    => 'ans',
             'month'       => 'mois',
+            'week'       => 'semaine',
+            'weeks'       => 'semaines',
+            'day'       => 'jour',
+            'days'       => 'jours',
         ],
         'auth' => [
             'login_box_title'    => 'Connexion',
@@ -168,6 +174,7 @@ return [
             'origin' => "Origine",
             'status' => 'Status',
             'disponibility' => 'Disponibilité',
+            'history' => 'Historique',
             'mother' => 'Mère',
             'father' => 'Père',
             'orderFirst' => "Choisissez d'abord un Ordre.",

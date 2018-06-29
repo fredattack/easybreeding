@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\App;
 
 use App\Bird;
+use App\CustomSpecie;
 use App\Order;
 use App\Specie;
 use App\Famille;
@@ -33,9 +34,30 @@ class BirdsController extends Controller
      */
     public function index()
     {
-        $birds=Bird::with('specie')->where('userId','=',Auth::id())->get();
-//        dd($birds);
-        return view('frontend.app.bird.birdsIndex',compact('birds'));
+        $data=[];
+        $birds=Bird::where('userId','=',Auth::id())->get();
+
+        foreach ($birds as $bird)
+        {
+            $temp=[$bird];
+            if(str_contains($bird->species_id, '@')) {
+                $specie=CustomSpecie::where('id',$bird->species_id)->first();
+
+            }
+            else {
+                $specieId= intval($bird->species_id);
+                $specie=Specie::where('id','=',$specieId)->first();
+
+
+            }
+            array_push($temp,$specie);
+            array_push($data,$temp);
+
+        }
+
+//        dd($data);
+
+        return view('frontend.app.bird.birdsIndex',compact('data'));
     }
 
     /**
@@ -74,9 +96,12 @@ class BirdsController extends Controller
     public function store(Request $request)
     {
 
+        dd($request);
+
         $bird = new Bird;
 
         $bird->species_id = $request->speciesId;
+
         $bird->sexe = $request->sexe;
         $bird->sexingMethode = $request->sexingMethode;
         $bird->origin = $request->origin;
@@ -124,13 +149,30 @@ class BirdsController extends Controller
      */
     public function edit($id)
     {
-        $bird=Bird::with('specie')->where('id','=',$id)->firstOrFail();
+        $orders  = Order::get();
+        $bird=Bird::where('id','=',$id)->first();
+//        dd($bird);
+        $idSpecie=$bird->species_id;
+        if(!str_contains($idSpecie, '@')){
+            $specie  = Specie::where('id',$idSpecie)->first();
+            $famille = Famille::where('id',$specie->id_famillie)->first();
+            $order   = Order::where('id',$famille->orderId)->first();
+//            dd($order);
+        }
+        else{
+            $specie  = CustomSpecie::where('id',$idSpecie)->first();
 
-        $famille=Famille::where('id',$bird->specie->Id_famillie)->firstOrFail();
-        $order=Order::where('id',$famille->orderId)->firstOrFail();
-        $orders=Order::get();
+            $idFamille = Specie::where('id',$specie->idReferedSpecies)->first()->id_famillie;
+//            dd($idFamille);
+            Log::info('idFamille: '.$idFamille);
+            ($idFamille!=null) ? $famille =Famille::where('id',$idFamille)->first() : $famille=null;
+            ($famille!=null) ? $order =Order::where('id',$famille->orderId)->first() : $order=null;
+//            dd($order);
 
-        return view('frontend.app.bird.birdsCreate',compact(['bird','order','orders','famille']));
+        }
+
+
+        return view('frontend.app.bird.birdsEdit',compact(['bird','specie','order','orders','famille']));
     }
 
     /**
@@ -198,22 +240,50 @@ class BirdsController extends Controller
 
     public function getSpecie(){
         $id = Input::get('id');
-//        $specie = Customspecie::where('id','=',$id)
-//                              ->where('userId','=',Auth::id())
-//                              ->firstOrFail();
-//        if(!$specie)
-        $specie = Specie::where('id','=',$id)->firstOrFail();
+        Log::info('id: '.$id);
+        if(str_contains($id, '@'))
+        {
+            $specie=CustomSpecie::where('id',$id)->first();
+            Log::info('Speciettt: '.$specie);
+
+            if($specie->idReferedSpecies!=null)
+            {
+                $idFamille = Specie::where('id',$specie->idReferedSpecies)->first()->id_famillie;
+                Log::info('idFamille: '.$idFamille);
+                $famille=Famille::where('id',$idFamille)->first();
+                $famillyName= $famille->name;
+            }
+        }
+
+        else
+        {
+            $specie=Specie::where('id',$id)->first();
+            $famille=Famille::where('id',$specie->id_famillie)->first();
+            $famillyName= $famille->name;
+        }
+
         Log::info('Specie: '.$specie);
 
-        $famille=Famille::where('id',$specie->Id_famillie)->firstOrFail();
-        $famillyName= $famille->name;
+
         Log::info('famille: '.$famille);
 
-        $order=Order::where('id',$famille->orderId)->firstOrFail();
+        $order=Order::where('id',$famille->orderId)->first();
         $orderName= $order->orderName ;
         Log::info('OrderName: '.$orderName);
 
         $data=[$orderName,$famillyName,$specie];
         return response()->json($data);
     }
+
+
+    public function editCustomSpecie($id)
+    {
+//dd('pépite');
+        $id=7933;
+        $specie= new CustomSpecie();
+
+// CustomSpecie::where('idReferedSpecies','=',$id)->firstOrFail();
+        dd($specie);
+    }
+
 }

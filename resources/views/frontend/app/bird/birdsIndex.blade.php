@@ -37,6 +37,7 @@
         @endif
         @include('frontend.app.bird.modales.bird')
         @include('frontend.app.bird.modales.specieModale')
+
         <div class="row">
             <div class="col-12" id="element">
                 <div class="card">
@@ -73,7 +74,7 @@
                         </div>
                         <!--endregion-->
                         <!--region displayBirds @todo language-->
-                        @if(count($birds)!=0)
+                        @if(count($data)!=0)
                             <div id="displayList" >
                                 <div class="table-responsive m-t-40" style="width:100%">
                                     <table id="example" class="table display table-bordered table-striped">
@@ -110,30 +111,36 @@
                                         </tfoot>
                                         <tbody>
 
-                                        @foreach($birds as $bird)
+                                        @foreach($data as $birdArr)
+                                        <?php
+                                                $bird=$birdArr[0];
+                                                $theSpecie=$birdArr[1];
+
+                                        ?>
                                         <tr>
                                             <td>{{$bird->personal_id}}</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->sexe)</td>
-                                            <td>{{$bird->specie->commonName}}</td>
+                                            <td>{{$theSpecie['commonName']}}</td>
                                             <td>{{$bird->dateOfBirth}}</td>
                                             <td>
                                                 @if($bird->idNum!=null)<p><b>{{$bird->idNum}}</b></p>@else<p><b>@lang('labels.frontend.birds.noOne')</b></p>@endif
                                             </td>
                                             <td>@lang('labels.frontend.birds.'.$bird->status)</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>
+
                                             <td class="text-center">
                                                 <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewBird')}}">
                                                     <button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-success"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >
                                                         <i class="mdi mdi-linux"></i>
                                                     </button>
                                                 </span>
-
+{{----}}
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{route('frontend.app.editBird',$bird->id)}}" class="btn btn-small btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom">
                                                     <i class="mdi mdi-grease-pencil"></i>
                                                 </a>
-
+{{----}}
                                             </td>
                                             <td class="text-center">
                                                 <button href="#" class="btn btn-small btn-circle btn-success " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
@@ -156,9 +163,13 @@
                             </div>
                             <div id="displayBlock">
                                 <div class="row">
-                                    @foreach($birds as $bird)
+                                    @foreach($data as $birdArr)
+                                        <?php
+                                        $bird=$birdArr[0];
+                                        $theSpecie=$birdArr[1]
+                                        ?>
                                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                                        @include('frontend.app.bird.birdCard',$bird)
+{{--                                        @include('frontend.app.bird.birdCard',[$bird,$theSpecie])--}}
                                         </div>
                                     @endforeach</div>
                                 </div>

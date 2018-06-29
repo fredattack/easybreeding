@@ -11,7 +11,7 @@ class CreateSpeciesTable extends Migration {
 			$table->increments('id');
             $table->string('commonName')->nullable();
             $table->string('scientificName')->nullable();
-            $table->integer('')->unsigned();
+            $table->integer('Id_famillie')->unsigned();
             $table->string('subspecies')->nullable();
             $table->decimal('price')->nullable();
             $table->integer('incubation')->unsigned()->nullable();

@@ -58,7 +58,7 @@
                             <label class="control-label text-center ">@lang('labels.frontend.birds.sexingMethode')</label>
                             <h4 id="sexingMethodeText"></h4>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" id="genderGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.gender')</label>
                             <h4 id="genderText"></h4>
                         </div>
@@ -69,7 +69,7 @@
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idType')</label>
                             <h4 id="idTypeText"></h4>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" id="idNummerGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idNummer')</label>
                             <h4 id="idNumText">ABC1234</h4>
                         </div>
@@ -80,7 +80,7 @@
                             <label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>
                             <h4 id="originText"></h4>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" id="breederGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>
                             <h4 id="breederText"></h4>
                         </div>
@@ -96,7 +96,14 @@
                             <h4 id="statusText"></h4>
                         </div>
                     </div>
+                    <hr>
+                    <div class="row infoLine">
+                        <div class="form-group col-md-6">
+                            <h2>@lang('labels.frontend.birds.history')</h2>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-lg btn-circle btn-success" data-dismiss="modal">X</button>
 

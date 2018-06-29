@@ -23,10 +23,10 @@ function getBird(id) {
 }
 
 function setText(data) {
-
     let bird= data['0'];
     let specie = data['1'];
     console.log(bird);
+
     $('#idPersoText').text(bird['personal_id']);
     $('#usualNameText').text(Lang.get('birds.'+specie['commonName']));
     $('#dateOfBirthText').text(bird['dateOfBirth']);
@@ -39,5 +39,14 @@ function setText(data) {
     $('#breederText').text(bird['breederId']);
     $('#disponibilityText').text(Lang.get('labels.frontend.birds.'+bird['disponibility']));
     $('#statusText').text(Lang.get('labels.frontend.birds.'+bird['status']));
+
+    displayItems(bird);
+
+}
+
+function displayItems(bird) {
+    if(!bird['breederId'] || !bird['origin']=='thisElevage')$('#breederGroup').css('display','none');
+    if(!bird['idNum'])$('#idNummerGroup').css('display','none');
+    if(bird['sexe'] == 'unknow')$('#genderGroup').css('display','none');
 
 }

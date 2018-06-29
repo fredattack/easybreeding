@@ -46,6 +46,7 @@ return [
         'addBird'    => 'Ajouter un Oiseau',
         'addCouples'    => 'Ajouter à un couple',
         'editBird'    => "Modifier l'Oiseau",
+        'editSpecie'    => "Modifier l'Espéce",
         'noBirds'    => "Vous n'avez pas encore ajouter d'oiseau.",
         'viewSpecie'    => "Voir la fiche de l'espèce",
         'viewBird'    => "Voir la fiche de l'oiseau",

@@ -20,13 +20,13 @@
             </button>
 
             <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewSpecie')}}">
-                <button href="#" id="showSpecieBtn" type="button" class="btn btn-lg btn-circle btn-success " data-placement="bottom" data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
+                <button href="#" id="showSpecieBtn" type="button" class="btn btn-lg btn-circle btn-success " data-placement="bottom" data-toggle="modal" data-target="#specieModal" value="{{$specie->id}}">
                     <i class="mdi  mdi-eye"></i>
                 </button>
             </span>
         </div>
         <div class="leftCard">
-            <label>@lang('labels.frontend.birds.usualName'): </label><p><b>{{$bird->specie->commonName}}</b></p>
+            <label>@lang('labels.frontend.birds.usualName'): </label><p><b>{{$specie['commonName']}}</b></p>
             <label>@lang('labels.frontend.birds.gender'): </label><p><b>@lang('labels.frontend.birds.'.$bird->sexe)</b></p>
             {{--<label>@lang('labels.frontend.birds.status'): </label><p><b>@lang('labels.frontend.birds.'.$bird->status)</b></p>--}}
             {{--<label>@lang('labels.frontend.birds.origin'): </label><p><b>@lang('labels.frontend.birds.'.$bird->origin)</b></p>--}}

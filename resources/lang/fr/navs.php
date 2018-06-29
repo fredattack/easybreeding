@@ -17,13 +17,14 @@ return [
         'home'   => 'Accueil',
         'logout' => 'Déconnexion',
     ],
-
+    //@todo multi language after this
     'frontend' => [
         'contact' => 'Contact',
         'dashboard' => 'Tableau de bord',
         'birds' => 'les Oiseaux',
         'addbird' => 'Ajouter un Oiseau',
-        'editbird' => "Modifier l' Oiseau",
+        'editbird' => "Modifier un Oiseau",
+        'editSpecie' => "Modifier une Espece",
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",

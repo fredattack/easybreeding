@@ -18,7 +18,7 @@
 
         <!-- Check if the language is set to RTL, so apply the RTL layouts -->
         <!-- Otherwise apply the normal LTR layouts -->
-        {{ style(mix('css/frontend.css')) }}
+        {{--{{ style(mix('css/frontend.css')) }}--}}
 
         @stack('after-styles')
     </head>
@@ -35,9 +35,11 @@
 
         <!-- Scripts -->
         @stack('before-scripts')
-        {!! script(mix('js/frontend.js')) !!}
 
-        {!! script(mix('js/react.js')) !!}
+        <script type="text/javascript" src="{{mix('js/frontend.js')}}"></script>
+        <script type="text/javascript" src="{{mix('/js/react.js')}}"></script>
+        <script type="text/javascript" src="{{mix('/message.js')}}"></script>
+
         @stack('after-scripts')
 
         @include('includes.partials.ga')
