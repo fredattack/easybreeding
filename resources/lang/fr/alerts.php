@@ -47,11 +47,15 @@ return [
         'addCouples'    => 'Ajouter à un couple',
         'editBird'    => "Modifier l'Oiseau",
         'editSpecie'    => "Modifier l'Espéce",
+        'createSpecie'    => "Ajouter une nouvelle Espéce",
+        'SelectCustom'    => "Choisir une de vos Espéces",
+        'searchSpecie'    => "Cherchez une Espéce ...",
         'noBirds'    => "Vous n'avez pas encore ajouter d'oiseau.",
         'viewSpecie'    => "Voir la fiche de l'espèce",
         'viewBird'    => "Voir la fiche de l'oiseau",
         'birdUpdated' => "l'oiseau à bien été mis à jour",
         'birdCreated' => "l'oiseau à bien été ajouté",
+        'goBack' => "Revenir en Arriére",
 
     ],
 ];

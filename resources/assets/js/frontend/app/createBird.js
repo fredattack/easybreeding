@@ -1,3 +1,7 @@
+jQuery(document).ready(function() {
+    $('#hiddenTable').dataTable();
+});
+
 $('#order').on('change',function(e){
     console.log(e.target.value);
     $('input[name="searchBox"]').val('');
@@ -5,7 +9,7 @@ $('#order').on('change',function(e){
 
 
 });
-
+$('#hiddenTable').dataTable();
 function generateFamillies(id) {
 
     $.get('/ajax/generateFamillies?orderId='+id,function (data) {
@@ -42,16 +46,20 @@ function generateSpecies(id) {
 }
 
 $('#species').on('change',function(e){
-    console.log(e.target.value);
+    // console.log(e.target.value);
     generateUsualName(e.target.value);
-
+    $('#showSpecieBtn').val(e.target.value);
+    $('#showSpecieBtn').css('display','inline-flex');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
 });
 
 function generateUsualName(id) {
 
     $.get('/ajax/generateUsualName?specieId='+id,function (data) {
-        console.log(data);
-        $('input[name="usualName"]').val(data.commonName);
+        console.log('usualName:'+data);
+        $('input[name="commonName"]').val(data.commonName);
       // $('#species').append('<option value="'+speciesObs.id+'">'+speciesObs.scientificName+'</option>');
     });
 }
@@ -115,6 +123,56 @@ $('select[name=origin]').change(function () {
     else $('#infoBreeder').css('display','none');
 });
 
+function addaptSpecieFields() {
+    $('#showSpecieBtn').val($('#species').val());
+    $('#showSpecieBtn').css('display', 'inline-flex');
+    // $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+     $('#returnSpecieBtn').css('display', 'inline-flex');
+     $('#customSpecieBtn').css('display', 'none');
+     $('#addSpecieBtn').css('display', 'none');
+
+}
+
+function displaySpecieAttribut() {
+    let ordreSearched = $("#basics").getSelectedItemData().ordre;
+    let famille = $("#basics").getSelectedItemData().famillie;
+    console.log(ordreSearched);
+    let latin = $("#basics").getSelectedItemData().latin;
+    generateFamillies($("#basics").getSelectedItemData().id_Ordre);
+    generateSpecies($("#basics").getSelectedItemData().Id_famille);
+    $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+    setTimeout(function () {
+
+        // Something you want delayed.
+
+        $(function () {
+            $('[name=orderId] option').filter(function () {
+                return ($(this).text() == ordreSearched);
+            }).prop('selected', true);
+        });
+
+        console.log(famille);
+
+        $(function () {
+            $('[name=famillyId] option').filter(function () {
+                return ($(this).text() == famille);
+            }).prop('selected', true);
+        });
+
+        console.log(latin);
+        $(function () {
+            $('[name=speciesId] option').filter(function () {
+                return ($(this).text() == latin);
+            }).prop('selected', true);
+        });
+
+
+    }, 500);
+    setTimeout(function () {
+        addaptSpecieFields();
+    }, 500);
+}
+
 //AutoComplete
 let options = {
     url: function(phrase) {
@@ -128,91 +186,93 @@ let options = {
             enabled: true
         },
         onClickEvent: function() {
-            let ordreSearched = $("#basics").getSelectedItemData().ordre;
-            let famille = $("#basics").getSelectedItemData().famillie;
-            console.log(ordreSearched);
-            let latin = $("#basics").getSelectedItemData().latin;
-            generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-            generateSpecies($("#basics").getSelectedItemData().Id_famille);
-
-            setTimeout(function (){
-
-                // Something you want delayed.
-
-
-                    $(function() {
-                        $('[name=orderId] option').filter(function() {
-                            return ($(this).text() == ordreSearched);
-                        }).prop('selected', true);
-                    });
-
-
-                    console.log(famille);
-
-
-                    $(function() {
-                        $('[name=famillyId] option').filter(function() {
-                            return ($(this).text() == famille);
-                        }).prop('selected', true);
-                    });
-
-
-                    console.log(latin);
-                    $(function() {
-                        $('[name=speciesId] option').filter(function() {
-                            return ($(this).text() == latin);
-                        }).prop('selected', true);
-                    });
-
-            }, 500);
-            $('input[name="usualName"]').val($("#basics").getSelectedItemData().name_FR);
+            displaySpecieAttribut();
+            console.log('click');
 
         },
         onChooseEvent: function () {
-            console.log('enter');
-            let ordreSearched = $("#basics").getSelectedItemData().ordre;
-            let famille = $("#basics").getSelectedItemData().famillie;
-            console.log(ordreSearched);
-            let latin = $("#basics").getSelectedItemData().latin;
-            generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-            generateSpecies($("#basics").getSelectedItemData().Id_famille);
+            displaySpecieAttribut();
+            console.log('choose');
 
-            setTimeout(function (){
-
-                // Something you want delayed.
-
-
-                $(function() {
-                    $('[name=orderId] option').filter(function() {
-                        return ($(this).text() == ordreSearched);
-                    }).prop('selected', true);
-                });
-
-
-                console.log(famille);
-
-
-                $(function() {
-                    $('[name=famillyId] option').filter(function() {
-                        return ($(this).text() == famille);
-                    }).prop('selected', true);
-                });
-
-
-                console.log(latin);
-                $(function() {
-                    $('[name=speciesId] option').filter(function() {
-                        return ($(this).text() == latin);
-                    }).prop('selected', true);
-                });
-
-            }, 500);
-            $('input[name="usualName"]').val($("#basics").getSelectedItemData().name_FR);
         }
     }
-
 };
-
 
 $("#basics").easyAutocomplete(options,"minLength", 3 );
 
+// create Specie
+
+$('#addSpecieBtn').on('click',function () {
+    $('.newSpecieBlock').css('display','block');
+    $('.specieBlock').css('display','none');
+
+    $('.newSpecieBlock input').prop('disabled',false);
+    $('.specieBlock input').prop('disabled',true);
+
+    $('#basics').prop('disabled',true);
+    $('#newusualNameInput').prop('required',true);
+    $('#type').val('newSpecie');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
+
+});
+
+$('#speciesCustomSelect').on('change',function(e){
+    console.log(e.target.value);
+    let id=e.target.value;
+
+
+    $.get('/ajax/getSpecie?id='+id,function(data) {
+        console.log(data);
+        newSpecieSetInputValue(data);
+
+    });
+    $('.newSpecieBlock').css('display','none');
+
+    $('#showSpecieBtn').val(id);
+    $('#showSpecieBtn').css('display', 'inline-flex');
+});
+
+function newSpecieSetInputValue(data){
+    let specie = data['2'];
+    $('#newusualNameInput').val((specie['commonName']!=null ?  specie['commonName'] : 'come on'));
+    $('#newscientificNameInput').val((specie['scientificName']!=null ?  specie['scientificName'] : ''));
+    $('#newincubationInput').val((specie['incubation']!=null ?  specie['incubation'] : ''));
+    $('#newfertilityControlInput').val((specie['fertilityControl']!=null ?  specie['fertilityControl'] : ''));
+    $('#newspawningIntervalInput').val((specie['spawningInterval']!=null ?  specie['spawningInterval'] : ''));
+    $('#newoutOfNestInput').val((specie['outOfNest']!=null ?  specie['outOfNest'] : ''));
+    $('#newweaningInput').val((specie['weaning']!=null ?  specie['weaning'] : ''));
+    $('#newsexualMaturityInput').val((specie['sexualMaturity']!=null ?  specie['sexualMaturity'] : ''));
+    $('#newgirdleDateInput').val((specie['girdleDate']!=null ?  specie['girdleDate'] : ''));
+
+}
+
+$('#customSpecieBtn').on('click',function () {
+    $('#goButton').css('display', 'none');
+    $('.easy-autocomplete').css('display', 'none');
+    $('#speciesCustomSelect').css('display', 'block');
+    $('.specieBlock').css('display','none');
+    $('.specieBlock input').prop('disabled',true);
+    $('#type').val('userSpecie');
+    $('#basics').css('display','none');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
+
+});
+
+$('#returnSpecieBtn').on('click',function () {
+    $('#goButton').css('display', 'block');
+    $('#basics').css('display','block');
+    $('.easy-autocomplete').css('display', 'block');
+    $('#speciesCustomSelect').css('display', 'none');
+    $('#customSpecieBtn').css('display', 'inline-flex');
+    $('#addSpecieBtn').css('display', 'inline-flex');
+    $('#returnSpecieBtn').css('display', 'none');
+    $('#showSpecieBtn').css('display', 'none');
+    $('.newSpecieBlock').css('display','none');
+    $('.specieBlock').css('display','block');
+    $('#createBird')[0].reset();
+
+});

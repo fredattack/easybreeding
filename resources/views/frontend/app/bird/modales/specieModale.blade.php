@@ -28,9 +28,8 @@
                     <div class="row infoLine">
                         <div class="col-md-6 text-center">
                             <h3 class="modalText" id="NameText"></h3>
-                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.species')" name="usualName" id="usualNameInput" value="">
-                        </div>
-                        <div class="col-md-6 pull-right">
+                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.commonName')" name="commonName" id="usualNameInput" value="">
+                    </div><div class="col-md-6 pull-right">
                             <a href="" class="btn btn-lg btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editSpecie')}}" data-placement="bottom" id="editCustomSpecieBtn">
                                 <i class="mdi mdi-grease-pencil"></i>
                             </a>
@@ -44,7 +43,7 @@
                     <div class="row infoLine">
                         <div class="col-md-6 text-center">
                             <h4 class="modalText" id="scienceText"></h4>
-                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.usualName')" name="scientificName" id="scientificNameInput"  value="">
+                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.species')" name="scientificName" id="scientificNameInput"  value="">
                         </div>
                     </div>
                 </div>

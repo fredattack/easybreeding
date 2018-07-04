@@ -1,8 +1,9 @@
 @extends('frontend.layouts.customApp')
-
 @section('title', app_name() . ' | '.__('navs.frontend.dashboard'))
 
 @section('content')
+    <table id="hiddenTable"></table>
+
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             @if(isset($bird))
@@ -41,29 +42,73 @@
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
+        @include('frontend.app.bird.modales.specieModale')
+
         <div class="row">
             <div class="col-12" id="element">
                 <div class="card">
                     <div class="card-body">
 
                         <!--region fromCreate-->
-                        @if(isset($bird))
-                            {!! Form::open(array('route' => ['frontend.app.updateBird',$bird->id], 'method' => 'POST','onkeypress'=>"return event.keyCode != 13")) !!}
-                        @else
-                            {!! Form::open(array('route' => 'frontend.app.storeBird', 'method' => 'POST','onkeypress'=>"return event.keyCode != 13")) !!}
-                        @endif
 
-                        <div class="specieBlock" >
-                                @if(!isset($bird))
-                                    <div class="form-group row searchBar">
-                                        <div class="input-group text-center searchBox" >
-                                            <input type="text" placeholder="Search for Specie..." id="basics" name="searchBox">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-success" type="button" id="'goButton">Go!</button>
-                                            </span>
-                                        </div>
+                            {!! Form::open(array('route' => 'frontend.app.storeBird', 'method' => 'POST','id'=>'createBird','onkeypress'=>"return event.keyCode != 13")) !!}
+                        <input type="hidden" name="type" id="type" value="specie">
+                        @if(!isset($bird))
+                        <div class=" searchBar">
+                            <div class="form-group row">
+                                <div class="col-md-8">
+                                    <div class="input-group text-center searchBox" >
+                                        <input type="text" placeholder="{{__('alerts.frontend.searchSpecie')}}" id="basics" name="searchBox">
+                                        <span class="input-group-btn">
+                                                    <button class="btn btn-success" type="button" id="goButton" disabled>Go!</button>
+                                                </span>
+                                        <select class="form-control custom-select " name="customSpeciesId" id="speciesCustomSelect" data-live-search="true" >
+
+                                            @if(isset($customSpecies))
+                                                <option   selected>@lang('labels.frontend.birds.specieCustom')</option>
+                                                @foreach($customSpecies as $specie)
+                                                <option value="{{$specie['id']}}">{{$specie['name']}}</option>
+                                                @endforeach
+                                            @endif
+
+                                        </select>
                                     </div>
-                                @endif
+
+                                </div>
+                                <div class="col-md-3 text-center">
+                                        <span data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="{{__('alerts.frontend.viewSpecie')}}">
+                                            <a href="#"  class="btn btn-circle btn-lg btn-success" id="showSpecieBtn"   data-toggle="modal" data-target="#specieModal" value="">
+                                                <i class="mdi  mdi-eye"></i>
+                                            </a>
+                                        </span>
+                                    <span>
+                                        <a href="#" class="btn btn-circle btn-lg btn-success" id="customSpecieBtn" title="{{__('alerts.frontend.SelectCustom')}}" data-toggle="tooltip" data-placement="bottom">
+                                            <i class="fa fa-home"></i>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="#" class="btn btn-circle btn-lg btn-success" id="addSpecieBtn" title="{{__('alerts.frontend.createSpecie')}}" data-toggle="tooltip" data-placement="bottom">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="#" class="btn btn-circle btn-lg btn-success" id="returnSpecieBtn" title="{{__('alerts.frontend.goBack')}}" data-toggle="tooltip" data-placement="bottom">
+                                            <i class="fa fa-rotate-left"></i>
+                                        </a>
+                                    </span>
+                                </div>
+                                {{--<div class="col-md-2 text-center">--}}
+                                    {{--<span>--}}
+                                        {{--<a href="#" class="btn btn-circle btn-lg btn-success" id="addSpecieBtn" title="{{__('alerts.frontend.createSpecie')}}">--}}
+                                            {{--<i class="fa fa-plus"></i>--}}
+                                        {{--</a>--}}
+                                    {{--</span>--}}
+                                {{--</div>--}}
+                            </div>
+                        </div>
+                        @endif
+                        <div class="specieBlock" >
+
                         <div class="form-group row">
                             <div class="col-md-6" >
                                 @if(isset($orders))
@@ -130,7 +175,7 @@
 
                             </div>
                         </div>
-                    </div>
+                        </div>
                         <!--
 ***********************Debut New Specie***********************************************
                         -->
@@ -140,7 +185,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-4" style="width: 100%">@lang('labels.frontend.birds.usualName')</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" placeholder="Coco" name="newCommonName" id="commonName"  @if(isset($bird)) value="{{$specie->commonName}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.usualName')" name="newCommonName" id="newusualNameInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
@@ -150,7 +195,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-4">@lang('labels.frontend.birds.species')</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" placeholder="Coco" name="newScientificName" id="scientificName"  @if(isset($bird)) value="{{$specie->scientificName}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.species')" name="newScientificName" id="newscientificNameInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
@@ -161,21 +206,21 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.incubation')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="incubation" id="incubation"  @if(isset($bird)) value="{{$specie->incubation}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="incubation" id="newincubationInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.fertilityControl')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="fertilityControl" id="fertilityControl"  @if(isset($bird)) value="{{$specie->fertilityControl}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="newfertilityControlInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.outOfNest')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="outOfNest" id="outOfNest"  @if(isset($bird)) value="{{$specie->outOfNest}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="outOfNest" id="newoutOfNestInput"  value=""  disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
@@ -185,14 +230,14 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.weaning')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="weaning" id="weaning"  @if(isset($bird)) value="{{$specie->weaning}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="weaning" id="newweaningInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.sexualMaturity')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="newScientificName" id="sexualMaturity"  @if(isset($bird)) value="{{$specie->sexualMaturity}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="newScientificName" id="newsexualMaturityInput" value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
@@ -202,20 +247,20 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.girdleDate')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="girdleDate" id="girdleDate"  @if(isset($bird)) value="{{$specie->girdleDate}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="girdleDate" id="newgirdleDateInput"  value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.spawningInterval')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Coco" name="spawningInterval" id="spawningInterval"  @if(isset($bird)) value="{{$specie->spawningInterval}}" @endif disabled>
+                                        <input type="text" class="form-control" placeholder="XX" name="spawningInterval" id="newspawningIntervalInput" value="" disabled>
                                         {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
 
                             </div>
-
+                        </div>
                         </div>
 
 <!--
@@ -350,13 +395,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-4">@lang('labels.frontend.birds.idNummer')</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" placeholder="John doe">
-                                    <small class="form-control-feedback"> This is inline help </small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="control-label col-md-4">@lang('labels.frontend.birds.disponibility')</label>
                                 <div class="col-md-8 text-center">
                                     <div class="radio-list pull-center">
@@ -429,7 +467,7 @@
                     </div>
 
                         </div>
-                </div>
+
 
                        <div class="row">
                            <div class="col-md-5"></div>
@@ -464,5 +502,10 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
-
+<script>
+    var table = $('#customGrid').DataTable({
+        data: rows,
+        destroy: true,
+        columns: columns});
+</script>
 @endsection

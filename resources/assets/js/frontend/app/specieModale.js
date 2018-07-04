@@ -13,9 +13,9 @@ jQuery(document).ready(function($) {
 function getSpecie(id) {
 
     $.get('/ajax/getSpecie?id='+id,function(data) {
-        // console.log(data);
         setText(data);
         setInputValue(data['2']);
+        console.log(data['2']);
 
     });
     //

@@ -1,62 +1,107 @@
 
-.easy-autocomplete input{
-  width: 20em !important;
-
-}
-#displayBlock{
+#hiddenTable{
   display: none;
 }
-.cardflex{
-  display: flex;
-  flex-wrap: wrap;
+
+button:disabled{
+  background: #26dad2 !important;
 }
 
-.leftCard,.rightCard{
-  width: 50%;
-  padding: 1em 1em;
-  @media screen and (max-width:500px) {
-    padding: 0;
 
+
+
+#basics{
+  min-width: 20em !important;
+
+  @media screen and(max-width:500px) {
+    min-width: 2em !important;
+    margin-bottom: 1em;
+  }
+
+  @media all and(min-width:1200px) {
+    width: 35vw !important;
+  }
+
+  &placeholder{
+    margin: 0 1em;
   }
 }
 
-.horizonCard{
-  width:100%;
-  padding: 1em 1em;
 
-  @media screen and (max-width:500px) {
-    padding: 0;
+
+  #displayBlock{
+    display: none;
+  }
+  .cardflex{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .leftCard,.rightCard{
+    width: 50%;
+    padding: 1em 1em;
+    @media screen and (max-width:500px) {
+      padding: 0;
+
+    }
+  }
+
+  .horizonCard{
+    width:100%;
+    padding: 1em 1em;
+
+    @media screen and (max-width:500px) {
+      padding: 0;
+
+    }
+  }
+  .btn-small{
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+
+  /*
+  *
+   CreateBirds
+  *
+  */
+  input::placeholder{
+    color:#dedede !important;
+  }
+  #idNumberGroup > div > input::placeholder{
+    color: #dedede !important;
+  }
+  .searchBar{
+    padding: 1em 1em;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    margin-bottom: 1em;
+
+    .form-group{
+      margin-bottom: 0 !important;
+    }
 
   }
-}
-.btn-small{
-  width: 20px !important;
-  height: 20px !important;
-}
+  .searchBox{
+    justify-content: center;
+  }
+  #idNumberGroup,#sexMethod,#infoBreeder{
+    display: none;
+  }
+  #showSpecieBtn,#speciesCustomSelect,.newSpecieBlock,#returnSpecieBtn,#returnBirdBtn{
+    display: none;
+  }
 
+  .newBirdBlock,.newSpecieBlock,.specieBlock{
+    padding: 1em 1em;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    transition: 2s;
+  }
 
-/*
-*
- CreateBirds
-*
-*/
-input::placeholder{
-  color:#dedede !important;
-}
-#idNumberGroup > div > input::placeholder{
-  color: #dedede !important;
-}
-.searchBar{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em 1em;
-  border: 1px solid #dedede;
-  border-radius: 4px;
-}
-.searchBox{
-  justify-content: center;
-}
-#idNumberGroup,#sexMethod,#infoBreeder{
-  display: none;
-}
+//
+//.groupSpecieBtn span{
+//  position: absolute;
+//}

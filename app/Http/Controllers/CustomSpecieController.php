@@ -97,36 +97,27 @@ class CustomSpecieController extends Controller
               $specie->idReferedSpecies=$specie->id;
               $specie->idUser=$idUser;
            }
-//
-            $specie->commonName=$request->usualName;
-            $specie->scientificName=$request->scientificName;
-            $specie->incubation=$request->incubation;
-            $specie->fertilityControl=$request->fertilityControl;
-            $specie->girdleDate=$request->girdleDate;
-            $specie->outOfNest =$request->outOfNest;
-            $specie->weaning=$request->weaning;
-            $specie->sexualMaturity=$request->sexualMaturity;
-            $specie->spawningInterval=$request->spawningInterval;
-            if($specie->save()) $response='Update Done';
         }
         else{
             $specie  = CustomSpecie::where('id',$request->id)->firstOrFail();
             $count= CustomSpecie::where('idUser',$idUser)->count();
             $specie->id=$newId;
             $specie->idUser=$idUser;
-            $specie->usualName=$request->commonName;
-            $specie->scientificName=$request->scientificName;
-            $specie->incubation=$request->incubation;
-            $specie->fertilityControl=$request->fertilityControl;
-            $specie->girdleDate=$request->girdleDate;
-            $specie->outOfNest =$request->outOfNest;
-            $specie->weaning=$request->weaning;
-            $specie->sexualMaturity=$request->sexualMaturity;
-            $specie->spawingInterval=$request->spawingInterval;
-            if($specie->save()) $response='Update Done';
         }
 
+        $specie->commonName=$request->commonName;
+        $specie->scientificName=$request->scientificName;
+        $specie->incubation=$request->incubation;
+        $specie->fertilityControl=$request->fertilityControl;
+        $specie->girdleDate=$request->girdleDate;
+        $specie->outOfNest =$request->outOfNest;
+        $specie->weaning=$request->weaning;
+        $specie->sexualMaturity=$request->sexualMaturity;
+        $specie->spawningInterval=$request->spawingInterval;
+        if($specie->save()) $response='Update Done';
         $this->updateBirds($request->id,$newId);
+
+
         return $response;
 
    }

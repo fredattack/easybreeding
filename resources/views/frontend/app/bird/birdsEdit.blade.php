@@ -173,7 +173,7 @@
 
 
                                <div class="form-group row">
-                                   <label class="control-label col-md-4">@lang('labels.frontend.birds.birthDate')</label>
+                                   <label class="control-label col-md-4">@lang('labels.frontend.birds.Date')</label>
                                    <div class="col-md-8">
                                        @php($today = date('d/m/Y'))
                                        <input type="text"  class="form-control mydatepicker" @if(isset($bird)) value="{{$bird->dateOfBirth}}" @else value="{{$today}}" @endif name="dateOfBirth">

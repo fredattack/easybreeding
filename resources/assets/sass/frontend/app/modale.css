@@ -95,7 +95,7 @@
 .modal.right .modal-content .modal-footer button{
     position: absolute;
     left: 4em;
-    display: none;
+    /*display: none;*/
 }
 
 .modal.left .modal-content .modal-footer button{

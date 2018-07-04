@@ -129,7 +129,7 @@
                                             <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>
 
                                             <td class="text-center">
-                                                <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewBird')}}">
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
                                                     <button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-success"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >
                                                         <i class="mdi mdi-linux"></i>
                                                     </button>
@@ -148,11 +148,12 @@
                                                 </button>
                                             </td>
                                             <td class="text-center">
-                                                <span data-toggle="tooltip" data-target="#id" title="{{__('alerts.frontend.viewSpecie')}}">
-                                                    <button href="#" id="showSpecieBtn" type="button" class="btn btn-small btn-circle btn-success " data-placement="bottom" data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                                                    <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-success "  data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
                                                         <i class="mdi  mdi-eye"></i>
                                                     </button>
                                                 </span>
+
                                             </td>
                                         </tr>
                                         @endforeach
@@ -169,7 +170,7 @@
                                         $theSpecie=$birdArr[1]
                                         ?>
                                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-{{--                                        @include('frontend.app.bird.birdCard',[$bird,$theSpecie])--}}
+                                        @include('frontend.app.bird.birdCard',[$bird,$theSpecie])
                                         </div>
                                     @endforeach</div>
                                 </div>

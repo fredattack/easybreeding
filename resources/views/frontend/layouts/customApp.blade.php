@@ -28,6 +28,7 @@
 </head>
 
 <body class="fix-header card-no-border logo-center">
+{{--<table id="hiddenTable"></table>--}}
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->

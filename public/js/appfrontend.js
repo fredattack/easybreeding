@@ -42113,9 +42113,9 @@ __webpack_require__("./resources/assets/js/frontend/global/jquery.easy-autocompl
 __webpack_require__("./resources/assets/js/frontend/global/jquery.dataTables.min.js");
 
 __webpack_require__("./resources/assets/js/frontend/app/custom.min.js");
+__webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/createBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
-__webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/birdModale.js");
 
 /*
@@ -42170,6 +42170,7 @@ function getBird(id) {
     $.get('/ajax/getBird?id=' + id, function (data) {
         // console.log(data);
         setText(data);
+        setInputValue(data['0']);
     });
     //
 }
@@ -42177,7 +42178,6 @@ function getBird(id) {
 function setText(data) {
     var bird = data['0'];
     var specie = data['1'];
-    console.log(bird);
 
     $('#idPersoText').text(bird['personal_id']);
     $('#usualNameText').text(Lang.get('birds.' + specie['commonName']));
@@ -42197,21 +42197,102 @@ function setText(data) {
 
 function displayItems(bird) {
     if (!bird['breederId'] || !bird['origin'] == 'thisElevage') $('#breederGroup').css('display', 'none');
-    if (!bird['idNum']) $('#idNummerGroup').css('display', 'none');
-    if (bird['sexe'] == 'unknow') $('#genderGroup').css('display', 'none');
+    // if(!bird['idNum'])$('#idNummerGroup').css('display','none');
+    // if(bird['sexe'] == 'unknow')$('#genderGroup').css('display','none');
+    bird['sexe'] != 'unknow' ? $('#genderGroup').css('display', 'block') : $('#genderGroup').css('display', 'none');
+    bird['idType'] != 'noOne' ? $('#idNummerGroup').css('display', 'block') : $('#genderGroup').css('display', 'none');
 }
+function setInputValue(data) {
+
+    var bird = data;
+    console.log(bird);
+    $('#personal_idInput').val(bird['personal_id'] != null ? bird['personal_id'] : '');
+    $('#dateOfBirthInput').val(bird['dateOfBirth'] != null ? bird['dateOfBirth'] : '');
+    $('#sexingMethodeSelect').val(bird['sexingMethode']).prop('selected', true);
+    $('#' + bird["sexe"]).prop('checked', true);
+    $('#' + bird["idType"]).prop('checked', true);
+    $('#idNumInput').val(bird['idNum'] != null ? bird['idNum'] : '');
+    $('#originSelect').val(bird['origin']).prop('selected', true);
+    $('#breederIdInput').val(bird['breederId'] != null ? bird['breederId'] : '');
+    $('#' + bird["disponibility"]).prop('checked', true);
+    $('#' + bird["status"]).prop('checked', true);
+    $('#idInput').val(bird['id']);
+}
+
+$('#editBirdBtn').on('click', function (e) {
+    e.preventDefault();
+    switchView();
+});
+
+function switchView() {
+    $("#birdModal input").show();
+    $("#birdModal select").show();
+    $("#birdModal .radio-list").css('display', 'grid');
+    $('#returnBirdBtn').css('display', 'inline-block');
+    $('#updateBirdBtn').show();
+    $('#editBirdBtn').hide();
+    $('#historyGroup').hide();
+    $('.modalText').hide();
+}
+function unSwitchViewBird() {
+    $("#birdModal input").hide();
+    $("#birdModal select").hide();
+    $("#birdModal .radio-list").hide();
+    $('#updateBirdBtn').hide();
+    $('#returnBirdBtn').hide();
+    $('#editBirdBtn').show();
+    $('#historyGroup').show();
+    $('.modalText').show();
+}
+
+$('#sexingMethodeSelect').on('change', function (e) {
+    console.log(e.target.value);
+    e.target.value != 'unknow' ? $('#genderGroup').css('display', 'block') : $('#genderGroup').css('display', 'none');
+});
+
+$("#UpdateBirdForm").submit(function (e) {
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    console.log(data);
+    updateBird(data);
+});
+
+function updateBird(data) {
+    $.post("/ajax/setBird", data).done(function (res) {
+        console.log(res);
+        location.reload();
+    });
+}
+
+$('#closeModalBtn').on('click', function (e) {
+    e.preventDefault();
+    console.log('close');
+    unSwitchViewBird();
+});
+
+$('#returnBirdBtn').on('click', function () {
+    unSwitchViewBird();
+});
+
+$('#birdModal').on('hidden.bs.modal', function (e) {
+    unSwitchViewBird();
+});
 
 /***/ }),
 
 /***/ "./resources/assets/js/frontend/app/createBird.js":
 /***/ (function(module, exports) {
 
+jQuery(document).ready(function () {
+    $('#hiddenTable').dataTable();
+});
+
 $('#order').on('change', function (e) {
     console.log(e.target.value);
     $('input[name="searchBox"]').val('');
     generateFamillies(e.target.value);
 });
-
+$('#hiddenTable').dataTable();
 function generateFamillies(id) {
 
     $.get('/ajax/generateFamillies?orderId=' + id, function (data) {
@@ -42245,15 +42326,20 @@ function generateSpecies(id) {
 }
 
 $('#species').on('change', function (e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     generateUsualName(e.target.value);
+    $('#showSpecieBtn').val(e.target.value);
+    $('#showSpecieBtn').css('display', 'inline-flex');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
 });
 
 function generateUsualName(id) {
 
     $.get('/ajax/generateUsualName?specieId=' + id, function (data) {
-        console.log(data);
-        $('input[name="usualName"]').val(data.commonName);
+        console.log('usualName:' + data);
+        $('input[name="commonName"]').val(data.commonName);
         // $('#species').append('<option value="'+speciesObs.id+'">'+speciesObs.scientificName+'</option>');
     });
 }
@@ -42313,6 +42399,53 @@ $('select[name=origin]').change(function () {
     if ($('select[name=origin]').val() != 'thisElevage') $('#infoBreeder').css('display', 'flex');else $('#infoBreeder').css('display', 'none');
 });
 
+function addaptSpecieFields() {
+    $('#showSpecieBtn').val($('#species').val());
+    $('#showSpecieBtn').css('display', 'inline-flex');
+    // $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
+}
+
+function displaySpecieAttribut() {
+    var ordreSearched = $("#basics").getSelectedItemData().ordre;
+    var famille = $("#basics").getSelectedItemData().famillie;
+    console.log(ordreSearched);
+    var latin = $("#basics").getSelectedItemData().latin;
+    generateFamillies($("#basics").getSelectedItemData().id_Ordre);
+    generateSpecies($("#basics").getSelectedItemData().Id_famille);
+    $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+    setTimeout(function () {
+
+        // Something you want delayed.
+
+        $(function () {
+            $('[name=orderId] option').filter(function () {
+                return $(this).text() == ordreSearched;
+            }).prop('selected', true);
+        });
+
+        console.log(famille);
+
+        $(function () {
+            $('[name=famillyId] option').filter(function () {
+                return $(this).text() == famille;
+            }).prop('selected', true);
+        });
+
+        console.log(latin);
+        $(function () {
+            $('[name=speciesId] option').filter(function () {
+                return $(this).text() == latin;
+            }).prop('selected', true);
+        });
+    }, 500);
+    setTimeout(function () {
+        addaptSpecieFields();
+    }, 500);
+}
+
 //AutoComplete
 var options = {
     url: function url(phrase) {
@@ -42326,83 +42459,88 @@ var options = {
             enabled: true
         },
         onClickEvent: function onClickEvent() {
-            var ordreSearched = $("#basics").getSelectedItemData().ordre;
-            var famille = $("#basics").getSelectedItemData().famillie;
-            console.log(ordreSearched);
-            var latin = $("#basics").getSelectedItemData().latin;
-            generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-            generateSpecies($("#basics").getSelectedItemData().Id_famille);
-
-            setTimeout(function () {
-
-                // Something you want delayed.
-
-
-                $(function () {
-                    $('[name=orderId] option').filter(function () {
-                        return $(this).text() == ordreSearched;
-                    }).prop('selected', true);
-                });
-
-                console.log(famille);
-
-                $(function () {
-                    $('[name=famillyId] option').filter(function () {
-                        return $(this).text() == famille;
-                    }).prop('selected', true);
-                });
-
-                console.log(latin);
-                $(function () {
-                    $('[name=speciesId] option').filter(function () {
-                        return $(this).text() == latin;
-                    }).prop('selected', true);
-                });
-            }, 500);
-            $('input[name="usualName"]').val($("#basics").getSelectedItemData().name_FR);
+            displaySpecieAttribut();
+            console.log('click');
         },
         onChooseEvent: function onChooseEvent() {
-            console.log('enter');
-            var ordreSearched = $("#basics").getSelectedItemData().ordre;
-            var famille = $("#basics").getSelectedItemData().famillie;
-            console.log(ordreSearched);
-            var latin = $("#basics").getSelectedItemData().latin;
-            generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-            generateSpecies($("#basics").getSelectedItemData().Id_famille);
-
-            setTimeout(function () {
-
-                // Something you want delayed.
-
-
-                $(function () {
-                    $('[name=orderId] option').filter(function () {
-                        return $(this).text() == ordreSearched;
-                    }).prop('selected', true);
-                });
-
-                console.log(famille);
-
-                $(function () {
-                    $('[name=famillyId] option').filter(function () {
-                        return $(this).text() == famille;
-                    }).prop('selected', true);
-                });
-
-                console.log(latin);
-                $(function () {
-                    $('[name=speciesId] option').filter(function () {
-                        return $(this).text() == latin;
-                    }).prop('selected', true);
-                });
-            }, 500);
-            $('input[name="usualName"]').val($("#basics").getSelectedItemData().name_FR);
+            displaySpecieAttribut();
+            console.log('choose');
         }
     }
-
 };
 
 $("#basics").easyAutocomplete(options, "minLength", 3);
+
+// create Specie
+
+$('#addSpecieBtn').on('click', function () {
+    $('.newSpecieBlock').css('display', 'block');
+    $('.specieBlock').css('display', 'none');
+
+    $('.newSpecieBlock input').prop('disabled', false);
+    $('.specieBlock input').prop('disabled', true);
+
+    $('#basics').prop('disabled', true);
+    $('#newusualNameInput').prop('required', true);
+    $('#type').val('newSpecie');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
+});
+
+$('#speciesCustomSelect').on('change', function (e) {
+    console.log(e.target.value);
+    var id = e.target.value;
+
+    $.get('/ajax/getSpecie?id=' + id, function (data) {
+        console.log(data);
+        newSpecieSetInputValue(data);
+    });
+    $('.newSpecieBlock').css('display', 'none');
+
+    $('#showSpecieBtn').val(id);
+    $('#showSpecieBtn').css('display', 'inline-flex');
+});
+
+function newSpecieSetInputValue(data) {
+    var specie = data['2'];
+    $('#newusualNameInput').val(specie['commonName'] != null ? specie['commonName'] : 'come on');
+    $('#newscientificNameInput').val(specie['scientificName'] != null ? specie['scientificName'] : '');
+    $('#newincubationInput').val(specie['incubation'] != null ? specie['incubation'] : '');
+    $('#newfertilityControlInput').val(specie['fertilityControl'] != null ? specie['fertilityControl'] : '');
+    $('#newspawningIntervalInput').val(specie['spawningInterval'] != null ? specie['spawningInterval'] : '');
+    $('#newoutOfNestInput').val(specie['outOfNest'] != null ? specie['outOfNest'] : '');
+    $('#newweaningInput').val(specie['weaning'] != null ? specie['weaning'] : '');
+    $('#newsexualMaturityInput').val(specie['sexualMaturity'] != null ? specie['sexualMaturity'] : '');
+    $('#newgirdleDateInput').val(specie['girdleDate'] != null ? specie['girdleDate'] : '');
+}
+
+$('#customSpecieBtn').on('click', function () {
+    $('#goButton').css('display', 'none');
+    $('.easy-autocomplete').css('display', 'none');
+    $('#speciesCustomSelect').css('display', 'block');
+    $('.specieBlock').css('display', 'none');
+    $('.specieBlock input').prop('disabled', true);
+    $('#type').val('userSpecie');
+    $('#basics').css('display', 'none');
+    $('#returnSpecieBtn').css('display', 'inline-flex');
+    $('#customSpecieBtn').css('display', 'none');
+    $('#addSpecieBtn').css('display', 'none');
+});
+
+$('#returnSpecieBtn').on('click', function () {
+    $('#goButton').css('display', 'block');
+    $('#basics').css('display', 'block');
+    $('.easy-autocomplete').css('display', 'block');
+    $('#speciesCustomSelect').css('display', 'none');
+    $('#customSpecieBtn').css('display', 'inline-flex');
+    $('#addSpecieBtn').css('display', 'inline-flex');
+    $('#returnSpecieBtn').css('display', 'none');
+    $('#showSpecieBtn').css('display', 'none');
+    $('.newSpecieBlock').css('display', 'none');
+    $('.specieBlock').css('display', 'block');
+    $('#createBird')[0].reset();
+});
 
 /***/ }),
 
@@ -42560,9 +42698,9 @@ jQuery(document).ready(function ($) {
 function getSpecie(id) {
 
     $.get('/ajax/getSpecie?id=' + id, function (data) {
-        // console.log(data);
         setText(data);
         setInputValue(data['2']);
+        console.log(data['2']);
     });
     //
 }

@@ -100,7 +100,7 @@
 .modal.right .modal-content .modal-footer button{
     position: absolute;
     left: 4em;
-    display: none;
+    /*display: none;*/
 }
 
 .modal.left .modal-content .modal-footer button{
@@ -10797,8 +10797,33 @@ a.link:focus {
   }
 }
 
-.easy-autocomplete input {
-  width: 20em !important;
+#hiddenTable {
+  display: none;
+}
+
+button:disabled {
+  background: #26dad2 !important;
+}
+
+#basics {
+  min-width: 20em !important;
+}
+
+@media screen and (max-width: 500px) {
+  #basics {
+    min-width: 2em !important;
+    margin-bottom: 1em;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  #basics {
+    width: 35vw !important;
+  }
+}
+
+#basicsplaceholder {
+  margin: 0 1em;
 }
 
 #displayBlock {
@@ -10843,10 +10868,10 @@ a.link:focus {
 }
 
 /*
-*
- CreateBirds
-*
-*/
+  *
+   CreateBirds
+  *
+  */
 
 input::-webkit-input-placeholder {
   color: #dedede !important;
@@ -10881,18 +10906,14 @@ input::placeholder {
 }
 
 .searchBar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   padding: 1em 1em;
   border: 1px solid #dedede;
   border-radius: 4px;
+  margin-bottom: 1em;
+}
+
+.searchBar .form-group {
+  margin-bottom: 0 !important;
 }
 
 .searchBox {
@@ -10905,6 +10926,25 @@ input::placeholder {
 #sexMethod,
 #infoBreeder {
   display: none;
+}
+
+#showSpecieBtn,
+#speciesCustomSelect,
+.newSpecieBlock,
+#returnSpecieBtn,
+#returnBirdBtn {
+  display: none;
+}
+
+.newBirdBlock,
+.newSpecieBlock,
+.specieBlock {
+  padding: 1em 1em;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  -webkit-transition: 2s;
+  transition: 2s;
 }
 
 /*

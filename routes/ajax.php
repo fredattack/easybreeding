@@ -19,6 +19,7 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::get('/getBird', "Frontend\App\BirdsController@getBird")->name('frontend.app.getBird');
     Route::get('/getSpecie', "Frontend\App\BirdsController@getSpecie")->name('frontend.app.getSpecie');
     Route::post('/setSpecie', "CustomSpecieController@update")->name('frontend.app.setSpecie');
+    Route::post('/setBird', "Frontend\App\BirdsController@update")->name('frontend.app.setBird');
 
 
 });

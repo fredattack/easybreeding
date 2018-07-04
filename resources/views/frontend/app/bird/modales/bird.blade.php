@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" >
 
     <!-- Modal content -->
     <div class="modal-content">
@@ -32,72 +32,189 @@
                 </div>
 
                 <div class="modal-body">
+                    <div class="row infoLine buttonRow">
+                        <div class="col-md-10">
+                        </div>
+                        <div class="col-md-2 pull-right">
+                           <span>
+                             <a href="" class="btn btn-lg btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom" id="editBirdBtn">
+                                 <i class="mdi mdi-grease-pencil"></i>
+                            </a>
+                           </span>
+                            <span>
+                                <a href="#" class="btn btn-circle btn-lg btn-success" id="returnBirdBtn" title="{{__('alerts.frontend.goBack')}}" data-toggle="tooltip" data-placement="bottom">
+                                    <i class="fa fa-rotate-left"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+        {!! Form::open(array('route' => ['frontend.app.updateBird',0], 'method' => 'POST','id'=>'UpdateBirdForm','onkeypress'=>"return event.keyCode != 13")) !!}
+                <input type="hidden" name="id" id="idInput" value="">
+
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
-                            <h3 id="idPersoText"></h3>
+                            <h3 class="modalText" id="idPersoText"></h3>
+                            <input type="text" class="form-control" placeholder="Coco123" id="personal_idInput" name="personal_id" value="">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.birthDate')</label>
-                            <h4 id="dateOfBirthText"></h4>
+                            <h4  class="modalText"  id="dateOfBirthText"></h4>
+
+                            <input type="text"  class="form-control mydatepicker"  name="dateOfBirth" id="dateOfBirthInput">
                         </div>
                     </div>
 <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.usualName')</label>
-                            <h4 id="usualNameText"></h4>
+                            <h4   id="usualNameText"></h4>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.species')</label>
-                            <h4 id="speciesText"></h4>
+                            <h4  id="speciesText"></h4>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.sexingMethode')</label>
-                            <h4 id="sexingMethodeText"></h4>
+                            <h4  class="modalText"  id="sexingMethodeText"></h4>
+                            <select class="form-control custom-select" name="sexingMethode" id="sexingMethodeSelect">
+                               <option value="noOne" selected>@lang('labels.frontend.birds.noOne')</option>
+                               <option value="DNA">@lang('labels.frontend.birds.DNA')</option>
+                               <option value="endoscopy">@lang('labels.frontend.birds.endoscopy')</option>
+                               <option value="supposed">@lang('labels.frontend.birds.supposed')</option>
+                               <option value="dymorphism">@lang('labels.frontend.birds.dymorphism')</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6" id="genderGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.gender')</label>
-                            <h4 id="genderText"></h4>
+                            <h4  class="modalText"  id="genderText"></h4>
+                            <div class="radio-list pull-center">
+                               <label class="custom-control custom-radio">
+                                   <input id="male" name="sexe" type="radio" value='male' class="custom-control-input">
+                                   <span class="custom-control-indicator"></span>
+                                   <span class="custom-control-description">@lang('labels.frontend.birds.male')</span>
+                               </label>
+                               <label class="custom-control custom-radio">
+                                   <input id="female" name="sexe" type="radio" value="female" class="custom-control-input">
+                                   <span class="custom-control-indicator"></span>
+                                   <span class="custom-control-description">@lang('labels.frontend.birds.female')</span>
+                               </label>
+                               <label class="custom-control custom-radio">
+                                   <input id="unknow" name="sexe" type="radio" value="unknow" class="custom-control-input" >
+                                   <span class="custom-control-indicator"></span>
+                                   <span class="custom-control-description">@lang('labels.frontend.birds.unknow')</span>
+                               </label>
+
+                           </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idType')</label>
-                            <h4 id="idTypeText"></h4>
+                            <h4  class="modalText"  id="idTypeText"></h4>
+                             <div class="radio-list pull-center">
+                                <label class="custom-control custom-radio">
+                                    <input id="openRings" name="idType" type="radio" class="custom-control-input" value="openRings"  >
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">@lang('labels.frontend.birds.openRings')</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="closedRings" name="idType" type="radio" class="custom-control-input" value="closedRings">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">@lang('labels.frontend.birds.closedRings')</span>
+                                </label>
+                                {{--<label class="custom-control custom-radio">--}}
+                                    {{--<input id="idType3" name="idType" type="radio" class="custom-control-input" value="other">--}}
+                                    {{--<span class="custom-control-indicator"></span>--}}
+                                    {{--<span class="custom-control-description">@lang('labels.frontend.birds.other')</span>--}}
+                                {{--</label>--}}
+                                <label class="custom-control custom-radio">
+                                    <input id="noOne" name="idType" type="radio" class="custom-control-input" value="noOne"  >
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">@lang('labels.frontend.birds.noOne')</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group col-md-6" id="idNummerGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idNummer')</label>
-                            <h4 id="idNumText">ABC1234</h4>
+                            <h4  class="modalText"  id="idNumText"></h4>
+                                <input type="text" class="form-control" placeholder="ABC1234" name="idNum" id="idNumInput"  >
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>
-                            <h4 id="originText"></h4>
+                            <h4  class="modalText"  id="originText"></h4>
+                             <select class="form-control custom-select" name="origin" id="originSelect">
+                                <option value="thisElevage" @if(isset($bird) && $bird->origin="thisElevage") checked @endif>@lang('labels.frontend.birds.thisElevage')</option>
+                                <option value="advertencie" @if(isset($bird) && $bird->origin="advertencie") checked @endif>@lang('labels.frontend.birds.advertencie')</option>
+                                <option value="friend" @if(isset($bird) && $bird->origin="friend") checked @endif>@lang('labels.frontend.birds.friend')</option>
+                                <option value="expo" @if(isset($bird) && $bird->origin="expo") checked @endif>@lang('labels.frontend.birds.expo')</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6" id="breederGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>
-                            <h4 id="breederText"></h4>
+                            <h4  class="modalText"  id="breederText"></h4>
+                            <input type="text" class="form-control" placeholder="Coco123" name="breederId" id="breederIdInput">
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.disponibility')</label>
-                            <h4 id="disponibilityText"></h4>
+                            <h4  class="modalText"  id="disponibilityText"></h4>
+                            <div class="radio-list pull-center">
+                                        <label class="custom-control custom-radio">
+                                            <input id="disponible" name="disponibility" type="radio"  class="custom-control-input" value="disponible" @if((isset($bird) && $bird->disponibility=="disponible")|| !isset($bird)) checked @endif>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.disponible')</span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input id="toBeSale" name="disponibility" type="radio" class="custom-control-input" value="toBeSale" @if(isset($bird) && $bird->disponibility=="toBeSale") checked @endif >
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.toBeSale')</span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input id="reserved" name="disponibility" type="radio" class="custom-control-input" value="reserved" @if(isset($bird) && $bird->disponibility=="reserved") checked @endif >
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.reserved')</span>
+                                        </label>
+                                    </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.status')</label>
-                            <h4 id="statusText"></h4>
+                            <h4  class="modalText"  id="statusText"></h4>
+                            <div class="radio-list pull-center">
+                                        <label class="custom-control custom-radio">
+                                            <input id="single" name="status" type="radio" checked="true" class="custom-control-input" value="single">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.single')</span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input id="coupled" name="status" type="radio" class="custom-control-input" value="coupled">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.coupled')</span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input id="rest" name="status" type="radio" class="custom-control-input" value="rest">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">@lang('labels.frontend.birds.rest')</span>
+                                        </label>
+                                    </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
+                        <div class="form-group col-md-6 text-center">
+                        <button id="updateBirdBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
+                         </div>
+                    </div>
+                        {!! Form::close() !!}
+                    <div class="row infoLine" id="historyGroup">
                         <div class="form-group col-md-6">
                             <h2>@lang('labels.frontend.birds.history')</h2>
                         </div>
@@ -105,9 +222,67 @@
                 </div>
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-lg btn-circle btn-success" data-dismiss="modal">X</button>
+                  <button type="button"  class="btn btn-lg btn-circle btn-success " id="closeModalBtn" data-dismiss="modal">X</button>
 
                 </div>
             </div>
         </div>
     </div>
+
+
+<style>
+
+    #birdModal .row input{
+        display: none;
+        width:95%;
+        text-align: center;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+
+    }#birdModal .row select{
+        display: none;
+        width:95%;
+        text-align: center;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+   #birdModal .radio-list{
+        display: none;
+    }
+    #birdModal .control-label,#specieModal .control-label{
+       font-size: 120%;
+    }
+    #birdModal input ::placeholder{
+        text-align: center;
+
+    }
+    @media all and(max-width: 780px) {
+            #birdModal .modal-body .form-group,
+            #birdModal .control-label,#specieModal .control-label{
+            margin-bottom:1em;
+        }
+        #birdModal .control-label,#specieModal .control-label{
+            font-weight: 600;
+        }
+
+    }
+
+      /*#birdModal Input:nth-child(1),#specieModal Input:nth-child(2){*/
+        /*width:90%;*/
+    /*}*/
+
+    /*#birdModal .control-label{*/
+        /*width:90%;*/
+    /*}*/
+
+    #updateBirdBtn{
+        display: none;
+    }
+    .buttonRow{
+        min-height: 5em;
+    }
+    
+
+</style>

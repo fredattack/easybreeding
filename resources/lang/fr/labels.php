@@ -180,6 +180,7 @@ return [
             'orderFirst' => "Choisissez d'abord un Ordre.",
             'famillyFirst' => 'Choisissez d\'abord une Famille.',
             'speciesFirst' => 'Choisissez d\'abord une Espéce.',
+            'specieCustom' => 'Choisissez une de vos Espéce.',
             'openRings' => 'Bague Ouverte',
             'closedRings' => 'Bague Fermée',
             'noOne' => 'Aucune',

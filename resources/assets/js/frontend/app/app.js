@@ -26,9 +26,9 @@ require('../global/jquery.dataTables.min');
 
 
 require('./custom.min.js');
+require('./specieModale');
 require('./createBird.js');
 require('./indexBird');
-require('./specieModale');
 require('./birdModale');
 
 /*

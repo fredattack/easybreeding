@@ -34,8 +34,9 @@ class BirdsController extends Controller
      */
     public function index()
     {
+
         $data=[];
-        $birds=Bird::where('userId','=',Auth::id())->get();
+        $birds=Bird::orderBy('species_id', 'desc')->where('userId','=',Auth::id())->get();
 
         foreach ($birds as $bird)
         {
@@ -55,7 +56,8 @@ class BirdsController extends Controller
 
         }
 
-//        dd($data);
+
+
 
         return view('frontend.app.bird.birdsIndex',compact('data'));
     }
@@ -67,12 +69,38 @@ class BirdsController extends Controller
      */
     public function create()
     {
+
+
         $orders=Order::get();
         $females = Bird::where('sexe','=','female')->get();
         $males = Bird::where('sexe','=','male')->get();
 
-        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males']));
+          $customSpecies=[];
 
+        $speciesId=Bird::where('userId','=',Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
+
+
+        foreach($speciesId as $specieId)
+        {
+            $newcustomSpecies=[];
+            if(!str_contains($specieId, '@')) {
+                $newSpecieName=Specie::where('id',$specieId)->first()->commonName;
+                $newcustomSpecies['id']=$specieId;
+                $newcustomSpecies['name']=$newSpecieName;
+                array_push($customSpecies,$newcustomSpecies);
+            }
+            else{
+
+                    $newSpecieName=CustomSpecie::where('id',$specieId)->first()->commonName;
+                    $newcustomSpecies['id']=$specieId;
+                    $newcustomSpecies['name']=$newSpecieName;
+
+                    array_push($customSpecies,$newcustomSpecies);
+
+            }
+        }
+
+        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males','customSpecies']));
     }
 
 
@@ -96,11 +124,42 @@ class BirdsController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        $specieId='';
+
+        switch ($request->type) {
+            case 'specie':
+                    $specieId=$request->speciesId;
+                break;
+            case 'userSpecie':
+                     $specieId=$request->customSpeciesId;
+                break;
+            case 'newSpecie':
+           $specie= new CustomSpecie();
+
+               ///CreateSpecie
+           $idUser=Auth::id();
+           $specieId=CustomSpecie::where('idUser', '=', Auth::id())->count().'@'.Auth::id();
+           $specie->id=$specieId;
+           $specie->idUser=$idUser;
+
+           $specie->commonName=$request->newCommonName;
+           $specie->scientificName=$request->newScientificName;
+           $specie->incubation=$request->incubation;
+           $specie->fertilityControl=$request->fertilityControl;
+           $specie->girdleDate=$request->girdleDate;
+           $specie->outOfNest =$request->outOfNest;
+           $specie->weaning=$request->weaning;
+           $specie->sexualMaturity=$request->sexualMaturity;
+           $specie->spawningInterval=$request->spawningInterval;
+           if($specie->save()) $response='Update Done';
+
+                break;
+        }
+
 
         $bird = new Bird;
 
-        $bird->species_id = $request->speciesId;
+        $bird->species_id = $specieId;
 
         $bird->sexe = $request->sexe;
         $bird->sexingMethode = $request->sexingMethode;
@@ -119,8 +178,12 @@ class BirdsController extends Controller
         if($request->mutation !=null)$bird->mutation = $request->mutation;
         $count = Bird::where('species_id','=',$request->speciesId )
                         ->where('userId', '=', Auth::id())->count();
-
-        if($request->personal_id == null)$bird->personal_id = str_replace(" ","",$request->usualName). $count+1;
+//dd($count);
+        if($request->personal_id == null){
+            if($request->commonName) $name = $request->commonName ;
+            else $name = $request->newCommonName;
+            $bird->personal_id = str_replace(" ","_",$name)."_".$count++;
+        }
         else $bird->personal_id = $request->personal_id;
         $bird->userId=Auth::id();
 //        dd($request);
@@ -181,10 +244,10 @@ class BirdsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
 //        dd($request);
-        $bird=Bird::with('specie')->where('id','=',$id)->firstOrFail();
+        $bird=Bird::with('specie')->where('id','=',$request->id)->firstOrFail();
 
         $bird->sexe=$request->sexe;
         $bird->sexingMethode=$request->sexingMethode;
@@ -252,6 +315,14 @@ class BirdsController extends Controller
                 Log::info('idFamille: '.$idFamille);
                 $famille=Famille::where('id',$idFamille)->first();
                 $famillyName= $famille->name;
+                $order=Order::where('id',$famille->orderId)->first();
+                $orderName= $order->orderName ;
+            }
+            else{
+                $famille="";
+                $famillyName= "";
+                $order="";
+                $orderName= "" ;
             }
         }
 
@@ -260,12 +331,11 @@ class BirdsController extends Controller
             $specie=Specie::where('id',$id)->first();
             $famille=Famille::where('id',$specie->id_famillie)->first();
             $famillyName= $famille->name;
+            $order=Order::where('id',$famille->orderId)->first();
+            $orderName= $order->orderName ;
         }
 
         Log::info('Specie: '.$specie);
-
-
-        Log::info('famille: '.$famille);
 
         $order=Order::where('id',$famille->orderId)->first();
         $orderName= $order->orderName ;
