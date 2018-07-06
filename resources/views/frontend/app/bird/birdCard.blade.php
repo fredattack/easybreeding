@@ -11,8 +11,6 @@
                     <i class="mdi mdi-linux"></i>
                 </button>
             </span>
-
-
             <button href="#" class="btn btn-lg btn-circle btn-success " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
                 <i class="mdi mdi-infinity"></i>
             </button>

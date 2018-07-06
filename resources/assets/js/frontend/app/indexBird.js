@@ -1,5 +1,6 @@
-$(document).ready(function() {
 
+$(document).ready(function() {
+    console.log('indexBird');
 
     var table = $('#example').DataTable({
         "columnDefs": [{

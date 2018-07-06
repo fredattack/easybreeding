@@ -9,8 +9,7 @@
 
 </div>
 
-
-    <div class="modal left fade" id="birdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal left fade" id="birdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +52,7 @@
 
                     <div class="row infoLine">
                         <div class="form-group col-md-6">
-                            <h3 class="modalText" id="idPersoText"></h3>
+                            <h2 class="modalText" id="idPersoText"></h2>
                             <input type="text" class="form-control" placeholder="Coco123" id="personal_idInput" name="personal_id" value="">
                         </div>
                         <div class="form-group col-md-6">
@@ -209,8 +208,10 @@
                     </div>
                     <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6 text-center">
-                        <button id="updateBirdBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
+                        <div class="form-group col-md-8">
+                         </div>
+                        <div class="form-group col-md-4 text-center">
+                            <button id="updateBirdBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
                          </div>
                     </div>
                         {!! Form::close() !!}
@@ -222,8 +223,12 @@
                 </div>
 
                 <div class="modal-footer">
-                  <button type="button"  class="btn btn-lg btn-circle btn-success " id="closeModalBtn" data-dismiss="modal">X</button>
+                                            <div class="form-group col-md-10">
+                                            </div>
+                                            <div class="form-group col-md-2">
 
+                  <button type="button"  class="btn btn-lg btn-circle btn-success " id="closeModalBtn" data-dismiss="modal">X</button>
+                                            </div>
                 </div>
             </div>
         </div>
@@ -232,57 +237,5 @@
 
 <style>
 
-    #birdModal .row input{
-        display: none;
-        width:95%;
-        text-align: center;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-
-    }#birdModal .row select{
-        display: none;
-        width:95%;
-        text-align: center;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-    }
-   #birdModal .radio-list{
-        display: none;
-    }
-    #birdModal .control-label,#specieModal .control-label{
-       font-size: 120%;
-    }
-    #birdModal input ::placeholder{
-        text-align: center;
-
-    }
-    @media all and(max-width: 780px) {
-            #birdModal .modal-body .form-group,
-            #birdModal .control-label,#specieModal .control-label{
-            margin-bottom:1em;
-        }
-        #birdModal .control-label,#specieModal .control-label{
-            font-weight: 600;
-        }
-
-    }
-
-      /*#birdModal Input:nth-child(1),#specieModal Input:nth-child(2){*/
-        /*width:90%;*/
-    /*}*/
-
-    /*#birdModal .control-label{*/
-        /*width:90%;*/
-    /*}*/
-
-    #updateBirdBtn{
-        display: none;
-    }
-    .buttonRow{
-        min-height: 5em;
-    }
-    
 
 </style>

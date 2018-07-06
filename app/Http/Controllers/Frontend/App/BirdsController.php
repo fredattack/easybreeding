@@ -286,6 +286,8 @@ class BirdsController extends Controller
 
         return response()->json($species);
     }
+
+
     public function generateUsualName(){
         $specieId = Input::get('specieId');
         $selectedSpecie = Specie::where('id','=',$specieId)->first();

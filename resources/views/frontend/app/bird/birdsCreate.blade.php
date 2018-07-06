@@ -2,8 +2,6 @@
 @section('title', app_name() . ' | '.__('navs.frontend.dashboard'))
 
 @section('content')
-    <table id="hiddenTable"></table>
-
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             @if(isset($bird))
@@ -29,7 +27,7 @@
             </ol>
         </div>
         <div>
-            <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+            {{--<button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>--}}
         </div>
     </div>
     <!-- ============================================================== -->
@@ -502,10 +500,10 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
-<script>
-    var table = $('#customGrid').DataTable({
-        data: rows,
-        destroy: true,
-        columns: columns});
-</script>
+{{--table--}}
 @endsection
+@section('script')
+<script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
+
+@endsection
+

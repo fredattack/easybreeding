@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
-    console.log('reloadax');
+
+    console.log('speciemodal');
 
     $('#specieModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);// Button that triggered the modal
@@ -77,6 +78,8 @@ function switchView() {
     $("#specieModal input").show();
     $('#updateSpecieBtn').show();
     $('.modalText').css('display','none');
+    $('#editCustomSpecieBtn').hide();
+    $('#returnBackBtn').css('display','inline-block');
 }
 
 // $('#updateSpecieBtn').on('click',function (e) {
@@ -103,8 +106,20 @@ function setSpecie(data) {
     });
 }
 
-function reSwitchView(){
-
+function unSwitchViewSpecie(){
+    $("#specieModal input").hide();
+    $('#updateSpecieBtn').hide();
+    $('.modalText').css('display','block');
+    $('#editCustomSpecieBtn').css('display','inline-block');
+    $('#returnBackBtn').hide();
 }
 
 
+$('#returnBackBtn').on('click',function () {
+    unSwitchViewSpecie();
+});
+
+
+$('#specieModal').on('hidden.bs.modal', function (e) {
+   unSwitchViewSpecie();
+});

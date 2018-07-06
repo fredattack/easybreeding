@@ -1,6 +1,7 @@
-jQuery(document).ready(function() {
-    $('#hiddenTable').dataTable();
-});
+
+jQuery(document).ready(function($) {
+    console.log('createBird');
+    // $('.display').dataTable();
 
 $('#order').on('change',function(e){
     console.log(e.target.value);
@@ -9,7 +10,7 @@ $('#order').on('change',function(e){
 
 
 });
-$('#hiddenTable').dataTable();
+// $('#hiddenTable').dataTable();
 function generateFamillies(id) {
 
     $.get('/ajax/generateFamillies?orderId='+id,function (data) {
@@ -274,5 +275,7 @@ $('#returnSpecieBtn').on('click',function () {
     $('.newSpecieBlock').css('display','none');
     $('.specieBlock').css('display','block');
     $('#createBird')[0].reset();
+
+});
 
 });

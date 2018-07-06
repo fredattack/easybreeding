@@ -17,7 +17,7 @@
             </ol>
         </div>
         <div>
-            <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+            {{--<button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>--}}
         </div>
     </div>
     <!-- ============================================================== -->
@@ -55,4 +55,7 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
+@endsection
+@section('script')
+<script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
 @endsection

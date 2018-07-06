@@ -3,7 +3,10 @@
 @section('title', app_name() . ' | '.__('navs.frontend.birds'))
 
 @section('content')
+
+
     <div class="row page-titles">
+        {{--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.2/b-flash-1.5.2/b-html5-1.5.2/datatables.min.js"></script>--}}
         <div class="col-md-5 align-self-center">
             <h3 class="text-themecolor">{{__('navs.frontend.birds')}}</h3>
         </div>
@@ -17,7 +20,7 @@
             </ol>
         </div>
         <div>
-            <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+            {{--<button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>--}}
         </div>
     </div>
     <!-- ============================================================== -->
@@ -90,7 +93,6 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -102,7 +104,6 @@
                                             <th>@lang('labels.frontend.birds.idNummer')</th>
                                             <th>@lang('labels.frontend.birds.status'):</th>
                                             <th>@lang('labels.frontend.birds.disponibility'):</th>
-                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -136,12 +137,7 @@
                                                 </span>
 {{----}}
                                             </td>
-                                            <td class="text-center">
-                                                <a href="{{route('frontend.app.editBird',$bird->id)}}" class="btn btn-small btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom">
-                                                    <i class="mdi mdi-grease-pencil"></i>
-                                                </a>
-{{----}}
-                                            </td>
+
                                             <td class="text-center">
                                                 <button href="#" class="btn btn-small btn-circle btn-success " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
                                                     <i class="mdi mdi-infinity"></i>
@@ -202,10 +198,16 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script>
+    {{--<script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>--}}
+    {{--<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>--}}
 
 
-    </script>
 
 @endsection
+
+@section('script')
+    <script type="text/javascript" src="{{mix('/js/appfrontendDatable.js')}}"></script>
+
+@endsection
+
+

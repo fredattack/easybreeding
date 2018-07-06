@@ -166,3 +166,53 @@
         max-width: 60% ;
     }
 }
+
+
+    #birdModal .row input{
+        display: none;
+        width:95%;
+        text-align: center;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+
+    }
+#birdModal .row input:nth-child(1){
+        color:red;
+    width: 20%;
+
+    }
+#birdModal .row select{
+        display: none;
+        width:95%;
+        text-align: center;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+   #birdModal .radio-list{
+        display: none;
+    }
+    #birdModal .control-label,#specieModal .control-label{
+       font-size: 120%;
+    }
+    #birdModal input ::placeholder{
+        text-align: center;
+
+    }
+    @media all and(max-width: 780px) {
+            #birdModal .modal-body .form-group,
+            #birdModal .control-label,#specieModal .control-label{
+            margin-bottom:1em;
+        }
+        #birdModal .control-label,#specieModal .control-label{
+            font-weight: 600;
+        }
+    }
+
+    #updateBirdBtn{
+        display: none;
+    }
+    .buttonRow{
+        min-height: 5em;
+    }

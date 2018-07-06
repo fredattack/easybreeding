@@ -1,14 +1,23 @@
 
-#hiddenTable{
+.hiddenTable{
+  th{
+    display: none;
+    visibility: hidden;
+  }
   display: none;
+  visibility: hidden;
 }
 
 button:disabled{
   background: #26dad2 !important;
 }
 
-
-
+.radio-list{
+  display: grid;
+}
+.modalText{
+  font-weight:100;
+}
 
 #basics{
   min-width: 20em !important;
@@ -89,7 +98,8 @@ button:disabled{
   #idNumberGroup,#sexMethod,#infoBreeder{
     display: none;
   }
-  #showSpecieBtn,#speciesCustomSelect,.newSpecieBlock,#returnSpecieBtn,#returnBirdBtn{
+  #showSpecieBtn,#speciesCustomSelect,.newSpecieBlock,
+  #returnSpecieBtn,#returnBirdBtn,#returnBackBtn{
     display: none;
   }
 

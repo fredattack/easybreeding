@@ -15,12 +15,15 @@
     <title>@yield('title', app_name())</title>
     <!-- Custom CSS -->
     {{ style(mix('css/appfrontend.css')) }}
-    <link href="css/colors/red-dark.css" id="theme" rel="stylesheet">
+
+    {{--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.2/b-flash-1.5.2/b-html5-1.5.2/datatables.min.css"/>--}}
+
+    {{--<link href="css/colors/red-dark.css" id="theme" rel="stylesheet">--}}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>-->
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -28,7 +31,6 @@
 </head>
 
 <body class="fix-header card-no-border logo-center">
-{{--<table id="hiddenTable"></table>--}}
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
@@ -158,13 +160,13 @@
 <!-- ============================================================== -->
 <!-- Script-->
 <!-- ============================================================== -->
-<script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
 <script type="text/javascript" src="{{asset('/messages.js')}}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-<script>
+@yield('script')
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>--}}
+{{--<script>--}}
     {{--window.translations = {!! Cache::get('translations') !!};--}}
-</script>
+{{--</script>--}}
 {{--<script  type="text/javascript" src="{{ mix('/js/react.js') }}"></script>--}}
 </body>
 

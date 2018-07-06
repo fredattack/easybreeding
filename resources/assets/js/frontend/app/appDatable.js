@@ -16,7 +16,7 @@ require('../global/waves.js');
 require('../global/sidebarmenu.js');
 require('../global/bootstrap-datepicker.min');
 require('../global/jquery.easy-autocomplete');
-// require('../global/jquery.dataTables.min');
+require('../global/jquery.dataTables.min');
 
 
 
@@ -27,7 +27,7 @@ require('../global/jquery.easy-autocomplete');
 
 require('./custom.min.js');
 require('./createBird.js');
-// require('./indexBird');
+require('./indexBird');
 require('./specieModale');
 require('./birdModale');
 

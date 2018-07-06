@@ -1,7 +1,9 @@
 
 jQuery(document).ready(function($) {
+    console.log('birdmodal');
 
-console.log(Lang.get('labels.frontend.birds.openRings'));
+
+// console.log(Lang.get('labels.frontend.birds.openRings'));
 
     $('#birdModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);// Button that triggered the modal
@@ -79,11 +81,15 @@ function switchView() {
     $("#birdModal input").show();
     $("#birdModal select").show();
     $("#birdModal .radio-list").css('display','grid');
-    $('#returnBirdBtn').css('display','inline-block');
+    $('#returnBirdBtn').css('display','grid');
     $('#updateBirdBtn').show();
     $('#editBirdBtn').hide();
     $('#historyGroup').hide();
     $('.modalText').hide();
+     // $("#birdModal").attr('backdrop', 'static');
+     // $("#birdModal").attr('keyboard', false);
+     // $('#birdModal').data('modal').options.keyboard = false;
+     // $('#birdModal').data('modal').options.backdrop = 'static';
 }
 function unSwitchViewBird() {
     $("#birdModal input").hide();
@@ -129,3 +135,9 @@ $('#returnBirdBtn').on('click',function () {
 $('#birdModal').on('hidden.bs.modal', function (e) {
    unSwitchViewBird();
 });
+
+// function blockModal() {
+//     $('#specieModal').on('hidden.bs.modal', function (e) {
+//         e.preventDefault();
+//     });
+// }

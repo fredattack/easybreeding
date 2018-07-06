@@ -1,3 +1,3 @@
 <footer class="footer">
-    © 2017 Admin Press Admin by themedesigner.in
+    © 2018 EasyBreeding  By Fred Moras
 </footer>

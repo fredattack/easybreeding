@@ -26,13 +26,22 @@
 
                 <div class="form-group col-md-12 ">
                     <div class="row infoLine">
-                        <div class="col-md-6 text-center">
-                            <h3 class="modalText" id="NameText"></h3>
-                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.commonName')" name="commonName" id="usualNameInput" value="">
-                    </div><div class="col-md-6 pull-right">
+                        <div class="col-md-2 text-center">
+                             <span>
                             <a href="" class="btn btn-lg btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editSpecie')}}" data-placement="bottom" id="editCustomSpecieBtn">
                                 <i class="mdi mdi-grease-pencil"></i>
                             </a>
+                            </span>
+                              <span>
+                                <a href="#" class="btn btn-circle btn-lg btn-success" id="returnBackBtn" title="{{__('alerts.frontend.goBack')}}" data-toggle="tooltip" data-placement="bottom">
+                                    <i class="fa fa-rotate-left"></i>
+                                </a>
+                            </span>
+                    </div>
+                        <div class="col-md-10 text-center">
+                            <h2 class="modalText" id="NameText"></h2>
+                            <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.commonName')" name="commonName" id="usualNameInput" value="">
+
                         </div>
                     </div>
 
@@ -41,8 +50,10 @@
 
                 <div class="form-group col-md-12 ">
                     <div class="row infoLine">
-                        <div class="col-md-6 text-center">
-                            <h4 class="modalText" id="scienceText"></h4>
+                        <div class="col-md-2 text-center">
+                        </div>
+                            <div class="col-md-10 text-center">
+                            <h3 class="modalText" id="scienceText"></h3>
                             <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.species')" name="scientificName" id="scientificNameInput"  value="">
                         </div>
                     </div>
@@ -51,11 +62,11 @@
                 <div class="row infoLine">
                     <div class="form-group col-md-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.order')</label>
-                        <h4 class="modalText" id="orderText"></h4>
+                        <h3  id="orderText"></h3>
                     </div>
                     <div class="form-group col-md-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.familly')</label>
-                        <h4 class="modalText" id="famillyText"></h4>
+                        <h3  id="famillyText"></h3>
                     </div>
                 </div>
                 <div class="row infoLine">
@@ -102,12 +113,12 @@
                 </div>
                 <div class="row infoLine">
                     <div class="form-group col-md-6 text-center">
+                        <button id="updateSpecieBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
+                    </div>
+                    <div class="form-group col-md-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.girdleDate')</label>
                         <h4 class="modalText" id="girdleDateText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="girdleDate" id="girdleDateInput" value="">
-                    </div>
-                    <div class="form-group col-md-6 text-center">
-                        <button id="updateSpecieBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
                     </div>
                 </div>
                 {!! Form::close() !!}
@@ -116,7 +127,7 @@
 
             </div>
             <div class="modal-footer">
-                <button  type="button" class="btn btn-lg btn-circle btn-success" data-dismiss="modal">X</button>
+                <button  type="button" id="closeModalBtn" class="btn btn-lg btn-circle btn-success" data-dismiss="modal">X</button>
             </div>
         </div>
     </div>
