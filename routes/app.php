@@ -16,6 +16,10 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
     Route::post('/storeBird', "Frontend\App\BirdsController@store")->name('frontend.app.storeBird');
     Route::get('/editCustomSpecie/{id}', 'CustomSpecieController@edit')->name('frontend.editCustomSpecie');
     Route::get('/updateSpecie/{id}', 'CustomSpecieController@update')->name('frontend.app.updateSpecie');
+    Route::get('/updatecustomid', 'CustomSpecieController@updatecustomid')->name('frontend.app.updatecustomid');
+
+    Route::get('/couples', "Frontend\App\CoupleController@index")->name('frontend.app.couples');
+
 
 
 

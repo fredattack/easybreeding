@@ -38,8 +38,8 @@
                 {{ session('info') }}
             </div>
         @endif
-        @include('frontend.app.bird.modales.bird')
-        @include('frontend.app.bird.modales.specieModale')
+        @include('frontend.app.modales.bird')
+        @include('frontend.app.modales.specieModale')
 
         <div class="row">
             <div class="col-12" id="element">
@@ -75,6 +75,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
                         <!--endregion-->
                         <!--region displayBirds @todo language-->
                         @if(count($data)!=0)
@@ -122,7 +126,8 @@
                                             <td>{{$bird->personal_id}}</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->sexe)</td>
                                             <td>{{$theSpecie['commonName']}}</td>
-                                            <td>{{$bird->dateOfBirth}}</td>
+                                            {{--<td>{{$bird->dateOfBirth}}</td>--}}
+                                            <td>{{$bird->species_id}}</td>
                                             <td>
                                                 @if($bird->idNum!=null)<p><b>{{$bird->idNum}}</b></p>@else<p><b>@lang('labels.frontend.birds.noOne')</b></p>@endif
                                             </td>
@@ -139,9 +144,15 @@
                                             </td>
 
                                             <td class="text-center">
+                                                @if($bird->status=='single')
                                                 <button href="#" class="btn btn-small btn-circle btn-success " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
                                                     <i class="mdi mdi-infinity"></i>
                                                 </button>
+                                                    @else
+                                                    <button href="#" class="btn btn-small btn-circle btn-coupled " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
+                                                    <i class="mdi mdi-gender-male-female"></i>
+                                                </button>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">

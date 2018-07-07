@@ -62,8 +62,8 @@
                 {{--</li>--}}
                 <li class="two-column">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-infinity"></i><span class="hide-menu">@lang('custom.couples')</span></a>
-                    {{--<ul aria-expanded="false" class="collapse">--}}
-                        {{--<li><a href="starter-kit.html">Starter Kit</a></li>--}}
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('frontend.app.couples')}}">@lang('navs.frontend.couples')</a></li>
 
                         {{--<li><a href="pages-profile.html">Profile page</a></li>--}}
                         {{--<li><a href="pages-animation.html">Animation</a></li>--}}
@@ -97,7 +97,7 @@
                                 {{--<li><a href="pages-recover-password.html">Recover password</a></li>--}}
                             {{--</ul>--}}
                         {{--</li>--}}
-                    {{--</ul>--}}
+                    </ul>
                 </li>
                 {{--<li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>--}}
                 {{--<li class="two-column"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>--}}

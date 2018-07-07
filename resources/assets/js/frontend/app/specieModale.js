@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 });
 
 function getSpecie(id) {
-
+console.log('dans getSpecie: '+ id);
     $.get('/ajax/getSpecie?id='+id,function(data) {
         setText(data);
         setInputValue(data['2']);
@@ -23,8 +23,10 @@ function getSpecie(id) {
 }
 
 function setText(data) {
+    console.log('dans setText: ', data['2']);
     let specie = data['2'];
-    (data['0'] !=null ?  $('#orderText').text(data['0']) : "");
+    // (data['0'] !=null ?  $('#orderText').text(data['0']) : "");
+    (data['0'] !=null ?  $('#orderText').text(specie['customId']) : "no ID pass");
     (data['1'] !=null ?  $('#famillyText').text(data['0']) : "");
     $('#NameText').text((specie['commonName']!=null ?  specie['commonName'] : Lang.get('labels.frontend.birds.unknow')));
     $('#scienceText').text((specie['scientificName']!=null ?  specie['scientificName'] : Lang.get('labels.frontend.birds.unknow')));
@@ -39,8 +41,10 @@ function setText(data) {
 }
 
 function setInputValue(data) {
-
+    console.log('dans setInput: ', data);
     let specie = data;
+    console.log('id: ', specie['customId']);
+
     $('#usualNameInput').val((specie['commonName']!=null ?  specie['commonName'] : ''));
     $('#scientificNameInput').val((specie['scientificName']!=null ?  specie['scientificName'] : ''));
     $('#incubationInput').val((specie['incubation']!=null ?  specie['incubation'] : ''));
@@ -50,7 +54,8 @@ function setInputValue(data) {
     $('#weaningInput').val((specie['weaning']!=null ?  specie['weaning'] : ''));
     $('#sexualMaturityInput').val((specie['sexualMaturity']!=null ?  specie['sexualMaturity'] : ''));
     $('#girdleDateInput').val((specie['girdleDate']!=null ?  specie['girdleDate'] : ''));
-    $('#idInput').val(specie['id']);
+    $('#idInputSpecie').val(specie['customId']);
+    console.log('idInput',    $('#idInputSpecie').val());
     $('#id_famillieInput').val(specie['id_famillie']);
 
 
@@ -110,6 +115,7 @@ function unSwitchViewSpecie(){
     $("#specieModal input").hide();
     $('#updateSpecieBtn').hide();
     $('.modalText').css('display','block');
+
     $('#editCustomSpecieBtn').css('display','inline-block');
     $('#returnBackBtn').hide();
 }

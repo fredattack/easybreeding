@@ -234,6 +234,11 @@
         min-height: 5em;
     }
 
+    .personal_idInput{
+        line-height: 36px;
+        font-size: 24px;
+    }
+
 
 .preloader{
   position: relative;
@@ -10872,6 +10877,12 @@ a.link:focus {
 
 button:disabled {
   background: #26dad2 !important;
+}
+
+.btn-coupled {
+  background: #f62d51;
+  color: #fff;
+  font-size: 125%;
 }
 
 .radio-list {

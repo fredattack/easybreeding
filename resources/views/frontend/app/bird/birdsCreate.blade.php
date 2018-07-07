@@ -40,7 +40,7 @@
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
-        @include('frontend.app.bird.modales.specieModale')
+        @include('frontend.app.modales.specieModale')
 
         <div class="row">
             <div class="col-12" id="element">
@@ -105,6 +105,10 @@
                             </div>
                         </div>
                         @endif
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
                         <div class="specieBlock" >
 
                         <div class="form-group row">

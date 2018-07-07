@@ -21,7 +21,8 @@
 
             <div class="modal-body">
                 {!! Form::open(array('route' => ['frontend.app.updateBird',0], 'method' => 'POST','id'=>'UpdateSpecieForm','onkeypress'=>"return event.keyCode != 13")) !!}
-                <input type="hidden" name="id" id="idInput" value="">
+
+                <input type="hidden" name="specieId" id="idInputSpecie" value="">
                 <input type="hidden" name="id_famillie" id="id_famillieInput" value="">
 
                 <div class="form-group col-md-12 ">

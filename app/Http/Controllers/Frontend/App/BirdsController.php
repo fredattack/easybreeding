@@ -41,8 +41,8 @@ class BirdsController extends Controller
         foreach ($birds as $bird)
         {
             $temp=[$bird];
-            if(str_contains($bird->species_id, '@')) {
-                $specie=CustomSpecie::where('id',$bird->species_id)->first();
+            if(str_contains($bird->species_id, '_')) {
+                $specie=CustomSpecie::where('customId',$bird->species_id)->first();
 
             }
             else {
@@ -83,7 +83,7 @@ class BirdsController extends Controller
         foreach($speciesId as $specieId)
         {
             $newcustomSpecies=[];
-            if(!str_contains($specieId, '@')) {
+            if(!str_contains($specieId, '_')) {
                 $newSpecieName=Specie::where('id',$specieId)->first()->commonName;
                 $newcustomSpecies['id']=$specieId;
                 $newcustomSpecies['name']=$newSpecieName;
@@ -91,7 +91,7 @@ class BirdsController extends Controller
             }
             else{
 
-                    $newSpecieName=CustomSpecie::where('id',$specieId)->first()->commonName;
+                    $newSpecieName=CustomSpecie::where('customId',$specieId)->first()->commonName;
                     $newcustomSpecies['id']=$specieId;
                     $newcustomSpecies['name']=$newSpecieName;
 
@@ -128,19 +128,24 @@ class BirdsController extends Controller
 
         switch ($request->type) {
             case 'specie':
-                    $specieId=$request->speciesId;
+                $specieId=$this->testCustomSpecie($request->speciesId);
                 break;
             case 'userSpecie':
-                     $specieId=$request->customSpeciesId;
+                 $specieId=$request->customSpeciesId;
                 break;
             case 'newSpecie':
-           $specie= new CustomSpecie();
+                $specie= new CustomSpecie();
+
+     ///////////*****************///////////////
 
                ///CreateSpecie
            $idUser=Auth::id();
-           $specieId=CustomSpecie::where('idUser', '=', Auth::id())->count().'@'.Auth::id();
-           $specie->id=$specieId;
+
+
+           $specieId=CustomSpecie::where('idUser', '=', Auth::id())->count().'_'.Auth::id();
+           $specie->customId=$specieId;
            $specie->idUser=$idUser;
+
 
            $specie->commonName=$request->newCommonName;
            $specie->scientificName=$request->newScientificName;
@@ -176,13 +181,15 @@ class BirdsController extends Controller
         if($request->mother_id !=1)$bird->mother_id = $request->mother_id;
         if($request->father_id !=1)$bird->father_id = $request->father_id;
         if($request->mutation !=null)$bird->mutation = $request->mutation;
-        $count = Bird::where('species_id','=',$request->speciesId )
-                        ->where('userId', '=', Auth::id())->count();
-//dd($count);
+
+
         if($request->personal_id == null){
+            $count = Bird::where('species_id','=',$specieId)
+                        ->where('userId', '=', Auth::id())->count();
+            $count++;
             if($request->commonName) $name = $request->commonName ;
             else $name = $request->newCommonName;
-            $bird->personal_id = str_replace(" ","_",$name)."_".$count++;
+            $bird->personal_id = str_replace(" ","_",$name)."_".$count;
         }
         else $bird->personal_id = $request->personal_id;
         $bird->userId=Auth::id();
@@ -191,6 +198,17 @@ class BirdsController extends Controller
         $bird->save();
 
         return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdCreated'));
+    }
+
+    public function testCustomSpecie($id){
+
+        $newid=$id.'_'.Auth::id();
+
+        $count=CustomSpecie::where('customId', '=', $newid)->count();
+        if($count>0) return $newid;
+        else return $id;
+
+
     }
 
     /**
@@ -216,14 +234,14 @@ class BirdsController extends Controller
         $bird=Bird::where('id','=',$id)->first();
 //        dd($bird);
         $idSpecie=$bird->species_id;
-        if(!str_contains($idSpecie, '@')){
+        if(!str_contains($idSpecie, '_')){
             $specie  = Specie::where('id',$idSpecie)->first();
             $famille = Famille::where('id',$specie->id_famillie)->first();
             $order   = Order::where('id',$famille->orderId)->first();
 //            dd($order);
         }
         else{
-            $specie  = CustomSpecie::where('id',$idSpecie)->first();
+            $specie  = CustomSpecie::where('customId',$idSpecie)->first();
 
             $idFamille = Specie::where('id',$specie->idReferedSpecies)->first()->id_famillie;
 //            dd($idFamille);
@@ -261,7 +279,7 @@ class BirdsController extends Controller
         $bird->status=$request->status;
         $bird->save();
 
-        return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdUpdated'));
+        return $request->id;
     }
 
     /**
@@ -303,54 +321,10 @@ class BirdsController extends Controller
         return response()->json($data);
     }
 
-    public function getSpecie(){
-        $id = Input::get('id');
-        Log::info('id: '.$id);
-        if(str_contains($id, '@'))
-        {
-            $specie=CustomSpecie::where('id',$id)->first();
-            Log::info('Speciettt: '.$specie);
-
-            if($specie->idReferedSpecies!=null)
-            {
-                $idFamille = Specie::where('id',$specie->idReferedSpecies)->first()->id_famillie;
-                Log::info('idFamille: '.$idFamille);
-                $famille=Famille::where('id',$idFamille)->first();
-                $famillyName= $famille->name;
-                $order=Order::where('id',$famille->orderId)->first();
-                $orderName= $order->orderName ;
-            }
-            else{
-                $famille="";
-                $famillyName= "";
-                $order="";
-                $orderName= "" ;
-            }
-        }
-
-        else
-        {
-            $specie=Specie::where('id',$id)->first();
-            $famille=Famille::where('id',$specie->id_famillie)->first();
-            $famillyName= $famille->name;
-            $order=Order::where('id',$famille->orderId)->first();
-            $orderName= $order->orderName ;
-        }
-
-        Log::info('Specie: '.$specie);
-
-        $order=Order::where('id',$famille->orderId)->first();
-        $orderName= $order->orderName ;
-        Log::info('OrderName: '.$orderName);
-
-        $data=[$orderName,$famillyName,$specie];
-        return response()->json($data);
-    }
 
 
     public function editCustomSpecie($id)
     {
-//dd('pépite');
         $id=7933;
         $specie= new CustomSpecie();
 

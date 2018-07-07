@@ -1,8 +1,22 @@
 <?php 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend\App;
 
+use App\Bird;
+use App\CustomSpecie;
+use App\Order;
+use App\Specie;
+use App\Famille;
+use App\BirdsAlpha;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
+use JavaScript;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PHPUnit\Util\PHP\AbstractPhpProcess;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use DateTime;
 
 class CoupleController extends Controller 
 {
@@ -14,7 +28,7 @@ class CoupleController extends Controller
    */
   public function index()
   {
-    
+    return view('frontend.app.couple.couplesIndex');
   }
 
   /**

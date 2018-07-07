@@ -216,3 +216,8 @@
     .buttonRow{
         min-height: 5em;
     }
+
+    .personal_idInput{
+        line-height: 36px;
+        font-size: 24px;
+    }

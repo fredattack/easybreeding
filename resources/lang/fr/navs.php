@@ -21,10 +21,11 @@ return [
     'frontend' => [
         'contact' => 'Contact',
         'dashboard' => 'Tableau de bord',
-        'birds' => 'les Oiseaux',
+        'birds' => 'Les Oiseaux',
         'addbird' => 'Ajouter un Oiseau',
         'editbird' => "Modifier un Oiseau",
         'editSpecie' => "Modifier une Espece",
+        'couples'   => 'Les Couples',
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",
