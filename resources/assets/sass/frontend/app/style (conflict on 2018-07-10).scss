@@ -1,0 +1,57 @@
+/*
+Template Name: Admin Press Admin
+Author: Themedesigner
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+/**
+ * Table Of Content
+ *
+ * 	1. Globals
+ *	2. Headers
+ *	3. Navigations
+ *	4. Banners
+ *	5. Footers
+ *	6. app
+ *	7. Widgets
+ *	8. Custom Templates
+ */
+ 
+@import 'variable';
+@import '../global/bootstrap.min.css';
+@import '../global/app';
+@import 'pages';
+@import 'sidebar';
+@import "_global";
+@import "/colors/global.scss";
+@import "/customMobile";
+@import "/custom";
+@import '/icons/font-awesome/css/font-awesome.min.css';
+@import '/icons/simple-line-icons/css/simple-line-icons.css';
+@import '/icons/weather-icons/css/weather-icons.min.css';
+@import '/icons/linea-icons/linea.css';
+@import '/icons/themify-icons/themify-icons.css';
+@import '/icons/flag-icon-css/flag-icon.min.css';
+@import "/icons/material-design-iconic-font/css/materialdesignicons.min.css";
+@import '../global/widgets';
+@import '../global/grid';
+@import 'responsive';
+@import 'material';
+@import "modale.css";
+@import '../global/spinners.css';
+@import '../global/animate.css';
+@import '../global/bootstrap-datepicker.min.css';
+@import '../global/easy-autocomplete.css';
+@import '../global/easy-autocomplete.themes.css';
+@import '../global/jquery.dataTables.min.css';
+
+@import "../global/footable/css/footable.bootstrap.css";
+//@import "../global/footable/footable.filtering.css";
+//@import "../global/footable/footable.sorting.css";
+@import "../global/footable/Footable.Glyphicons.css";
+//@import "../global/footable/FooTable.FontAwesome.css";
+
+
+
+
+//@import 'style.css';

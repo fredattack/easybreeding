@@ -38,8 +38,8 @@
                 {{ session('info') }}
             </div>
         @endif
-        @include('frontend.app.modales.bird')
-        @include('frontend.app.modales.specieModale')
+{{--        @include('frontend.app.modales.bird')--}}
+{{--        @include('frontend.app.modales.specieModale')--}}
 
         <div class="row">
             <div class="col-12" id="element">
@@ -86,7 +86,129 @@
 
                 <div class="card">
                     <div class="card-body">
-                    <h3>Sguen peoples....</h3>
+                            {{--<div class="col-md-12" style="border: 1px solid red">--}}
+                        <div class="row" >
+                            <div class="col-md-12 text-center">
+                            @if(count($data)!=0)
+                            <div id="displayList" >
+                                <div class="table-responsive m-t-40">
+                                    <table id="couplesTable" class="table display table-bordered" data-filtering="true" data-paging="true" >
+                                        <thead>
+                                        <tr>
+                                            <th>@lang('labels.frontend.birds.idCouples')</th>
+                                            <th></th>
+                                            <th>@lang('labels.frontend.birds.species')</th>
+                                            <th>@lang('labels.frontend.birds.male')</th>
+                                            <th></th>
+                                            <th>@lang('labels.frontend.birds.female')</th>
+                                            <th>@lang('labels.frontend.birds.couplesFrom')</th>
+                                            <th>@lang('labels.frontend.birds.until'):</th>
+{{--                                            <th>@lang('labels.frontend.birds.disponibility'):</th>--}}
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        @foreach($data as $couple)
+
+                                        <tr>
+                                            <td>{{$couple['1']->id}}</td>
+                                            <td>
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
+                                                    <button  id="showBirdBtn{{$couple['1']->maleId}}" type="button" class="btn btn-small btn-circle btn-table"
+                                                             data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$couple['1']->maleId}}" >
+                                                        <i class="mdi mdi-linux"></i>
+                                                    </button>
+                                                </span>
+
+                                            </td>
+                                            <td>
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                                                    <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "
+                                                            data-toggle="modal" data-target="#couple['0']Modal" value="{{$couple['0']->customId}}">
+                                                        <i class="mdi  mdi-eye"></i>
+                                                    </button>
+                                                </span>
+                                                {{$couple['0']->commonName}}
+                                            </td>
+                                            <td>
+                                                <span>{{$couple['1']->male->personal_id}}</span>
+
+                                            </td>
+
+
+
+                                            <td><span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
+                                                    <button  id="showBirdBtn{{$couple['1']->femaleId}}" type="button" class="btn btn-small btn-circle btn-table"
+                                                             data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$couple['1']->femaleId}}" >
+                                                        <i class="mdi mdi-linux"></i>
+                                                    </button>
+                                                </span>
+                                            </td>
+                                            <td ><span>{{$couple['1']->female->personal_id}}</span>
+
+                                            </td>
+                                            <td>{{$couple['1']->created_at}}</td>
+                                            <td>@php($couple['1']->seperated_at==null ? $couple['1']->seperated_at: 'En Couple')</td>
+{{--                                            <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>--}}
+
+                                            {{--<td class="text-center">--}}
+                                                {{--<span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">--}}
+                                                    {{--<button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >--}}
+                                                        {{--<i class="mdi mdi-linux"></i>--}}
+                                                    {{--</button>--}}
+                                                {{--</span>--}}
+{{----}}
+                                            {{--</td>--}}
+
+                                            {{--<td class="text-center">--}}
+                                                {{--<span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">--}}
+                                                    {{--<button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "  data-toggle="modal" data-target="#couple['0']Modal" value="{{$bird->couple['0']s_id}}">--}}
+                                                        {{--<i class="mdi  mdi-eye"></i>--}}
+                                                    {{--</button>--}}
+                                                {{--</span>--}}
+                                            {{--</td>--}}
+                                            {{--<td class="text-center">--}}
+                                                {{--@if($bird->status=='single')--}}
+                                                {{--<button href="#" class="btn btn-small btn-circle btn-table " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">--}}
+                                                    {{--<i class="mdi mdi-infinity"></i>--}}
+                                                {{--</button>--}}
+                                                    {{--@else--}}
+                                                    {{--<button href="#" class="btn btn-small btn-circle btn-coupled " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">--}}
+                                                    {{--<i class="mdi mdi-gender-male-female"></i>--}}
+                                                {{--</button>--}}
+                                                {{--@endif--}}
+                                            {{--</td>--}}
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div id="displayBlock">
+                                <div class="row">
+                                    {{--@foreach($data as $birdArr)--}}
+<!--                                        --><?php
+//                                        $bird=$birdArr[0];
+//                                        $theSpecie=$birdArr[1]
+//                                        ?>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+{{--                                        @include('frontend.app.bird.birdCard',[$bird,$theSpecie])--}}
+                                        </div>
+                                    {{--@endforeach</div>--}}
+                                </div>
+                        @else
+                    </div>
+
+                                <div class="alert alert-success">@lang('alerts.frontend.noBirds')</div>
+
+                        @endif
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,6 +237,8 @@
 
 @section('script')
     <script type="text/javascript" src="{{mix('/js/appfrontendDatable.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
 
 @endsection
 

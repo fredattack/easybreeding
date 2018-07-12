@@ -29,6 +29,7 @@ return [
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",
+        'tableSearch' => 'Chercher dans la table',
 
         'user' => [
             'account'         => 'Mon compte',

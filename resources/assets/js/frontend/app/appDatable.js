@@ -20,16 +20,12 @@ require('../global/jquery.dataTables.min');
 
 
 
-
-
-
-
-
 require('./custom.min.js');
 require('./createBird.js');
 require('./indexBird');
 require('./specieModale');
 require('./birdModale');
+require('./coupleIndex');
 
 /*
 *

@@ -42117,6 +42117,7 @@ __webpack_require__("./resources/assets/js/frontend/app/createBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/birdModale.js");
+__webpack_require__("./resources/assets/js/frontend/app/coupleIndex.js");
 
 /*
 *
@@ -42288,6 +42289,87 @@ $('#birdModal').on('hidden.bs.modal', function (e) {
 //         e.preventDefault();
 //     });
 // }
+
+/***/ }),
+
+/***/ "./resources/assets/js/frontend/app/coupleIndex.js":
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+$(document).ready(function () {
+    var _$$DataTable;
+
+    console.log('indexBird');
+
+    var table = $('#couplesTable').DataTable((_$$DataTable = {
+        "lengthMenu": [5, 10, 25],
+        responsive: true,
+        colReorder: false,
+        columnDefs: [{ responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 1, targets: 0, "width": "10%" }],
+        language: {
+
+            "sProcessing": "Traitement en cours...",
+            "sSearch": Lang.get('labels.frontend.table.sSearch'),
+            "sLengthMenu": Lang.get('labels.frontend.table.sLengthMenu'),
+            "sInfo": Lang.get('labels.frontend.table.sInfo'),
+            "sInfoEmpty": Lang.get('labels.frontend.table.sInfoEmpty'),
+            "sInfoFiltered": Lang.get('labels.frontend.table.sInfoFiltered'),
+            "sInfoPostFix": "",
+            "sLoadingRecords": Lang.get('labels.frontend.table.sLoadingRecords'),
+            "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+            "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sPrevious": "Pr&eacute;c&eacute;dent",
+                "sNext": "Suivant",
+                "sLast": "Dernier"
+            },
+            "oAria": {
+                "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+            },
+            "select": {
+                "rows": {
+                    _: "%d lignes séléctionnées",
+                    0: "Aucune ligne séléctionnée",
+                    1: "1 ligne séléctionnée"
+                }
+            }
+        },
+        "autoWidth": false
+
+    }, _defineProperty(_$$DataTable, 'columnDefs', [{
+        "visible": false,
+        "targets": 2
+
+    }]), _defineProperty(_$$DataTable, "order", [[1, 'asc']]), _defineProperty(_$$DataTable, "displayLength", 5), _defineProperty(_$$DataTable, "drawCallback", function drawCallback(settings) {
+        var api = this.api();
+        var rows = api.rows({
+            page: 'current'
+        }).nodes();
+        var last = null;
+
+        api.column(2, {
+            page: 'current'
+        }).data().each(function (group, i) {
+            if (last !== group) {
+                $(rows).eq(i).before('<tr class="group"><td colspan="2">' + group + '</td></tr>');
+                last = group;
+            }
+        });
+    }), _$$DataTable));
+    // Order by the grouping
+    // $('#example tbody').on('click', 'tr.group', function() {
+    //     var currentOrder = table.order()[0];
+    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+    //         table.order([2, 'desc']).draw();
+    //     } else {
+    //         table.order([2, 'asc']).draw();
+    //     }
+    // });
+    table.columns.adjust().draw();
+});
 
 /***/ }),
 
@@ -42643,43 +42725,79 @@ $(function () {
 /***/ "./resources/assets/js/frontend/app/indexBird.js":
 /***/ (function(module, exports) {
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 $(document).ready(function () {
+    var _$$DataTable;
+
     console.log('indexBird');
 
-    var table = $('#example').DataTable({
-        "columnDefs": [{
-            "visible": false,
-            "targets": 2
+    var table = $('#example').DataTable((_$$DataTable = {
+        "lengthMenu": [5, 10, 25, 50, 100],
+        responsive: true,
+        colReorder: true,
+        columnDefs: [{ responsivePriority: 1, targets: 0, "width": "30%" }, { responsivePriority: 1, targets: 0, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "15%" }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }],
+        language: {
 
-        }],
-        "order": [[2, 'asc']],
-        "displayLength": 25,
-        "drawCallback": function drawCallback(settings) {
-            var api = this.api();
-            var rows = api.rows({
-                page: 'current'
-            }).nodes();
-            var last = null;
-            api.column(2, {
-                page: 'current'
-            }).data().each(function (group, i) {
-                if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                    last = group;
+            "sProcessing": "Traitement en cours...",
+            "sSearch": Lang.get('labels.frontend.table.sSearch'),
+            "sLengthMenu": Lang.get('labels.frontend.table.sLengthMenu'),
+            "sInfo": Lang.get('labels.frontend.table.sInfo'),
+            "sInfoEmpty": Lang.get('labels.frontend.table.sInfoEmpty'),
+            "sInfoFiltered": Lang.get('labels.frontend.table.sInfoFiltered'),
+            "sInfoPostFix": "",
+            "sLoadingRecords": Lang.get('labels.frontend.table.sLoadingRecords'),
+            "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+            "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sPrevious": "Pr&eacute;c&eacute;dent",
+                "sNext": "Suivant",
+                "sLast": "Dernier"
+            },
+            "oAria": {
+                "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+            },
+            "select": {
+                "rows": {
+                    _: "%d lignes séléctionnées",
+                    0: "Aucune ligne séléctionnée",
+                    1: "1 ligne séléctionnée"
                 }
-            });
-        }
-    });
+            }
+        },
+        "autoWidth": false
+
+    }, _defineProperty(_$$DataTable, 'columnDefs', [{
+        "visible": false,
+        "targets": 2
+
+    }]), _defineProperty(_$$DataTable, "order", [[2, 'asc']]), _defineProperty(_$$DataTable, "displayLength", 5), _defineProperty(_$$DataTable, "drawCallback", function drawCallback(settings) {
+        var api = this.api();
+        var rows = api.rows({
+            page: 'current'
+        }).nodes();
+        var last = null;
+        api.column(2, {
+            page: 'current'
+        }).data().each(function (group, i) {
+            if (last !== group) {
+                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                last = group;
+            }
+        });
+    }), _$$DataTable));
     // Order by the grouping
-    $('#example tbody').on('click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-            table.order([2, 'desc']).draw();
-        } else {
-            table.order([2, 'asc']).draw();
-        }
-    });
+    // $('#example tbody').on('click', 'tr.group', function() {
+    //     var currentOrder = table.order()[0];
+    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+    //         table.order([2, 'desc']).draw();
+    //     } else {
+    //         table.order([2, 'asc']).draw();
+    //     }
+    // });
+    table.columns.adjust().draw();
 });
 
 $('#btnBlock').on('click', function () {

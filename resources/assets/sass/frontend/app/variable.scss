@@ -7,6 +7,16 @@ File: scss
 // Variables
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
 
+@font-face {
+ font-family: 'Glyphicons Halflings';
+ src: url('../global/bootstrap/glyphicons-halflings-regular.eot');
+ src: url('../global/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+ url('../global/bootstrap/glyphicons-halflings-regular.woff') format('woff'),
+ url('../global/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'),
+ url('../global/bootstrap/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+
 $bodyfont:'Poppins', sans-serif;
 $headingfont:'Poppins', sans-serif; 
 

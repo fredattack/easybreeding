@@ -1359,6 +1359,521 @@ table.dataTable td {
     }
 }
 
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th.child,
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty{
+    cursor:default !important
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th.child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty:before{
+    display:none !important
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child{
+    position:relative;
+    padding-left:30px;
+    cursor:pointer}
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
+    top:9px;
+    left:4px;
+    height:14px;
+    width:14px;
+    display:block;
+    position:absolute;
+    color:#000000;
+    /*border:2px solid white;*/
+    /*border-radius:14px;*/
+    /*box-shadow:0 0 3px #444;*/
+    -webkit-box-sizing:content-box;
+            box-sizing:content-box;
+    text-align:center;
+    text-indent:0 !important;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    line-height:18px;
+    content:'\F00E';
+    /*background-color:#31b131*/
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{
+    content:'\F010';
+    /*background-color:#d33333*/
+}
+table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child,
+table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child{
+    padding-left:27px}
+table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before,
+table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before{
+top:5px;
+    left:4px;
+    height:14px;
+    width:14px;
+    border-radius:14px;
+    line-height:14px;
+    text-indent:3px
+}
+table.dataTable.dtr-column>tbody>tr>td.control,
+table.dataTable.dtr-column>tbody>tr>th.control{
+    position:relative;
+    cursor:pointer
+}
+table.dataTable.dtr-column>tbody>tr>td.control:before,
+table.dataTable.dtr-column>tbody>tr>th.control:before{
+    top:50%;
+    left:50%;
+    height:16px;
+    width:16px;
+    margin-top:-10px;
+    margin-left:-10px;
+    display:block;
+    position:absolute;
+    color:white;
+    border:2px solid white;
+    border-radius:14px;
+    -webkit-box-shadow:0 0 3px #444;
+            box-shadow:0 0 3px #444;
+    -webkit-box-sizing:content-box;
+            box-sizing:content-box;
+    text-align:center;
+    text-indent:0 !important;
+    font-family:'Courier New', Courier, monospace;
+    line-height:14px;
+    content:'/f01e';
+    background-color:#31b131
+}
+table.dataTable.dtr-column>tbody>tr.parent td.control:before,
+table.dataTable.dtr-column>tbody>tr.parent th.control:before{
+    content:'/f010';
+    background-color:#d33333
+}
+table.dataTable>tbody>tr.child{
+    padding:0.5em 1em
+}
+table.dataTable>tbody>tr.child:hover{
+    background:transparent !important
+}
+table.dataTable>tbody>tr.child ul.dtr-details{
+    display:inline-block;list-style-type:none;margin:0;padding:0}
+table.dataTable>tbody>tr.child ul.dtr-details>li{border-bottom:1px solid #efefef;padding:0.5em 0}
+table.dataTable>tbody>tr.child ul.dtr-details>li:first-child{padding-top:0}
+table.dataTable>tbody>tr.child ul.dtr-details>li:last-child{border-bottom:none}
+table.dataTable>tbody>tr.child span.dtr-title{display:inline-block;min-width:75px;font-weight:bold}
+div.dtr-modal{position:fixed;-webkit-box-sizing:border-box;box-sizing:border-box;top:0;left:0;height:100%;width:100%;z-index:100;padding:10em 1em}
+div.dtr-modal div.dtr-modal-display{position:absolute;top:0;left:0;bottom:0;
+    right:0;width:50%;height:50%;overflow:auto;margin:auto;z-index:102;
+    overflow:auto;background-color:#f5f5f7;border:1px solid black;border-radius:0.5em;
+    -webkit-box-shadow:0 12px 30px rgba(0,0,0,0.6);
+            box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+div.dtr-modal div.dtr-modal-content{position:relative;padding:1em}
+div.dtr-modal div.dtr-modal-close{position:absolute;top:6px;right:6px;width:22px;
+    height:22px;border:1px solid #eaeaea;background-color:#f9f9f9;
+    text-align:center;border-radius:3px;cursor:pointer;z-index:12}
+div.dtr-modal div.dtr-modal-close:hover{background-color:#eaeaea}
+div.dtr-modal div.dtr-modal-background{position:fixed;top:0;left:0;right:0;bottom:0;z-index:101;background:rgba(0,0,0,0.6)}
+@media screen and (max-width: 767px){div.dtr-modal div.dtr-modal-display{width:95%}}/*
+* FooTable v3 - FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome.
+* @version 3.1.5
+* @link http://fooplugins.com
+* @copyright Steven Usher & Brad Vincent 2015
+* @license Released under the GPLv3 license.
+*/
+table.footable,
+table.footable-details {
+	position: relative;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+table.footable-details {
+	margin-bottom: 0;
+}
+table.footable-hide-fouc {
+	display: none;
+}
+table > tbody > tr > td > span.footable-toggle {
+	margin-right: 8px;
+	opacity: 0.3;
+}
+table > tbody > tr > td > span.footable-toggle.last-column {
+	margin-left: 8px;
+	float: right;
+}
+table.table-condensed > tbody > tr > td > span.footable-toggle {
+	margin-right: 5px;
+}
+table.footable-details > tbody > tr > th:nth-child(1) {
+	min-width: 40px;
+	width: 120px;
+}
+table.footable-details > tbody > tr > td:nth-child(2) {
+	word-break: break-all;
+}
+
+table.footable-details > thead > tr:first-child > th,
+table.footable-details > thead > tr:first-child > td,
+table.footable-details > tbody > tr:first-child > th,
+table.footable-details > tbody > tr:first-child > td,
+table.footable-details > tfoot > tr:first-child > th,
+table.footable-details > tfoot > tr:first-child > td {
+	border-top-width: 0;
+}
+table.footable-details.table-bordered > thead > tr:first-child > th,
+table.footable-details.table-bordered > thead > tr:first-child > td,
+table.footable-details.table-bordered > tbody > tr:first-child > th,
+table.footable-details.table-bordered > tbody > tr:first-child > td,
+table.footable-details.table-bordered > tfoot > tr:first-child > th,
+table.footable-details.table-bordered > tfoot > tr:first-child > td {
+	border-top-width: 1px;
+}
+
+div.footable-loader {
+	vertical-align: middle;
+	text-align: center;
+	height: 300px;
+	position: relative;
+}
+div.footable-loader > span.fooicon {
+	display: inline-block;
+	opacity: 0.3;
+	font-size: 30px;
+	line-height: 32px;
+	width: 32px;
+	height: 32px;
+	margin-top: -16px;
+	margin-left: -16px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-animation: fooicon-spin-r 2s infinite linear;
+	animation: fooicon-spin-r 2s infinite linear;
+}
+table.footable > tbody > tr.footable-empty > td {
+	vertical-align: middle;
+	text-align: center;
+	font-size: 30px;
+}
+table.footable > tbody > tr > td,
+table.footable > tbody > tr > th {
+	display: none;
+}
+table.footable > tbody > tr.footable-empty > td,
+table.footable > tbody > tr.footable-empty > th,
+table.footable > tbody > tr.footable-detail-row > td,
+table.footable > tbody > tr.footable-detail-row > th {
+	display: table-cell;
+}
+@-webkit-keyframes fooicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+@keyframes fooicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+.fooicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings' !important;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.fooicon:before,
+.fooicon:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.fooicon-loader:before {
+	content: "\E030";
+}
+.fooicon-plus:before {
+	content: "+";
+}
+.fooicon-minus:before {
+	content: "\2212";
+}
+.fooicon-search:before {
+	content: "\E003";
+}
+.fooicon-remove:before {
+	content: "\E014";
+}
+.fooicon-sort:before {
+	content: "\E150";
+}
+.fooicon-sort-asc:before {
+	content: "\E155";
+}
+.fooicon-sort-desc:before {
+	content: "\E156";
+}
+.fooicon-pencil:before {
+	content: "\270F";
+}
+.fooicon-trash:before {
+	content: "\E020";
+}
+.fooicon-eye-close:before {
+	content: "\E106";
+}
+.fooicon-flash:before {
+	content: "\E162";
+}
+.fooicon-cog:before {
+	content: "\E019";
+}
+.fooicon-stats:before {
+	content: "\E185";
+}
+
+table.footable > thead > tr.footable-filtering > th {
+	border-bottom-width: 1px;
+	font-weight: normal;
+}
+.footable-filtering-external.footable-filtering-right,
+table.footable > thead > tr.footable-filtering > th,
+table.footable.footable-filtering-right > thead > tr.footable-filtering > th {
+	text-align: right;
+}
+.footable-filtering-external.footable-filtering-left,
+table.footable.footable-filtering-left > thead > tr.footable-filtering > th {
+	text-align: left;
+}
+.footable-filtering-external.footable-filtering-center,
+table.footable.footable-filtering-center > thead > tr.footable-filtering > th {
+	text-align: center;
+}
+table.footable > thead > tr.footable-filtering > th div.form-group {
+	margin-bottom: 0;
+}
+table.footable > thead > tr.footable-filtering > th div.form-group+div.form-group {
+	margin-top: 5px;
+}
+table.footable > thead > tr.footable-filtering > th div.input-group {
+	width: 100%;
+}
+.footable-filtering-external ul.dropdown-menu > li > a.checkbox,
+table.footable > thead > tr.footable-filtering > th ul.dropdown-menu > li > a.checkbox {
+	margin: 0;
+	display: block;
+	position: relative;
+}
+.footable-filtering-external ul.dropdown-menu > li > a.checkbox > label,
+table.footable > thead > tr.footable-filtering > th ul.dropdown-menu > li > a.checkbox > label {
+	display: block;
+	padding-left: 20px;
+}
+.footable-filtering-external ul.dropdown-menu > li > a.checkbox input[type="checkbox"],
+table.footable > thead > tr.footable-filtering > th ul.dropdown-menu > li > a.checkbox input[type="checkbox"] {
+	position: absolute;
+	margin-left: -20px;
+}
+@media (min-width: 768px) {
+	table.footable > thead > tr.footable-filtering > th div.input-group {
+		width: auto;
+	}
+	table.footable > thead > tr.footable-filtering > th div.form-group {
+		margin-left: 2px;
+		margin-right: 2px;
+	}
+	table.footable > thead > tr.footable-filtering > th div.form-group+div.form-group {
+		margin-top: 0;
+	}
+}
+table.footable > thead > tr > td.footable-sortable,
+table.footable > thead > tr > th.footable-sortable,
+table.footable > tbody > tr > td.footable-sortable,
+table.footable > tbody > tr > th.footable-sortable,
+table.footable > tfoot > tr > td.footable-sortable,
+table.footable > tfoot > tr > th.footable-sortable {
+	position: relative;
+	padding-right: 30px;
+	cursor: pointer;
+}
+td.footable-sortable > span.fooicon,
+th.footable-sortable > span.fooicon {
+	position: absolute;
+	right: 6px;
+	top: 50%;
+	margin-top: -7px;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s ease-in;
+	transition: opacity 0.3s ease-in;
+}
+td.footable-sortable:hover > span.fooicon,
+th.footable-sortable:hover > span.fooicon {
+	opacity: 1;
+}
+td.footable-sortable.footable-asc > span.fooicon,
+th.footable-sortable.footable-asc > span.fooicon,
+td.footable-sortable.footable-desc > span.fooicon,
+th.footable-sortable.footable-desc > span.fooicon {
+	opacity: 1;
+}
+/* hides the sort icons when sorting is not allowed */
+table.footable-sorting-disabled td.footable-sortable.footable-asc > span.fooicon,
+table.footable-sorting-disabled td.footable-sortable.footable-desc > span.fooicon,
+table.footable-sorting-disabled td.footable-sortable:hover > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable.footable-asc > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable.footable-desc > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable:hover > span.fooicon {
+	opacity: 0;
+	visibility: hidden;
+}
+.footable-paging-external ul.pagination,
+table.footable > tfoot > tr.footable-paging > td > ul.pagination {
+	margin: 10px 0 0 0;
+}
+.footable-paging-external span.label,
+table.footable > tfoot > tr.footable-paging > td > span.label {
+	display: inline-block;
+	margin: 0 0 10px 0;
+	padding: 4px 10px;
+}
+.footable-paging-external.footable-paging-center,
+table.footable > tfoot > tr.footable-paging > td,
+table.footable-paging-center > tfoot > tr.footable-paging > td {
+	text-align: center;
+}
+.footable-paging-external.footable-paging-left,
+table.footable-paging-left > tfoot > tr.footable-paging > td {
+	text-align: left;
+}
+.footable-paging-external.footable-paging-right,
+table.footable-paging-right > tfoot > tr.footable-paging > td {
+	text-align: right;
+}
+ul.pagination > li.footable-page {
+	display: none;
+}
+ul.pagination > li.footable-page.visible {
+	display: inline;
+}
+td.footable-editing {
+	width: 90px;
+	max-width: 90px;
+}
+table.footable-editing-no-edit td.footable-editing,
+table.footable-editing-no-delete td.footable-editing,
+table.footable-editing-no-view td.footable-editing {
+	width: 70px;
+	max-width: 70px;
+}
+table.footable-editing-no-edit.footable-editing-no-delete td.footable-editing,
+table.footable-editing-no-edit.footable-editing-no-view td.footable-editing,
+table.footable-editing-no-delete.footable-editing-no-view td.footable-editing {
+	width: 50px;
+	max-width: 50px;
+}
+table.footable-editing-no-edit.footable-editing-no-delete.footable-editing-no-view td.footable-editing,
+table.footable-editing-no-edit.footable-editing-no-delete.footable-editing-no-view th.footable-editing {
+	width: 0;
+	max-width: 0;
+	display: none !important;
+}
+table.footable-editing-right td.footable-editing,
+table.footable-editing-right tr.footable-editing {
+	text-align: right;
+}
+table.footable-editing-left td.footable-editing,
+table.footable-editing-left tr.footable-editing {
+	text-align: left;
+}
+table.footable-editing button.footable-add,
+table.footable-editing button.footable-hide,
+table.footable-editing-show button.footable-show,
+table.footable-editing.footable-editing-always-show button.footable-show,
+table.footable-editing.footable-editing-always-show button.footable-hide,
+table.footable-editing.footable-editing-always-show.footable-editing-no-add tr.footable-editing {
+	display: none;
+}
+table.footable-editing.footable-editing-show button.footable-add,
+table.footable-editing.footable-editing-show button.footable-hide,
+table.footable-editing.footable-editing-always-show button.footable-add {
+	display: inline-block;
+}
+/* Glyphicons Icons - We're not actually using Glyphicons classes but instead provide a simple mapping from Glyphicons to FooTable class names. */
+.fooicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings' !important;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.fooicon:before,
+.fooicon:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.fooicon-loader:before {
+	content: "\E030";
+}
+.fooicon-plus:before {
+	content: "+";
+}
+.fooicon-minus:before {
+	content: "\2212";
+}
+.fooicon-search:before {
+	content: "\E003";
+}
+.fooicon-remove:before {
+	content: "\E014";
+}
+.fooicon-sort:before {
+	content: "\E150";
+}
+.fooicon-sort-asc:before {
+	content: "\E155";
+}
+.fooicon-sort-desc:before {
+	content: "\E156";
+}
+.fooicon-pencil:before {
+	content: "\270F";
+}
+.fooicon-trash:before {
+	content: "\E020";
+}
+.fooicon-eye-close:before {
+	content: "\E106";
+}
+.fooicon-flash:before {
+	content: "\E162";
+}
+.fooicon-cog:before {
+	content: "\E019";
+}
+.fooicon-stats:before {
+	content: "\E185";
+}
 /*
 Template Name: Admin Press Admin
 Author: Themedesigner
@@ -1385,6 +1900,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -3489,6 +4010,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -5869,7 +6396,7 @@ Table- Footable
   padding: .5rem .75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #0275d8;
+  color: #26dad2;
   background-color: #ffffff;
   border: 1px solid #ddd;
 }
@@ -5877,8 +6404,8 @@ Table- Footable
 .footable .pagination li.active a {
   z-index: 2;
   color: #fff;
-  background-color: #0275d8;
-  border-color: #0275d8;
+  background-color: #26dad2;
+  border-color: #26dad2;
 }
 
 .footable .pagination li.disabled a {
@@ -8513,6 +9040,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -8682,6 +9215,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -8903,6 +9442,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -9072,6 +9617,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -9292,6 +9843,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -9463,6 +10020,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -9683,6 +10246,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -9852,6 +10421,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -10073,6 +10648,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -10242,6 +10823,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -10463,6 +11050,12 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
+
 /*Theme Colors*/
 
 /*bootstrap Color*/
@@ -10632,6 +11225,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 
@@ -10851,18 +11450,14 @@ a.link:focus {
     padding: 1em 1em;
   }
 
-  #displayList {
-    display: none;
-  }
-
   #displayBlock {
-    display: block !important;
+    display: none !important;
   }
+}
 
-  #btnList,
-  #btnBlock {
-    display: none;
-  }
+.btn-table,
+.btn-coupled {
+  background: transparent;
 }
 
 .hiddenTable {
@@ -12831,6 +13426,12 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
+  src: url(/fonts/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
+}
 
 /*Theme Colors*/
 

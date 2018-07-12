@@ -4038,7 +4038,7 @@
 
 			self.$input = $('<input/>', {type: 'text', 'class': 'form-control', placeholder: self.placeholder});
 
-			self.$button = $('<button/>', {type: 'button', 'class': 'btn btn-primary'})
+			self.$button = $('<button/>', {type: 'button', 'class': 'btn btn-success'})
 				.on('click', { self: self }, self._onSearchButtonClicked)
 				.append($('<span/>', {'class': 'fooicon fooicon-search'}));
 
@@ -5604,7 +5604,7 @@
 			}
 			this.$wrapper = $('<div/>', {'class': 'footable-pagination-wrapper'}).appendTo(this.$container);
 			this.$pagination = $('<ul/>', { 'class': 'pagination' }).on('click.footable', 'a.footable-page-link', { self: this }, this._onPageClicked);
-			this.$count = $('<span/>', { 'class': 'label label-default' });
+			// this.$count = $('<span/>', { 'class': 'label label-default' });
 			this.$wrapper.append(this.$pagination, $('<div/>', {'class': 'divider'}), this.$count);
 			this.detached = false;
 		},
@@ -7328,9 +7328,11 @@
 	};
 
 	// override the base method for DateColumns
-	F.DateColumn.prototype.stringify = function(value, options, rowData){
-		return F.is.object(value) && F.is.boolean(value._isAMomentObject) && value.isValid() ? value.format(this.formatString) : '';
-	};
+	if (F.DateColumn != undefined) {
+    F.DateColumn.prototype.stringify = function (value, options, rowData) {
+        return F.is.object(value) && F.is.boolean(value._isAMomentObject) && value.isValid() ? value.format(this.formatString) : '';
+    };
+}
 
 	// override the base method for ObjectColumns
 	F.ObjectColumn.prototype.stringify = function(value, options, rowData){

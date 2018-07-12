@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\App;
 
 use App\Bird;
+use App\Couple;
 use App\CustomSpecie;
 use App\Order;
 use App\Specie;
@@ -28,7 +29,24 @@ class CoupleController extends Controller
    */
   public function index()
   {
-    return view('frontend.app.couple.couplesIndex');
+    $couples=Couple::with(['male','female'])->where('userId',Auth::id())->get();
+//    dd($couples);
+    $data=[];
+    foreach ($couples as $couple)
+    {
+
+        if(!str_contains($couple->specieId, '_')) {
+            $specie=Specie::where('customId',$couple->specieId)->first();
+        }
+        else{
+            $specie=CustomSpecie::where('customId',$couple->specieId)->first();
+        }
+        $fullCouple=[$specie,$couple];
+        array_push($data,$fullCouple);
+    }
+
+//    dd($data);
+    return view('frontend.app.couple.couplesIndex',compact(['data']));
   }
 
   /**
