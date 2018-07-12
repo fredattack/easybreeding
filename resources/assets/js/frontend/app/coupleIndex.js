@@ -7,7 +7,7 @@ $(document).ready(function () {
         colReorder: false,
         columnDefs: [
         { responsivePriority: 2, targets: -1 ,"width": "10%"},
-        { responsivePriority: 1, targets: 0 ,"width": "10%" },
+        { responsivePriority: 1, targets: 0 ,"width": "10%"},
         // { responsivePriority: 1, targets: 1 ,"width": "10%" },
         // { responsivePriority: 2, targets: 2,"width": "30%" },
         // { responsivePriority: 2, targets: 3 ,"width": "30%" },
@@ -51,6 +51,7 @@ $(document).ready(function () {
             "targets": 2,
 
         }],
+
         "order": [
             [1, 'asc']
         ],

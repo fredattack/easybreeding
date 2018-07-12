@@ -209,7 +209,12 @@ return [
             'spawningInterval'=>'Interval de ponte',
             'idCouples' => 'n° de couples',
             'couplesFrom' => 'En couple depuis',
-            'until' => 'Séparé le'
+            'until' => 'Séparé le',
+            'hatchingsNbr' => 'Nbr. couvées',
+            'eggsNbr' => 'Nbr. Oeufs',
+            'whiteEggsNbr' => 'Nbr. Oeufs Blanc',
+            'fertilizedEggNbr' => 'Nbr. Oeufs Fécondés',
+            'youngNbr' => 'Nbr. jeunes'
 
 
         ],

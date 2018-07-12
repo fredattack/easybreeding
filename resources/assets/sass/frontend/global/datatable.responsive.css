@@ -15,8 +15,8 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child{
     cursor:pointer}
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
-    top:9px;
-    left:4px;
+    top:1.25em;
+    left:2em;
     height:14px;
     width:14px;
     display:block;
@@ -33,12 +33,12 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
     font-weight: normal;
     text-decoration: inherit;
     line-height:18px;
-    content:'\f00e';
+    content:'\f067';
     /*background-color:#31b131*/
 }
 table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,
 table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{
-    content:'\f010';
+    content:'\f068';
     /*background-color:#d33333*/
 }
 table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child,
@@ -46,8 +46,8 @@ table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child{
     padding-left:27px}
 table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before,
 table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before{
-top:5px;
-    left:4px;
+    top:1.25em;
+    left:2em;
     height:14px;
     width:14px;
     border-radius:14px;
@@ -78,12 +78,12 @@ table.dataTable.dtr-column>tbody>tr>th.control:before{
     text-indent:0 !important;
     font-family:'Courier New', Courier, monospace;
     line-height:14px;
-    content:'/f01e';
+    content:'/f067';
     background-color:#31b131
 }
 table.dataTable.dtr-column>tbody>tr.parent td.control:before,
 table.dataTable.dtr-column>tbody>tr.parent th.control:before{
-    content:'/f010';
+    content:'/f068';
     background-color:#d33333
 }
 table.dataTable>tbody>tr.child{

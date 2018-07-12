@@ -38,8 +38,8 @@
                 {{ session('info') }}
             </div>
         @endif
-{{--        @include('frontend.app.modales.bird')--}}
-{{--        @include('frontend.app.modales.specieModale')--}}
+        @include('frontend.app.modales.bird')
+        @include('frontend.app.modales.specieModale')
 
         <div class="row">
             <div class="col-12" id="element">
@@ -102,8 +102,13 @@
                                             <th></th>
                                             <th>@lang('labels.frontend.birds.female')</th>
                                             <th>@lang('labels.frontend.birds.couplesFrom')</th>
+                                            <th>@lang('labels.frontend.birds.hatchingsNbr'):</th>
+                                            <th>@lang('labels.frontend.birds.eggsNbr'):</th>
+                                            <th>@lang('labels.frontend.birds.youngNbr'):</th>
+                                            <th>@lang('labels.frontend.birds.whiteEggsNbr'):</th>
+                                            <th>@lang('labels.frontend.birds.fertilizedEggNbr'):</th>
                                             <th>@lang('labels.frontend.birds.until'):</th>
-{{--                                            <th>@lang('labels.frontend.birds.disponibility'):</th>--}}
+                                            <th></th>
 
 
                                         </tr>
@@ -127,7 +132,7 @@
                                             <td>
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
                                                     <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "
-                                                            data-toggle="modal" data-target="#couple['0']Modal" value="{{$couple['0']->customId}}">
+                                                            data-toggle="modal" data-target="#specieModal" value="{{$couple['0']->customId}}">
                                                         <i class="mdi  mdi-eye"></i>
                                                     </button>
                                                 </span>
@@ -152,35 +157,19 @@
                                             </td>
                                             <td>{{$couple['1']->created_at}}</td>
                                             <td>@php($couple['1']->seperated_at==null ? $couple['1']->seperated_at: 'En Couple')</td>
-{{--                                            <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>--}}
-
-                                            {{--<td class="text-center">--}}
-                                                {{--<span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">--}}
-                                                    {{--<button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >--}}
-                                                        {{--<i class="mdi mdi-linux"></i>--}}
-                                                    {{--</button>--}}
-                                                {{--</span>--}}
-{{----}}
-                                            {{--</td>--}}
-
-                                            {{--<td class="text-center">--}}
-                                                {{--<span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">--}}
-                                                    {{--<button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "  data-toggle="modal" data-target="#couple['0']Modal" value="{{$bird->couple['0']s_id}}">--}}
-                                                        {{--<i class="mdi  mdi-eye"></i>--}}
-                                                    {{--</button>--}}
-                                                {{--</span>--}}
-                                            {{--</td>--}}
-                                            {{--<td class="text-center">--}}
-                                                {{--@if($bird->status=='single')--}}
-                                                {{--<button href="#" class="btn btn-small btn-circle btn-table " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">--}}
-                                                    {{--<i class="mdi mdi-infinity"></i>--}}
-                                                {{--</button>--}}
-                                                    {{--@else--}}
-                                                    {{--<button href="#" class="btn btn-small btn-circle btn-coupled " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">--}}
-                                                    {{--<i class="mdi mdi-gender-male-female"></i>--}}
-                                                {{--</button>--}}
-                                                {{--@endif--}}
-                                            {{--</td>--}}
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                                                    <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "
+                                                            data-toggle="modal" data-target="#specieModal" value="{{$couple['0']->customId}}">
+                                                        <i class="mdi  mdi-eye"></i>
+                                                    </button>
+                                                </span>
+                                            </td>
                                         </tr>
                                         @endforeach
                                         </tbody>
