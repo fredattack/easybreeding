@@ -17,6 +17,7 @@ require('../global/sidebarmenu.js');
 require('../global/bootstrap-datepicker.min');
 require('../global/jquery.easy-autocomplete');
 require('../global/jquery.dataTables.min');
+require('../global/parsley');
 
 
 

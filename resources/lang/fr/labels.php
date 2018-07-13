@@ -178,9 +178,9 @@ return [
             'mother' => 'Mère',
             'father' => 'Père',
             'orderFirst' => "Choisissez d'abord un Ordre.",
-            'famillyFirst' => 'Choisissez d\'abord une Famille.',
-            'speciesFirst' => 'Choisissez d\'abord une Espéce.',
-            'specieCustom' => 'Choisissez une de vos Espéce.',
+            'famillyFirst' => 'Choisissez d\'abord une Famille',
+            'speciesFirst' => 'Choisissez d\'abord une Espéce',
+            'specieCustom' => 'Choisissez une de vos Espéce',
             'openRings' => 'Bague Ouverte',
             'closedRings' => 'Bague Fermée',
             'noOne' => 'Aucune',
@@ -214,7 +214,10 @@ return [
             'eggsNbr' => 'Nbr. Oeufs',
             'whiteEggsNbr' => 'Nbr. Oeufs Blanc',
             'fertilizedEggNbr' => 'Nbr. Oeufs Fécondés',
-            'youngNbr' => 'Nbr. jeunes'
+            'youngNbr' => 'Nbr. jeunes',
+            'createCouples'=> 'Former un Couple',
+            'selectMale'=>'Choisissez un Mâle',
+            'selectFemale'=>'Choisissez une Femelle',
 
 
         ],

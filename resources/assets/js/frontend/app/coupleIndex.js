@@ -84,3 +84,51 @@ $(document).ready(function () {
     // });
     table.columns.adjust().draw();
 });
+
+$(document).ready(function($) {
+    console.log('specie change');
+    // $('.display').dataTable();
+
+    $('#specieCouple').on('change', function (e) {
+
+        console.log(e.target.value);
+
+        // $('input[name="searchBox"]').val('');
+        generateMales(e.target.value);
+        generateFemales(e.target.value)
+    });
+});
+
+function generateMales(id) {
+
+    $.get('/ajax/generateMales?specieId='+id,function (data) {
+        console.log(data);
+        
+        $('#males').empty();
+        $('#males').append('<option value="none" disabled selected>Choisissez un mâle</option>');
+
+        $.each(data,function (index,maleReturned) {
+            $('#males').append('<option value="'+maleReturned.id+'">'+maleReturned.personal_id+'('+maleReturned.idNum+')'+'</option>');
+        })
+    });
+
+
+}
+function generateFemales(id) {
+
+    $.get('/ajax/generateFemales?specieId='+id,function (data) {
+        console.log(data);
+
+        $('#females').empty();
+        $('#females').append('<option value="none" disabled selected>Choisissez une femelle</option>');
+
+        $.each(data,function (index,maleReturned) {
+            $('#females').append('<option value="'+maleReturned.id+'">'+maleReturned.personal_id+'('+maleReturned.idNum+')'+'</option>');
+        })
+    });
+
+}
+
+$(document).ready(function () {
+    $('#createCouple').parsley(options);
+});

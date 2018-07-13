@@ -40,6 +40,7 @@
         @endif
         @include('frontend.app.modales.bird')
         @include('frontend.app.modales.specieModale')
+        @include('frontend.app.modales.newCouplesModal',$customSpecies)
 
         <div class="row">
             <div class="col-12" id="element">
@@ -67,7 +68,7 @@
                                 <div class="col-md-3"></div>
                                     <div class="col-md-3"></div>
                                     <div class="col-md-3">
-                                        <a href="{{ route('frontend.app.birdCreate') }}" class="btn btn-circle btn-lg btn-success pull-right" data-toggle="tooltip" title="{{__('alerts.frontend.addBird')}}" data-placement="bottom">
+                                        <a href="#" class="btn btn-circle btn-lg btn-success pull-right" data-toggle="modal" data-target="#newCoupleModal" title="{{__('alerts.frontend.addBird')}}" data-placement="bottom">
                                             <i class="fa fa-plus"></i>
                                         </a>
 

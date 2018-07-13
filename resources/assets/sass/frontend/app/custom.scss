@@ -2,6 +2,22 @@
   background: transparent;
 }
 
+ table.dataTable.stripe tbody tr.odd,
+ table.dataTable.display tbody tr.odd,
+ table.dataTable.display tbody tr.odd>.sorting_1,
+ table.dataTable.order-column.stripe tbody tr.odd>.sorting_1{
+  background-color: white !important;
+}
+
+ .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+ .dataTables_wrapper .dataTables_paginate .paginate_button.next:hover,
+ .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff !important;
+    border: 1px solid #13dafe !important;
+    background-color: #13dafe !important;
+}
+
 .hiddenTable{
   th{
     display: none;
@@ -124,3 +140,9 @@ button:disabled{
 //.groupSpecieBtn span{
 //  position: absolute;
 //}
+
+
+#newCoupleModal .modal-content{
+  position: absolute;
+  top:15em;
+}

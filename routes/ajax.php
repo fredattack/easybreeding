@@ -21,5 +21,8 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::post('/setSpecie', "CustomSpecieController@update")->name('frontend.app.setSpecie');
     Route::post('/setBird', "Frontend\App\BirdsController@update")->name('frontend.app.setBird');
 
+    Route::get('/generateMales', "Frontend\App\CoupleController@generateMales");
+    Route::get('/generateFemales', "Frontend\App\CoupleController@generateFemales");
+
 
 });

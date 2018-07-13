@@ -45,8 +45,33 @@ class CoupleController extends Controller
         array_push($data,$fullCouple);
     }
 
-//    dd($data);
-    return view('frontend.app.couple.couplesIndex',compact(['data']));
+          $customSpecies=[];
+
+        $speciesId=Bird::where('userId','=',Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
+
+
+        foreach($speciesId as $specieId)
+        {
+            $newcustomSpecies=[];
+            if(!str_contains($specieId, '_')) {
+                $newSpecieName=Specie::where('id',$specieId)->first()->commonName;
+                $newcustomSpecies['id']=$specieId;
+                $newcustomSpecies['name']=$newSpecieName;
+                array_push($customSpecies,$newcustomSpecies);
+            }
+            else{
+
+                    $newSpecieName=CustomSpecie::where('customId',$specieId)->first()->commonName;
+                    $newcustomSpecies['id']=$specieId;
+                    $newcustomSpecies['name']=$newSpecieName;
+
+                    array_push($customSpecies,$newcustomSpecies);
+
+            }
+        }
+
+//    dd($customSpecies);
+    return view('frontend.app.couple.couplesIndex',compact(['data','customSpecies']));
   }
 
   /**
@@ -108,9 +133,28 @@ class CoupleController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function generateMales()
   {
+      $specieId = Input::get('specieId');
+      $males = Bird::where([
+                    'species_id'=>$specieId,
+                    'userId'=>Auth::id(),
+                    'sexe'=>'male'])->get();
+
+        return response()->json($males);
     
+  }
+
+  public function generateFemales()
+  {
+      $specieId = Input::get('specieId');
+      $males = Bird::where([
+                    'species_id'=>$specieId,
+                    'userId'=>Auth::id(),
+                    'sexe'=>'female'])->get();
+
+        return response()->json($males);
+
   }
   
 }
