@@ -13,6 +13,7 @@
                     <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.birds')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">@lang('custom.birds')</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('frontend.app.birds')}}">@lang('custom.birdsList')</a></li>
+                        <li><a href="{{route('frontend.app.nestlings')}}">@lang('custom.nestlings')</a></li>
                         <li><a href="{{route('frontend.app.birdCreate')}}">@lang('custom.createBird')</a></li>
                         {{--<li>--}}
                             {{--<a class="has-arrow" href="#" aria-expanded="false">Inbox</a>--}}
@@ -123,75 +124,78 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-inbox"></i><span class="hide-menu">@lang('custom.hatchings')</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="table-basic.html">Basic Tables</a></li>
-                        <li><a href="table-layout.html">Table Layouts</a></li>
-                        <li><a href="table-data-table.html">Data Tables</a></li>
-                        <li><a href="table-footable.html">Footable</a></li>
-                        <li><a href="table-jsgrid.html">Js Grid Table</a></li>
-                        <li><a href="table-responsive.html">Responsive Table</a></li>
-                        <li><a href="table-bootstrap.html">Bootstrap Tables</a></li>
-                        <li><a href="table-editable-table.html">Editable Table</a></li>
-                    </ul>
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li><a href="table-basic.html">Basic Tables</a></li>--}}
+                        {{--<li><a href="table-layout.html">Table Layouts</a></li>--}}
+                        {{--<li><a href="table-data-table.html">Data Tables</a></li>--}}
+                        {{--<li><a href="table-footable.html">Footable</a></li>--}}
+                        {{--<li><a href="table-jsgrid.html">Js Grid Table</a></li>--}}
+                        {{--<li><a href="table-responsive.html">Responsive Table</a></li>--}}
+                        {{--<li><a href="table-bootstrap.html">Bootstrap Tables</a></li>--}}
+                        {{--<li><a href="table-editable-table.html">Editable Table</a></li>--}}
+                    {{--</ul>--}}
                 </li>
                 <li>
                     <!--offers -->
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-opera"></i><span class="hide-menu">{{ __('custom.eggs') }}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li>
-                            <a class="has-arrow " href="#" aria-expanded="false">Widgets</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="widget-apps.html">Data Widgets</a></li>
-                                <li><a href="widget-data.html">Statestic Widgets</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow " href="#" aria-expanded="false">Maps</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="map-google.html">Google Maps</a></li>
-                                <li><a href="map-vector.html">Vector Maps</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow " href="#" aria-expanded="false">Icons</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="icon-material.html">Material Icons</a></li>
-                                <li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
-                                <li><a href="icon-themify.html">Themify Icons</a></li>
-                                <li><a href="icon-linea.html">Linea Icons</a></li>
-                                <li><a href="icon-weather.html">Weather Icons</a></li>
-                                <li><a href="icon-simple-lineicon.html">Simple Lineicons</a></li>
-                                <li><a href="icon-flag.html">Flag Icons</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow " href="#" aria-expanded="false">Charts</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-morris.html">Morris Chart</a></li>
-                                <li><a href="chart-chartist.html">Chartis Chart</a></li>
-                                <li><a href="chart-echart.html">Echarts</a></li>
-                                <li><a href="chart-flot.html">Flot Chart</a></li>
-                                <li><a href="chart-knob.html">Knob Chart</a></li>
-                                <li><a href="chart-chart-js.html">Chartjs</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline Chart</a></li>
-                                <li><a href="chart-extra-chart.html">Extra chart</a></li>
-                                <li><a href="chart-peity.html">Peity Charts</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false">Page Layout</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-single-column.html">1 Column</a></li>
-                                <li><a href="layout-fix-header.html">Fix header</a></li>
-                                <li><a href="layout-fix-sidebar.html">Fix sidebar</a></li>
-                                <li><a href="layout-fix-header-sidebar.html">Fixe header &amp; Sidebar</a></li>
-                                <li><a href="layout-boxed.html">Boxed Layout</a></li>
-                                <li><a href="layout-logo-center.html">Logo in Center</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                        </li>
-                    </ul>
+                      <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('frontend.app.indexEggs')}}">@lang('navs.frontend.eggs')</a></li>
+                      </ul>
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li>--}}
+                            {{--<a class="has-arrow " href="#" aria-expanded="false">Widgets</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="widget-apps.html">Data Widgets</a></li>--}}
+                                {{--<li><a href="widget-data.html">Statestic Widgets</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a class="has-arrow " href="#" aria-expanded="false">Maps</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="map-google.html">Google Maps</a></li>--}}
+                                {{--<li><a href="map-vector.html">Vector Maps</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a class="has-arrow " href="#" aria-expanded="false">Icons</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="icon-material.html">Material Icons</a></li>--}}
+                                {{--<li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>--}}
+                                {{--<li><a href="icon-themify.html">Themify Icons</a></li>--}}
+                                {{--<li><a href="icon-linea.html">Linea Icons</a></li>--}}
+                                {{--<li><a href="icon-weather.html">Weather Icons</a></li>--}}
+                                {{--<li><a href="icon-simple-lineicon.html">Simple Lineicons</a></li>--}}
+                                {{--<li><a href="icon-flag.html">Flag Icons</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a class="has-arrow " href="#" aria-expanded="false">Charts</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="chart-morris.html">Morris Chart</a></li>--}}
+                                {{--<li><a href="chart-chartist.html">Chartis Chart</a></li>--}}
+                                {{--<li><a href="chart-echart.html">Echarts</a></li>--}}
+                                {{--<li><a href="chart-flot.html">Flot Chart</a></li>--}}
+                                {{--<li><a href="chart-knob.html">Knob Chart</a></li>--}}
+                                {{--<li><a href="chart-chart-js.html">Chartjs</a></li>--}}
+                                {{--<li><a href="chart-sparkline.html">Sparkline Chart</a></li>--}}
+                                {{--<li><a href="chart-extra-chart.html">Extra chart</a></li>--}}
+                                {{--<li><a href="chart-peity.html">Peity Charts</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a class="has-arrow" href="#" aria-expanded="false">Page Layout</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="layout-single-column.html">1 Column</a></li>--}}
+                                {{--<li><a href="layout-fix-header.html">Fix header</a></li>--}}
+                                {{--<li><a href="layout-fix-sidebar.html">Fix sidebar</a></li>--}}
+                                {{--<li><a href="layout-fix-header-sidebar.html">Fixe header &amp; Sidebar</a></li>--}}
+                                {{--<li><a href="layout-boxed.html">Boxed Layout</a></li>--}}
+                                {{--<li><a href="layout-logo-center.html">Logo in Center</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
                 </li>
                 <!--end offers -->
 

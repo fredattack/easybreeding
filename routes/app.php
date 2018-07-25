@@ -19,9 +19,20 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
     Route::get('/updatecustomid', 'CustomSpecieController@updatecustomid')->name('frontend.app.updatecustomid');
 
     Route::get('/couples', "Frontend\App\CoupleController@index")->name('frontend.app.couples');
+    Route::post('/storeCouple', "Frontend\App\CoupleController@store")->name('frontend.app.storeCouple');
+    Route::get('/separateCouple', "Frontend\App\CoupleController@separe")->name('frontend.app.separateCouple');
+
+    Route::get('/eggs', "Frontend\App\EggController@index")->name('frontend.app.indexEggs');
+    Route::post('/storeEgg', "Frontend\App\EggController@store")->name('frontend.app.storeEgg');
+
+    Route::get('/hatchings', "Frontend\App\HatchingController@index")->name('frontend.app.indexHatchings');
+
+    Route::get('/nestlings', "Frontend\App\NestlingController@index")->name('frontend.app.nestlings');
 
 
 
 
+
+//    Route::get('/test/{test}', "Frontend\App\EggController@controlHatchingStatus")->name('test');
 });
 

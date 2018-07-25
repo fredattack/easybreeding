@@ -14,8 +14,8 @@
  .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #fff !important;
-    border: 1px solid #13dafe !important;
-    background-color: #13dafe !important;
+    border: 1px solid #26dad2 !important;
+    background-color: #26dad2 !important;
 }
 
 .hiddenTable{
@@ -63,7 +63,7 @@ button:disabled{
 
 
 
-  #displayBlock{
+  #displayBlock,.infoCard{
     display: none;
   }
   .cardflex{
@@ -123,8 +123,11 @@ button:disabled{
   #idNumberGroup,#sexMethod,#infoBreeder{
     display: none;
   }
-  #showSpecieBtn,#speciesCustomSelect,.newSpecieBlock,
-  #returnSpecieBtn,#returnBirdBtn,#returnBackBtn{
+
+#showSpecieBtn,#speciesCustomSelect,.newSpecieBlock,
+  #returnSpecieBtn,#returnBirdBtn,#returnBackBtn,
+  .returnHatBtnEggCard,.returnFertBtnEggCard,
+.returnFertBtnEggTab,.returnhatchBtnEggTab{
     display: none;
   }
 
@@ -136,13 +139,94 @@ button:disabled{
     transition: 2s;
   }
 
-//
-//.groupSpecieBtn span{
-//  position: absolute;
-//}
 
-
-#newCoupleModal .modal-content{
-  position: absolute;
-  top:15em;
+.specieTitle{
+  padding: 1em 0;
 }
+
+
+
+.zoneTable{
+  padding-left: auto;
+  padding-right: 2em;
+  @media(max-width:500px) {
+  padding-right: 0em;
+}
+}
+.btnTab{
+  display: flex;
+    flex-direction: row;
+}
+.specieName{
+  font-size: 125%;
+  font-weight: 500;
+}
+
+table#couplesTable tr td:first-child{
+@media(max-width:500px) {
+  font-size: 13px;
+}
+  text-align: left;
+  padding-left: 2em;
+
+}
+
+
+table#couplesTable tr.odd,table#couplesTable tr.even {
+  height: 4em;
+
+}
+
+#couplesTable > tbody > tr > td:nth-child(2),
+#couplesTable > tbody > tr > td:nth-child(9),
+#couplesTable > tbody > tr > td:nth-child(6),
+#couplesTable > tbody > tr > td:nth-child(7),
+#example > tbody > tr > td:nth-child(1){
+      line-height: 4em;
+    text-align: center;
+@media(max-width:500px) {
+  font-size: 75%;
+}
+}
+
+#couplesTable > tbody > tr > td:nth-child(7){
+  display: inline-flex;
+}
+
+.coupleDetails,.eggsDetails{
+  padding:10px 0;
+}
+
+#nbfc{
+  margin: auto;
+}
+
+#btnCloseNewCoupleModal,#btnCloseNewEggModal{
+    right: 0;
+    background: transparent;
+    position: absolute;
+}
+
+$greyborder : rgba(0, 0, 0, 0.1);
+
+.customCard{
+  border:1px solid $greyborder !important;
+  padding:1em;
+}
+
+.infoCouples{
+  b{
+    font-weight: 600 !important;
+  }
+}
+
+#eggsTable select,.eggsDetails select{
+  display: none;
+  width: 80% !important;
+}
+
+.coupleTitle{
+  margin-left: 3em;
+}
+
+

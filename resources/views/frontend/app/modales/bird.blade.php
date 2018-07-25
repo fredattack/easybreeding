@@ -51,11 +51,11 @@
                 <input type="hidden" name="id" id="idInput" value="">
 
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <h2 class="modalText" id="idPersoText"></h2>
                             <input type="text" class="form-control" placeholder="Coco123" id="personal_idInput" name="personal_id" value="">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.birthDate')</label>
                             <h4  class="modalText"  id="dateOfBirthText"></h4>
 
@@ -64,18 +64,18 @@
                     </div>
 <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.usualName')</label>
                             <h4   id="usualNameText"></h4>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.species')</label>
                             <h4  id="speciesText"></h4>
                         </div>
                     </div>
                     <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.sexingMethode')</label>
                             <h4  class="modalText"  id="sexingMethodeText"></h4>
                             <select class="form-control custom-select" name="sexingMethode" id="sexingMethodeSelect">
@@ -86,7 +86,7 @@
                                <option value="dymorphism">@lang('labels.frontend.birds.dymorphism')</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6" id="genderGroup">
+                        <div class="form-group col-md-12 col-lg-6" id="genderGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.gender')</label>
                             <h4  class="modalText"  id="genderText"></h4>
                             <div class="radio-list pull-center">
@@ -111,7 +111,7 @@
                     </div>
                     <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idType')</label>
                             <h4  class="modalText"  id="idTypeText"></h4>
                              <div class="radio-list pull-center">
@@ -137,7 +137,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group col-md-6" id="idNummerGroup">
+                        <div class="form-group col-md-12 col-lg-6" id="idNummerGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.idNummer')</label>
                             <h4  class="modalText"  id="idNumText"></h4>
                                 <input type="text" class="form-control" placeholder="ABC1234" name="idNum" id="idNumInput"  >
@@ -145,7 +145,7 @@
                     </div>
                     <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>
                             <h4  class="modalText"  id="originText"></h4>
                              <select class="form-control custom-select" name="origin" id="originSelect">
@@ -155,7 +155,7 @@
                                 <option value="expo" @if(isset($bird) && $bird->origin="expo") checked @endif>@lang('labels.frontend.birds.expo')</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6" id="breederGroup">
+                        <div class="form-group col-md-12 col-lg-6" id="breederGroup">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>
                             <h4  class="modalText"  id="breederText"></h4>
                             <input type="text" class="form-control" placeholder="Coco123" name="breederId" id="breederIdInput">
@@ -163,7 +163,7 @@
                     </div>
                     <hr>
                     <div class="row infoLine">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.disponibility')</label>
                             <h4  class="modalText"  id="disponibilityText"></h4>
                             <div class="radio-list pull-center">
@@ -184,7 +184,7 @@
                                         </label>
                                     </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.status')</label>
                             <h4  class="modalText"  id="statusText"></h4>
                             <div class="radio-list pull-center">
@@ -216,7 +216,7 @@
                     </div>
                         {!! Form::close() !!}
                     <div class="row infoLine" id="historyGroup">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <h2>@lang('labels.frontend.birds.history')</h2>
                         </div>
                     </div>

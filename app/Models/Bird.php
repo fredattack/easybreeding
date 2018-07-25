@@ -10,7 +10,7 @@ class Bird extends Model
     protected $table = 'Birds';
     public $timestamps = true;
     protected $fillable = array('sexe','disponibility', 'sexingMethode', 'origin', 'idType', 'idNum', 'personal_id', 'breederNum', 'dateOfBirth', 'status', 'father_id', 'mother_id', 'mutation');
-    protected $visible = array('id','sexe','disponibility', 'sexingMethode', 'origin', 'idType', 'idNum', 'personal_id', 'breederNum', 'dateOfBirth', 'status', 'father_id', 'mother_id', 'mutation');
+    protected $visible = array('id','species_id','sexe','disponibility', 'sexingMethode', 'origin', 'idType', 'idNum', 'personal_id', 'breederNum', 'dateOfBirth', 'status', 'father_id', 'mother_id', 'mutation');
 
     public function specie()
     {

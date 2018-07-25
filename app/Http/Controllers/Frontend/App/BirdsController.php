@@ -56,10 +56,9 @@ class BirdsController extends Controller
 
         }
 
+        $customSpecies= (array)$this->getUsersSpecies();
 
-
-
-        return view('frontend.app.bird.birdsIndex',compact('data'));
+        return view('frontend.app.bird.birdsIndex',compact(['data','customSpecies']));
     }
 
     /**
@@ -70,37 +69,17 @@ class BirdsController extends Controller
     public function create()
     {
 
+        $query =Input::get('nbfc');
+
+
 
         $orders=Order::get();
         $females = Bird::where('sexe','=','female')->get();
         $males = Bird::where('sexe','=','male')->get();
 
-          $customSpecies=[];
+        $customSpecies= $this->getUsersSpecies();
 
-        $speciesId=Bird::where('userId','=',Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
-
-
-        foreach($speciesId as $specieId)
-        {
-            $newcustomSpecies=[];
-            if(!str_contains($specieId, '_')) {
-                $newSpecieName=Specie::where('id',$specieId)->first()->commonName;
-                $newcustomSpecies['id']=$specieId;
-                $newcustomSpecies['name']=$newSpecieName;
-                array_push($customSpecies,$newcustomSpecies);
-            }
-            else{
-
-                    $newSpecieName=CustomSpecie::where('customId',$specieId)->first()->commonName;
-                    $newcustomSpecies['id']=$specieId;
-                    $newcustomSpecies['name']=$newSpecieName;
-
-                    array_push($customSpecies,$newcustomSpecies);
-
-            }
-        }
-
-        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males','customSpecies']));
+        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males','customSpecies','query']));
     }
 
 
@@ -195,9 +174,12 @@ class BirdsController extends Controller
         $bird->userId=Auth::id();
 //        dd($request);
 
-        $bird->save();
-
-        return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdCreated'));
+       $bird->save();
+//        dd($bird->id);
+        if($request->nbfc==true) return redirect(route('frontend.app.couples',['nbfc' => $bird->id]));
+        else{
+            return redirect(route('frontend.app.birds'))->with('info',trans('alerts.frontend.birdCreated'));
+        }
     }
 
     public function testCustomSpecie($id){
@@ -315,8 +297,8 @@ class BirdsController extends Controller
 
     public function getBird(){
         $id = Input::get('id');
-        $bird = Bird::where('id','=',$id)->firstOrFail();
-        $specie = Specie::where('id','=',$bird->species_id)->firstOrFail();
+        $bird = Bird::where('id','=',$id)->first();
+        $specie = Specie::where('id','=',$bird->species_id)->first();
         $data=[$bird,$specie];
         return response()->json($data);
     }
@@ -330,6 +312,33 @@ class BirdsController extends Controller
 
 // CustomSpecie::where('idReferedSpecies','=',$id)->firstOrFail();
         dd($specie);
+    }
+
+    public function getUsersSpecies()
+    {
+        $customSpecies = [];
+
+        $speciesId = Bird::where('userId', '=', Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
+
+
+        foreach ($speciesId as $specieId) {
+            $newcustomSpecies = [];
+            if (!str_contains($specieId, '_')) {
+                $newSpecieName = Specie::where('id', $specieId)->first()->commonName;
+                $newcustomSpecies['id'] = $specieId;
+                $newcustomSpecies['name'] = $newSpecieName;
+                array_push($customSpecies, $newcustomSpecies);
+            } else {
+
+                $newSpecieName = CustomSpecie::where('customId', $specieId)->first()->commonName;
+                $newcustomSpecies['id'] = $specieId;
+                $newcustomSpecies['name'] = $newSpecieName;
+
+                array_push($customSpecies, $newcustomSpecies);
+
+            }
+        }
+        return $customSpecies;
     }
 
 }

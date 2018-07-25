@@ -16,7 +16,7 @@ File: scss
  *	7. Widgets
  *	8. Custom Templates
  */
- 
+ @import url('https://use.fontawesome.com/releases/v5.1.1/css/all.css');
 @import 'variable';
 @import '../global/bootstrap.min.css';
 @import '../global/app';
@@ -24,7 +24,7 @@ File: scss
 @import 'sidebar';
 @import "_global";
 @import "/colors/global.scss";
-@import '/icons/font-awesome/css/font-awesome.min.css';
+//@import '/icons/font-awesome/css/font-awesome.min.css';
 @import '/icons/simple-line-icons/css/simple-line-icons.css';
 @import '/icons/weather-icons/css/weather-icons.min.css';
 @import '/icons/linea-icons/linea.css';

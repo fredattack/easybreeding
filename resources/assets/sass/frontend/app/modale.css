@@ -221,3 +221,33 @@
         line-height: 36px;
         font-size: 24px;
     }
+
+    #newCoupleModal .modal-footer .row,#newEggModal .modal-footer .row{
+        margin: auto;
+    }
+
+    #newCoupleModal .modal-content,#newEggModal .modal-content{
+        width: 500px;
+    }
+    @media (max-width: 500px) {
+        #newCoupleModal .modal-content,#newEggModal .modal-content{
+        width: 100%;
+    }
+    }
+
+
+#newCoupleModal .modal-content,#newEggModal .modal-content{
+  position: absolute;
+  top:5em;
+}
+#newCoupleModal .modal-body,#newEggModal .modal-body{
+  padding:2em 2em 0 2em;
+ }
+
+#newEggModal .mydatepicker{
+    margin:0 0.5em;
+}
+
+.selectCoupleGroupe{
+    display: none;
+}

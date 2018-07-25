@@ -37,6 +37,9 @@ return [
     ],
 
     'frontend' => [
+        'confirm' => [
+            'fecundity' => "Voulez vous confirmer l'information pour cet œuf? œuf : ",
+        ],
         'contact' => [
             'sent' => "Votre message a été envoyé avec succès. Nous répondrons à l'adresse email que vous nous avez fourni dès que nous le pourrons.",
         ],
@@ -45,17 +48,32 @@ return [
         'displayBlock'    => 'Affichage Bloc',
         'addBird'    => 'Ajouter un Oiseau',
         'addCouples'    => 'Ajouter à un couple',
+        'addCouple'    => 'Former un couple',
+        'addEgg'    => 'Ajouter un œuf',
         'editBird'    => "Modifier l'Oiseau",
         'editSpecie'    => "Modifier l'Espéce",
         'createSpecie'    => "Ajouter une nouvelle Espéce",
         'SelectCustom'    => "Choisir une de vos Espéces",
         'searchSpecie'    => "Cherchez une Espéce ...",
         'noBirds'    => "Vous n'avez pas encore ajouter d'oiseau.",
+        'noCouples'    => "Vous n'avez pas encore ajouter de couple.",
         'viewSpecie'    => "Voir la fiche de l'espèce",
         'viewBird'    => "Voir la fiche de l'oiseau",
-        'birdUpdated' => "l'oiseau à bien été mis à jour",
-        'birdCreated' => "l'oiseau à bien été ajouté",
+        'birdUpdated' => "L'oiseau a été mis à jour",
+        'birdCreated' => "L'oiseau a été ajouté",
         'goBack' => "Revenir en Arriére",
+        'coupleCreated' => "Le couple a été ajouté",
+        'eggAdded' => "L'œuf a été ajouté",
+        'coupleWellSeparate' => "Le couple a été séparé",
+        'couplepeoplesguen'=>'couplepeoplesguen',
+        'separateCouple'=>'Séparer le couple',
+        'viewcoupleDetails'=>'Afficher les détails de ce couple',
+        'vieweggsDetails'=>'Afficher les détails de cet œuf',
+        "addEggs"=>"Ajouter un œuf",
+        "coupleHistory"=>"Historique du Couple",
+        "viewHatching"=>"Voir la couvée en cours",
+        'noEggs'    => "Vous n'avez pas encore ajouter d'œufs.",
+
 
     ],
 ];

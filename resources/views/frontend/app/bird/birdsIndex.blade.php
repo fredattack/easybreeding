@@ -40,13 +40,13 @@
         @endif
         @include('frontend.app.modales.bird')
         @include('frontend.app.modales.specieModale')
+        @include('frontend.app.modales.newCouplesModal',$customSpecies)
+
 
         <div class="row">
             <div class="col-12" id="element">
                 <div class="card">
                     <div class="card-body">
-
-
                         <!--region ToolBar-->
                         <div class="row">
                             <div class="col-12" id="toolBar">
@@ -54,14 +54,13 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                        <div class="row">
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnList">
-                                                    <i class="fa fa-th-list"></i>
-                                               </button>
+                                           <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnList">
+                                                <i class="fa fa-th-list"></i>
+                                           </button>
 
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayBlock')}}" data-placement="bottom" id="btnBlock">
-                                                    <i class="fa  fa-th-large"></i>
-                                               </button>
-
+                                           <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayBlock')}}" data-placement="bottom" id="btnBlock">
+                                                <i class="fa  fa-th-large"></i>
+                                           </button>
                                        </div>
                                     </div>
                                 <div class="col-md-3"></div>
@@ -70,13 +69,13 @@
                                         <a href="{{ route('frontend.app.birdCreate') }}" class="btn btn-circle btn-lg btn-success pull-right" data-toggle="tooltip" title="{{__('alerts.frontend.addBird')}}" data-placement="bottom">
                                             <i class="fa fa-plus"></i>
                                         </a>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-body">
                         <!--endregion-->
@@ -87,45 +86,32 @@
                                     <table id="example" class="table display table-bordered" data-filtering="true" data-paging="true" >
                                         <thead>
                                         <tr>
+                                            <th></th>
                                             <th>@lang('labels.frontend.birds.idPerso')</th>
-                                            <th>@lang('labels.frontend.birds.gender')</th>
                                             <th>@lang('labels.frontend.birds.usualName')</th>
+                                            <th>@lang('labels.frontend.birds.gender')</th>
                                             <th>@lang('labels.frontend.birds.birthDate')</th>
                                             <th>@lang('labels.frontend.birds.idNummer')</th>
                                             <th>@lang('labels.frontend.birds.status'):</th>
                                             <th>@lang('labels.frontend.birds.disponibility'):</th>
                                             <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            {{--<th></th>--}}
+                                            {{--<th></th>--}}
                                         </tr>
                                         </thead>
-                                        {{--<tfoot>--}}
-                                        {{--<tr>--}}
-                                            {{--<th>@lang('labels.frontend.birds.idPerso')</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.gender')</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.usualName')</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.birthDate')</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.idNummer')</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.status'):</th>--}}
-                                            {{--<th>@lang('labels.frontend.birds.disponibility'):</th>--}}
-                                            {{--<th></th>--}}
-                                            {{--<th></th>--}}
-                                            {{--<th></th>--}}
 
-                                        {{--</tr>--}}
-                                        {{--</tfoot>--}}
                                         <tbody>
 
                                         @foreach($data as $birdArr)
                                         <?php
                                                 $bird=$birdArr[0];
                                                 $theSpecie=$birdArr[1];
-
                                         ?>
                                         <tr>
+                                            <td></td>
                                             <td>{{$bird->personal_id}}</td>
+                                            <td><h2>{{$theSpecie['commonName']}}</h2></td>
                                             <td>@lang('labels.frontend.birds.'.$bird->sexe)</td>
-                                            <td>{{$theSpecie['commonName']}}</td>
                                             <td>{{$bird->dateOfBirth}}</td>
                                             <td>
                                                 @if($bird->idNum!=null)<p><b>{{$bird->idNum}}</b></p>@else<p><b>@lang('labels.frontend.birds.noOne')</b></p>@endif
@@ -133,31 +119,33 @@
                                             <td>@lang('labels.frontend.birds.'.$bird->status)</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>
 
-                                            <td class="text-center">
+                                            <td class="text-center btnTab">
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
                                                     <button  id="showBirdBtn{{$bird->id}}" type="button" class="btn btn-small btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$bird->id}}" >
                                                         <i class="mdi mdi-linux"></i>
                                                     </button>
                                                 </span>
-{{----}}
-                                            </td>
-
-                                            <td class="text-center">
+                                            {{--</td>--}}
+                                            {{--<td class="text-center">--}}
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
                                                     <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$bird->species_id}}">
                                                         <i class="mdi  mdi-eye"></i>
                                                     </button>
                                                 </span>
-                                            </td>
-                                            <td class="text-center">
-                                                @if($bird->status=='single')
-                                                <button href="#" class="btn btn-small btn-circle btn-table " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
-                                                    <i class="mdi mdi-infinity"></i>
-                                                </button>
-                                                    @else
-                                                    <button href="#" class="btn btn-small btn-circle btn-coupled " type="button" data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
-                                                    <i class="mdi mdi-gender-male-female"></i>
-                                                </button>
+                                            {{--</td>--}}
+                                            {{--<td class="text-center">--}}
+                                                @if($bird->status=='single' && $bird->sexe!='unknow')
+                                                <span data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
+                                                    <button href="#" class="btn btn-small btn-circle btn-table addBirdToCouple" type="button" value="{{$bird->id}}" >
+                                                        <i class="mdi mdi-infinity"></i>
+                                                    </button>
+                                                </span>
+                                                @elseif ($bird->status=='coupled')
+                                                    <span data-toggle="tooltip" title="{{__('alerts.frontend.showCouples')}}" data-placement="bottom">
+                                                        <button href="#" class="btn btn-small btn-circle btn-table coupleDetails" type="button" value="{{$bird->id}}">
+                                                            <i class="mdi mdi-gender-male-female"></i>
+                                                        </button>
+                                                    </span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -168,28 +156,41 @@
 
                             </div>
                             <div id="displayBlock">
-                                <div class="row">
+                                    @foreach($customSpecies as $customSpecie)
+                                        <div class="row specieTitle">
+                                            <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                                                <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-lg btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$customSpecie['id']}}">
+                                                    <i class="mdi  mdi-eye"></i>
+                                                </button>
+                                            </span>
+                                         <h2>{{$customSpecie['name']}}</h2>
+                                        </div>
+                                    <div class="row">
                                     @foreach($data as $birdArr)
                                         <?php
                                         $bird=$birdArr[0];
                                         $theSpecie=$birdArr[1]
                                         ?>
-                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                    @if($bird->species_id == $customSpecie['id'])
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                         @include('frontend.app.bird.birdCard',[$bird,$theSpecie])
                                         </div>
-                                    @endforeach</div>
-                                </div>
+                                    @endif
+                                    @endforeach
+                                    </div>
+                                        <hr>
+                            @endforeach
+                            </div>
                         @else
-                    </div>
+                    {{--</div>--}}
 
-                                <div class="alert alert-success">@lang('alerts.frontend.noBirds')</div>
+                        <div class="alert alert-success">@lang('alerts.frontend.noBirds')</div>
 
                         @endif
                         <!--endregion-->
-
                     </div>
+                </div>
 
-                <div id="example"></div>
             </div>
         </div>
         <!-- ============================================================== -->

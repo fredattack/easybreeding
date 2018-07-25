@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Egg;
+use App\Couple;
 
 class Hatching extends Model 
 {
@@ -12,7 +14,11 @@ class Hatching extends Model
 
     public function couple()
     {
-        return $this->belongsTo('Couple', 'id');
+        return $this->belongsTo(Couple::class, 'couple_id','id');
+    }
+    public function eggs()
+    {
+        return $this->hasMany(Egg::class, 'idHatching','id');
     }
 
 }

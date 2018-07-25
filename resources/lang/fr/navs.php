@@ -26,6 +26,7 @@ return [
         'editbird' => "Modifier un Oiseau",
         'editSpecie' => "Modifier une Espece",
         'couples'   => 'Les Couples',
+        'eggs' => 'Les Oeufs',
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",

@@ -2,6 +2,7 @@
 @section('title', app_name() . ' | '.__('navs.frontend.dashboard'))
 
 @section('content')
+
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             @if(isset($bird))
@@ -51,6 +52,10 @@
 
                             {!! Form::open(array('route' => 'frontend.app.storeBird', 'method' => 'POST','id'=>'createBird','onkeypress'=>"return event.keyCode != 13")) !!}
                         <input type="hidden" name="type" id="type" value="specie">
+                        @if ($query!=null)
+                        <input type="hidden" name="nbfc" id="type" value="specie">
+
+                        @endif
                         @if(!isset($bird))
                         <div class=" searchBar">
                             <div class="form-group row">

@@ -10,6 +10,7 @@ use App\Specie;
 use App\Famille;
 use App\BirdsAlpha;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use JavaScript;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ use PHPUnit\Util\PHP\AbstractPhpProcess;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use DateTime;
+
 
 class CoupleController extends Controller 
 {
@@ -29,60 +31,17 @@ class CoupleController extends Controller
    */
   public function index()
   {
-    $couples=Couple::with(['male','female'])->where('userId',Auth::id())->get();
-//    dd($couples);
-    $data=[];
-    foreach ($couples as $couple)
-    {
+      $data=$this->getMixSpeciesAndCustomSpecies();
 
-        if(!str_contains($couple->specieId, '_')) {
-            $specie=Specie::where('customId',$couple->specieId)->first();
-        }
-        else{
-            $specie=CustomSpecie::where('customId',$couple->specieId)->first();
-        }
-        $fullCouple=[$specie,$couple];
-        array_push($data,$fullCouple);
-    }
+      $customSpecies=app('App\Http\Controllers\Frontend\App\BirdsController')->getUsersSpecies();
 
-          $customSpecies=[];
+      $distinctSpecies=$this->getDistinctSpeciesOfCouples($customSpecies);
 
-        $speciesId=Bird::where('userId','=',Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
+      $couples=Couple::where('userId',Auth::id())->get();
 
-
-        foreach($speciesId as $specieId)
-        {
-            $newcustomSpecies=[];
-            if(!str_contains($specieId, '_')) {
-                $newSpecieName=Specie::where('id',$specieId)->first()->commonName;
-                $newcustomSpecies['id']=$specieId;
-                $newcustomSpecies['name']=$newSpecieName;
-                array_push($customSpecies,$newcustomSpecies);
-            }
-            else{
-
-                    $newSpecieName=CustomSpecie::where('customId',$specieId)->first()->commonName;
-                    $newcustomSpecies['id']=$specieId;
-                    $newcustomSpecies['name']=$newSpecieName;
-
-                    array_push($customSpecies,$newcustomSpecies);
-
-            }
-        }
-
-//    dd($customSpecies);
-    return view('frontend.app.couple.couplesIndex',compact(['data','customSpecies']));
+    return view('frontend.app.couple.couplesIndex',compact(['data','customSpecies','distinctSpecies','couples']));
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
 
   /**
    * Store a newly created resource in storage.
@@ -91,7 +50,31 @@ class CoupleController extends Controller
    */
   public function store(Request $request)
   {
-    
+    $count=Couple::where('userId', '=', Auth::id())->count();
+
+    $couple =new Couple();
+    $couple->specieId=$request->specieId;
+    $couple->maleId=$request->maleId;
+    $couple->femaleId=$request->femaleId;
+
+    if($request->coupleId == null)$couple->customId=$request->specieId.'/'.$request->maleId.'/'.$request->femaleId.'/'.$count++;
+    else$couple->customId=$request->coupleId;
+    $couple->userId=Auth::id();
+
+    if($couple->save())$this->updateBirdsStatus($couple->maleId,$couple->femaleId);
+
+    return redirect()->route('frontend.app.couples')->with('info',trans('alerts.frontend.coupleCreated'));
+  }
+
+
+  public function updateBirdsStatus($maleId,$femaleId){
+   $male=Bird::where('id',$maleId)->first();
+   $male->status='coupled';
+   $male->save();
+
+   $female=Bird::where('id',$femaleId)->first();
+   $female->status='coupled';
+   $female->save();
   }
 
   /**
@@ -105,26 +88,23 @@ class CoupleController extends Controller
     
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
 
   /**
-   * Update the specified resource in storage.
+   * separe the specified resource in storage.
    *
    * @param  int  $id
    * @return Response
    */
-  public function update($id)
+  public function separe(Request $request)
   {
-    
+    $id=$request->coupleId;
+    $couple=Couple::where('customId',$id)->first();
+    Bird::where('id', $couple->maleId)->update(['status' => 'single']);
+    Bird::where('id', $couple->femaleId)->update(['status' => 'single']);
+    $couple->separeted_at=Carbon::now();
+    $couple->save();
+        return redirect()->route('frontend.app.couples')->with('info',trans('alerts.frontend.coupleWellSeparate'));
+
   }
 
   /**
@@ -139,7 +119,8 @@ class CoupleController extends Controller
       $males = Bird::where([
                     'species_id'=>$specieId,
                     'userId'=>Auth::id(),
-                    'sexe'=>'male'])->get();
+                    'sexe'=>'male',
+                    'status'=>'single'])->get();
 
         return response()->json($males);
     
@@ -151,12 +132,53 @@ class CoupleController extends Controller
       $males = Bird::where([
                     'species_id'=>$specieId,
                     'userId'=>Auth::id(),
-                    'sexe'=>'female'])->get();
+                    'sexe'=>'female',
+                    'status'=>'single'])->get();
 
         return response()->json($males);
 
   }
-  
+
+    private function getMixSpeciesAndCustomSpecies()
+    {
+        $couples = Couple::with(['male', 'female', 'specie', 'customSpecie'])->where('userId', Auth::id())->get();
+//    dd($couples);
+        $data = [];
+        foreach ($couples as $couple) {
+            if (!str_contains($couple->specieId, '_')) {
+                $specie = Specie::where('customId', $couple->specieId)->first();
+            } else {
+                $specie = CustomSpecie::where('customId', $couple->specieId)->first();
+            }
+            $fullCouple = [$specie, $couple];
+            array_push($data, $fullCouple);
+        }
+       return $data;
+    }
+
+    /**
+     * @param $distinctSpecie
+     * @param $customSpecies
+     */
+    private function getDistinctSpeciesOfCouples($customSpecies)
+    {
+        $distincts = Couple::select('specieId')->distinct()->get();
+
+        $distinctSpecies = [];
+
+
+        foreach ($distincts as $distinct) {
+            $distinctSpecie['id'] = $distinct->specieId;
+            foreach ($customSpecies as $customSpecie) {
+                if ($customSpecie['id'] == $distinct['specieId']) $distinctSpecie['commonName'] = $customSpecie['name'];
+            }
+            array_push($distinctSpecies, $distinctSpecie);
+        }
+
+        return $distinctSpecies;
+    }
+
+
 }
 
 ?>

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.adminPressHorizontal')
+@extends('frontend.layouts.adminPressHorizontalAuth')
 
 @section('content')
     {{--<div class="page-wrapper">--}}

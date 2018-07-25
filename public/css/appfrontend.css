@@ -239,6 +239,35 @@
         font-size: 24px;
     }
 
+    #newCoupleModal .modal-footer .row,#newEggModal .modal-footer .row{
+        margin: auto;
+    }
+
+    #newCoupleModal .modal-content,#newEggModal .modal-content{
+        width: 500px;
+    }
+    @media (max-width: 500px) {
+        #newCoupleModal .modal-content,#newEggModal .modal-content{
+        width: 100%;
+    }
+    }
+
+
+#newCoupleModal .modal-content,#newEggModal .modal-content{
+  position: absolute;
+  top:5em;
+}
+#newCoupleModal .modal-body,#newEggModal .modal-body{
+  padding:2em 2em 0 2em;
+ }
+
+#newEggModal .mydatepicker{
+    margin:0 0.5em;
+}
+
+.selectCoupleGroupe{
+    display: none;
+}
 
 .preloader{
   position: relative;
@@ -1376,8 +1405,8 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child{
     cursor:pointer}
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
-    top:1.25em;
-    left:2em;
+    top:1.5em;
+    left:1.5em;
     height:14px;
     width:14px;
     display:block;
@@ -11078,10 +11107,6 @@ a.link:focus {
     width: 100%;
     padding: 1em 1em;
   }
-
-  #displayBlock {
-    display: none !important;
-  }
 }
 
 .btn-table,
@@ -11101,8 +11126,8 @@ table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   color: #fff !important;
-  border: 1px solid #13dafe !important;
-  background-color: #13dafe !important;
+  border: 1px solid #26dad2 !important;
+  background-color: #26dad2 !important;
 }
 
 .hiddenTable {
@@ -11154,7 +11179,8 @@ button:disabled {
   margin: 0 1em;
 }
 
-#displayBlock {
+#displayBlock,
+.infoCard {
   display: none;
 }
 
@@ -11261,7 +11287,11 @@ input::placeholder {
 .newSpecieBlock,
 #returnSpecieBtn,
 #returnBirdBtn,
-#returnBackBtn {
+#returnBackBtn,
+.returnHatBtnEggCard,
+.returnFertBtnEggCard,
+.returnFertBtnEggTab,
+.returnhatchBtnEggTab {
   display: none;
 }
 
@@ -11276,9 +11306,110 @@ input::placeholder {
   transition: 2s;
 }
 
-#newCoupleModal .modal-content {
+.specieTitle {
+  padding: 1em 0;
+}
+
+.zoneTable {
+  padding-left: auto;
+  padding-right: 2em;
+}
+
+@media (max-width: 500px) {
+  .zoneTable {
+    padding-right: 0em;
+  }
+}
+
+.btnTab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.specieName {
+  font-size: 125%;
+  font-weight: 500;
+}
+
+table#couplesTable tr td:first-child {
+  text-align: left;
+  padding-left: 2em;
+}
+
+@media (max-width: 500px) {
+  table#couplesTable tr td:first-child {
+    font-size: 13px;
+  }
+}
+
+table#couplesTable tr.odd,
+table#couplesTable tr.even {
+  height: 4em;
+}
+
+#couplesTable > tbody > tr > td:nth-child(2),
+#couplesTable > tbody > tr > td:nth-child(9),
+#couplesTable > tbody > tr > td:nth-child(6),
+#couplesTable > tbody > tr > td:nth-child(7),
+#example > tbody > tr > td:nth-child(1) {
+  line-height: 4em;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  #couplesTable > tbody > tr > td:nth-child(2),
+  #couplesTable > tbody > tr > td:nth-child(9),
+  #couplesTable > tbody > tr > td:nth-child(6),
+  #couplesTable > tbody > tr > td:nth-child(7),
+  #example > tbody > tr > td:nth-child(1) {
+    font-size: 75%;
+  }
+}
+
+#couplesTable > tbody > tr > td:nth-child(7) {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.coupleDetails,
+.eggsDetails {
+  padding: 10px 0;
+}
+
+#nbfc {
+  margin: auto;
+}
+
+#btnCloseNewCoupleModal,
+#btnCloseNewEggModal {
+  right: 0;
+  background: transparent;
   position: absolute;
-  top: 15em;
+}
+
+.customCard {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 1em;
+}
+
+.infoCouples b {
+  font-weight: 600 !important;
+}
+
+#eggsTable select,
+.eggsDetails select {
+  display: none;
+  width: 80% !important;
+}
+
+.coupleTitle {
+  margin-left: 3em;
 }
 
 /*

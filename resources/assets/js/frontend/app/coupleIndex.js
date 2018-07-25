@@ -1,19 +1,38 @@
+function checkUrlForNewBird() {
+    // url = new URL(window.location.href);
+    let urlParams = new URLSearchParams(location.search);
+
+    if (urlParams.has('nbfc')) {
+        getTheBird(urlParams.get('nbfc'));
+
+    }
+}
+
 $(document).ready(function () {
-          console.log('indexBird');
+    checkUrlForNewBird();
+          console.log('indexCouples');
 
-    var table = $('#couplesTable').DataTable({
+    let table = $('#couplesTable').DataTable({
         "lengthMenu": [ 5,10, 25],
-        responsive:true,
-        colReorder: false,
-        columnDefs: [
-        { responsivePriority: 2, targets: -1 ,"width": "10%"},
-        { responsivePriority: 1, targets: 0 ,"width": "10%"},
-        // { responsivePriority: 1, targets: 1 ,"width": "10%" },
-        // { responsivePriority: 2, targets: 2,"width": "30%" },
-        // { responsivePriority: 2, targets: 3 ,"width": "30%" },
-        // { responsivePriority: 2, targets: 4 ,"width": "10%" },
+        responsive: {
+        details: {
+            renderer: function ( api, rowIdx, columns ) {
+                var data = $.map( columns, function ( col, i ) {
+                    return col.hidden ?
+                        '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                            '<td>'+col.title+':'+'</td> '+
+                            '<td>'+col.data+'</td>'+
+                        '</tr>' :
+                        '';
+                } ).join('');
 
-    ],
+                return data ?
+                    $('<table/>').append( data ) :
+                    false;
+            }
+        }
+    },
+        colReorder: true,
         language: {
 
              "sProcessing":     "Traitement en cours...",
@@ -46,52 +65,63 @@ $(document).ready(function () {
     },
         "autoWidth": false,
 
-        "columnDefs": [{
-            "visible": false,
-            "targets": 2,
-
-        }],
+        "columnDefs": [
+            {"visible": false, "targets": [1]},
+            {"orderable": false, "targets": [1,4]},
+            // {"visible":false, "targets" : },
+        ],
 
         "order": [
-            [1, 'asc']
+            [1, 'asc'],[11, 'asc']
         ],
-        "displayLength": 5,
+        "displayLength": 10,
         "drawCallback": function(settings) {
-            var api = this.api();
-            var rows = api.rows({
+            let api = this.api();
+            let rows = api.rows({
                 page: 'current'
             }).nodes();
-            var last = null;
+            let last = null;
 
-            api.column(2, {
+            api.column(1, {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="2">' + group + '</td></tr>');
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
                     last = group;
                 }
             });
         }
     });
-    // Order by the grouping
-    // $('#example tbody').on('click', 'tr.group', function() {
-    //     var currentOrder = table.order()[0];
-    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-    //         table.order([2, 'desc']).draw();
-    //     } else {
-    //         table.order([2, 'asc']).draw();
-    //     }
-    // });
+   // Order by the grouping
+    $('#example tbody').on('click', 'tr.group', function() {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
+        } else {
+            table.order([2, 'asc']).draw();
+        }
+    });
     table.columns.adjust().draw();
 });
 
+
+
+
+$('.btCardPlus').on('click',function () {
+   $("#details"+$(this).val()).toggle();
+   $(this).find('i').toggleClass('fa-plus fa-minus');
+
+});
+
+
 $(document).ready(function($) {
+
     console.log('specie change');
     // $('.display').dataTable();
 
     $('#specieCouple').on('change', function (e) {
 
-        console.log(e.target.value);
+        console.log('test:'+e.target.value);
 
         // $('input[name="searchBox"]').val('');
         generateMales(e.target.value);
@@ -99,11 +129,12 @@ $(document).ready(function($) {
     });
 });
 
+
 function generateMales(id) {
 
     $.get('/ajax/generateMales?specieId='+id,function (data) {
-        console.log(data);
-        
+        console.log('males generated', data);
+
         $('#males').empty();
         $('#males').append('<option value="none" disabled selected>Choisissez un mâle</option>');
 
@@ -117,18 +148,69 @@ function generateMales(id) {
 function generateFemales(id) {
 
     $.get('/ajax/generateFemales?specieId='+id,function (data) {
-        console.log(data);
+        console.log('females generated',data);
 
         $('#females').empty();
         $('#females').append('<option value="none" disabled selected>Choisissez une femelle</option>');
 
-        $.each(data,function (index,maleReturned) {
-            $('#females').append('<option value="'+maleReturned.id+'">'+maleReturned.personal_id+'('+maleReturned.idNum+')'+'</option>');
+        $.each(data,function (index,femaleReturned) {
+            $('#females').append('<option value="'+femaleReturned.id+'">'+femaleReturned.personal_id+'('+femaleReturned.idNum+')'+'</option>');
         })
     });
 
 }
 
+
 $(document).ready(function () {
-    $('#createCouple').parsley(options);
+    $('#createCouple').parsley();
 });
+
+
+
+$("#newCoupleModal").on("hidden.bs.modal", function () {
+    // put your default event here
+    $('#createCouple').trigger("reset");
+});
+
+$('#btnCloseNewCoupleModal').on('click',function () {
+   $('#newCoupleModal').modal("hide");
+});
+
+
+
+$('.addBirdToCouple').on('click',function () {
+    console.log($(this).val());
+    getTheBird($(this).val());
+
+});
+
+function getTheBird(id) {
+    $.get('/ajax/getBird?id='+id,function (data) {
+        console.log(data);
+      adaptModale(data);
+    });
+}
+
+function adaptModale(data){
+    bird=data['0'];
+    $('#specieCouple option[value="'+data["0"]["species_id"]+'"]').prop('selected', true);
+    // ​​$('#specieCouple').value =  bird.customId;
+   let speciesId=data['0']['species_id'];
+    console.log('species_id',speciesId);
+
+
+    switch(bird.sexe){
+        case'male':
+        $('#males').empty();
+        $('#males').append('<option value="'+data['0']['id']+'">'+data['0'].personal_id+'('+data['0'].idNum+')'+'</option>');
+        generateFemales(speciesId);
+            break;
+        case'female':
+        $('#females').empty();
+        $('#females').append('<option value="'+data['0']['id']+'">'+data['0'].personal_id+'('+data['0'].idNum+')'+'</option>');
+        generateMales(speciesId);
+            break;
+    }
+
+    $('#newCoupleModal').modal("show");
+}

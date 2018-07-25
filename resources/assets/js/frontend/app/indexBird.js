@@ -7,15 +7,15 @@ $(document).ready(function() {
         responsive:true,
         colReorder: true,
         columnDefs: [
-        { responsivePriority: 1, targets: 0 ,"width": "30%"},
-        { responsivePriority: 1, targets: 0 ,"width": "10%" },
-        { responsivePriority: 2, targets: -1,"width": "10%" },
-        { responsivePriority: 2, targets: -1 ,"width": "10%" },
-        { responsivePriority: 2, targets: -1 ,"width": "10%" },
-        { responsivePriority: 2, targets: -1 ,"width": "15%" },
-        { responsivePriority: 2, targets: 0,"width": "5%", "orderable": false },
-        { responsivePriority: 2, targets: 0,"width": "5%", "orderable": false },
-        { responsivePriority: 2, targets: 0,"width": "5%", "orderable": false }
+        { responsivePriority: 1, targets: 0 ,"width": "10%", "orderable": false},
+        { responsivePriority: 1, targets: 1 ,"width": "25%" },
+        { responsivePriority: 2, targets: 2,"visible":false },
+        { responsivePriority: 2, targets: 3 ,"width": "20%" },
+        { responsivePriority: 2, targets: 4 ,"width": "15%" },
+        { responsivePriority: 3, targets: 5 ,"width": "15%" },
+        { responsivePriority: 3, targets: 6,"width": "10%" },
+        { responsivePriority: 4, targets: 7,"width": "10%"},
+        { responsivePriority: 1, targets: 8, "orderable": false}
     ],
         language: {
 
@@ -49,21 +49,19 @@ $(document).ready(function() {
     },
         "autoWidth": false,
 
-        "columnDefs": [{
-            "visible": false,
-            "targets": 2,
-
-        }],
+        // "columnDefs": [
+        //     {"visible": false, "targets": [2,8]},
+        // ],
         "order": [
             [2, 'asc']
         ],
-        "displayLength": 5,
+        "displayLength": 25,
         "drawCallback": function(settings) {
-            var api = this.api();
-            var rows = api.rows({
+            let api = this.api();
+            let rows = api.rows({
                 page: 'current'
             }).nodes();
-            var last = null;
+            let last = null;
             api.column(2, {
                 page: 'current'
             }).data().each(function(group, i) {
@@ -75,14 +73,14 @@ $(document).ready(function() {
         }
     });
     // Order by the grouping
-    // $('#example tbody').on('click', 'tr.group', function() {
-    //     var currentOrder = table.order()[0];
-    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-    //         table.order([2, 'desc']).draw();
-    //     } else {
-    //         table.order([2, 'asc']).draw();
-    //     }
-    // });
+    $('#example tbody').on('click', 'tr.group', function() {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
+        } else {
+            table.order([2, 'asc']).draw();
+        }
+    });
     table.columns.adjust().draw();
 });
 

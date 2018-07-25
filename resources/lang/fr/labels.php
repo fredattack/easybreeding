@@ -201,15 +201,16 @@ return [
             'single'=>'Seul' ,
             'rest'=>'Au Repos' ,
             'incubation'=>'Durée d\'incubation',
-            'fertilityControl'=>'Contrôle de la fertilité',
+            'fertilityControl'=>'Contrôle de la fécondité',
             'girdleDate'=>'Age pour baguer',
             'outOfNest'=>'Sortie du nid',
             'weaning'=>'sevrage',
             'sexualMaturity'=>'Maturité sexuelle',
             'spawningInterval'=>'Interval de ponte',
-            'idCouples' => 'n° de couples',
+            'idCouples' => 'id. du couples',
             'couplesFrom' => 'En couple depuis',
-            'until' => 'Séparé le',
+            'until' => 'Séparé depuis le',
+            'separateCouple' => 'Séparer le couple',
             'hatchingsNbr' => 'Nbr. couvées',
             'eggsNbr' => 'Nbr. Oeufs',
             'whiteEggsNbr' => 'Nbr. Oeufs Blanc',
@@ -218,7 +219,34 @@ return [
             'createCouples'=> 'Former un Couple',
             'selectMale'=>'Choisissez un Mâle',
             'selectFemale'=>'Choisissez une Femelle',
+            'selectCouple'=>'Choisissez un Couple',
 
+
+        ],
+        'eggs'=>[
+            "layingDate"=>"Date de ponte",
+            "position"=>"Position",
+            "eggState"=>"État de l'oeuf",
+            "selectEggState"=>"Choisissez l'état de l'oeuf",
+            "comment"=>"Remarque",
+            "good"=>"Bon",
+            "dirty"=>"Sale",
+            "flabby"=>"Mou",
+            "damaged"=>"Endommagé",
+            "broken"=>"Endommagé",
+            "nextStep"=>"Prochaine étape",
+            "fertilized"=>"Fécondé",
+            "white"=>"Oeuf blanc",
+            "deadInEgg"=>"Mort dans l'oeuf",
+            "hatchingDate"=>"Date d'éclosion",
+            "birdHached"=>"Oiseau éclos",
+            "hached"=>"Oiseau éclos",
+            "birdNotHached"=>"Oeuf non éclos",
+            "abandoned" =>"Abandonné par les parents",
+            "unknow" =>"Inconnu",
+            "selectReasonNotHatched" => "Cause",
+            "hatched" => "Ėclos",
+            "hatching" => "Ėclosion",
 
         ],
         'table'=>[
@@ -246,6 +274,7 @@ return [
                 'rows1'=> "1 ligne séléctionnée"
 
         ],
+
 
     ],
 ];

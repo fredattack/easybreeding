@@ -26,6 +26,7 @@ require('./createBird.js');
 require('./indexBird');
 require('./specieModale');
 require('./birdModale');
+require('./eggsIndex');
 require('./coupleIndex');
 
 /*

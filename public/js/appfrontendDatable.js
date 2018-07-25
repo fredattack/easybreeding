@@ -42118,6 +42118,7 @@ __webpack_require__("./resources/assets/js/frontend/app/createBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/birdModale.js");
+__webpack_require__("./resources/assets/js/frontend/app/eggsIndex.js");
 __webpack_require__("./resources/assets/js/frontend/app/coupleIndex.js");
 
 /*
@@ -42296,18 +42297,33 @@ $('#birdModal').on('hidden.bs.modal', function (e) {
 /***/ "./resources/assets/js/frontend/app/coupleIndex.js":
 /***/ (function(module, exports) {
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function checkUrlForNewBird() {
+    // url = new URL(window.location.href);
+    var urlParams = new URLSearchParams(location.search);
+
+    if (urlParams.has('nbfc')) {
+        getTheBird(urlParams.get('nbfc'));
+    }
+}
 
 $(document).ready(function () {
-    var _$$DataTable;
+    checkUrlForNewBird();
+    console.log('indexCouples');
 
-    console.log('indexBird');
-
-    var table = $('#couplesTable').DataTable((_$$DataTable = {
+    var table = $('#couplesTable').DataTable({
         "lengthMenu": [5, 10, 25],
-        responsive: true,
-        colReorder: false,
-        columnDefs: [{ responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 1, targets: 0, "width": "10%" }],
+        responsive: {
+            details: {
+                renderer: function renderer(api, rowIdx, columns) {
+                    var data = $.map(columns, function (col, i) {
+                        return col.hidden ? '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' + '<td>' + col.title + ':' + '</td> ' + '<td>' + col.data + '</td>' + '</tr>' : '';
+                    }).join('');
+
+                    return data ? $('<table/>').append(data) : false;
+                }
+            }
+        },
+        colReorder: true,
         language: {
 
             "sProcessing": "Traitement en cours...",
@@ -42338,47 +42354,54 @@ $(document).ready(function () {
                 }
             }
         },
-        "autoWidth": false
+        "autoWidth": false,
 
-    }, _defineProperty(_$$DataTable, 'columnDefs', [{
-        "visible": false,
-        "targets": 2
+        "columnDefs": [{ "visible": false, "targets": [1] }, { "orderable": false, "targets": [1, 4] }],
 
-    }]), _defineProperty(_$$DataTable, "order", [[1, 'asc']]), _defineProperty(_$$DataTable, "displayLength", 5), _defineProperty(_$$DataTable, "drawCallback", function drawCallback(settings) {
-        var api = this.api();
-        var rows = api.rows({
-            page: 'current'
-        }).nodes();
-        var last = null;
+        "order": [[1, 'asc'], [11, 'asc']],
+        "displayLength": 10,
+        "drawCallback": function drawCallback(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var last = null;
 
-        api.column(2, {
-            page: 'current'
-        }).data().each(function (group, i) {
-            if (last !== group) {
-                $(rows).eq(i).before('<tr class="group"><td colspan="2">' + group + '</td></tr>');
-                last = group;
-            }
-        });
-    }), _$$DataTable));
+            api.column(1, {
+                page: 'current'
+            }).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    last = group;
+                }
+            });
+        }
+    });
     // Order by the grouping
-    // $('#example tbody').on('click', 'tr.group', function() {
-    //     var currentOrder = table.order()[0];
-    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-    //         table.order([2, 'desc']).draw();
-    //     } else {
-    //         table.order([2, 'asc']).draw();
-    //     }
-    // });
+    $('#example tbody').on('click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
+        } else {
+            table.order([2, 'asc']).draw();
+        }
+    });
     table.columns.adjust().draw();
 });
 
+$('.btCardPlus').on('click', function () {
+    $("#details" + $(this).val()).toggle();
+    $(this).find('i').toggleClass('fa-plus fa-minus');
+});
+
 $(document).ready(function ($) {
+
     console.log('specie change');
     // $('.display').dataTable();
 
     $('#specieCouple').on('change', function (e) {
 
-        console.log(e.target.value);
+        console.log('test:' + e.target.value);
 
         // $('input[name="searchBox"]').val('');
         generateMales(e.target.value);
@@ -42389,7 +42412,7 @@ $(document).ready(function ($) {
 function generateMales(id) {
 
     $.get('/ajax/generateMales?specieId=' + id, function (data) {
-        console.log(data);
+        console.log('males generated', data);
 
         $('#males').empty();
         $('#males').append('<option value="none" disabled selected>Choisissez un mâle</option>');
@@ -42402,20 +42425,64 @@ function generateMales(id) {
 function generateFemales(id) {
 
     $.get('/ajax/generateFemales?specieId=' + id, function (data) {
-        console.log(data);
+        console.log('females generated', data);
 
         $('#females').empty();
         $('#females').append('<option value="none" disabled selected>Choisissez une femelle</option>');
 
-        $.each(data, function (index, maleReturned) {
-            $('#females').append('<option value="' + maleReturned.id + '">' + maleReturned.personal_id + '(' + maleReturned.idNum + ')' + '</option>');
+        $.each(data, function (index, femaleReturned) {
+            $('#females').append('<option value="' + femaleReturned.id + '">' + femaleReturned.personal_id + '(' + femaleReturned.idNum + ')' + '</option>');
         });
     });
 }
 
 $(document).ready(function () {
-    $('#createCouple').parsley(options);
+    $('#createCouple').parsley();
 });
+
+$("#newCoupleModal").on("hidden.bs.modal", function () {
+    // put your default event here
+    $('#createCouple').trigger("reset");
+});
+
+$('#btnCloseNewCoupleModal').on('click', function () {
+    $('#newCoupleModal').modal("hide");
+});
+
+$('.addBirdToCouple').on('click', function () {
+    console.log($(this).val());
+    getTheBird($(this).val());
+});
+
+function getTheBird(id) {
+    $.get('/ajax/getBird?id=' + id, function (data) {
+        console.log(data);
+        adaptModale(data);
+    });
+}
+
+function adaptModale(data) {
+    bird = data['0'];
+    $('#specieCouple option[value="' + data["0"]["species_id"] + '"]').prop('selected', true);
+    // ​​$('#specieCouple').value =  bird.customId;
+    var speciesId = data['0']['species_id'];
+    console.log('species_id', speciesId);
+
+    switch (bird.sexe) {
+        case 'male':
+            $('#males').empty();
+            $('#males').append('<option value="' + data['0']['id'] + '">' + data['0'].personal_id + '(' + data['0'].idNum + ')' + '</option>');
+            generateFemales(speciesId);
+            break;
+        case 'female':
+            $('#females').empty();
+            $('#females').append('<option value="' + data['0']['id'] + '">' + data['0'].personal_id + '(' + data['0'].idNum + ')' + '</option>');
+            generateMales(speciesId);
+            break;
+    }
+
+    $('#newCoupleModal').modal("show");
+}
 
 /***/ }),
 
@@ -42768,21 +42835,28 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/assets/js/frontend/app/indexBird.js":
+/***/ "./resources/assets/js/frontend/app/eggsIndex.js":
 /***/ (function(module, exports) {
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 $(document).ready(function () {
-    var _$$DataTable;
+    console.log('indexEggs');
 
-    console.log('indexBird');
+    var table = $('#eggsTable').DataTable({
+        "lengthMenu": [5, 10, 25],
+        responsive: {
+            details: {
+                renderer: function renderer(api, rowIdx, columns) {
+                    var data = $.map(columns, function (col, i) {
+                        return col.hidden ? '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' + '<td>' + col.title + ':' + '</td> ' + '<td>' + col.data + '</td>' + '</tr>' : '';
+                    }).join('');
 
-    var table = $('#example').DataTable((_$$DataTable = {
-        "lengthMenu": [5, 10, 25, 50, 100],
-        responsive: true,
+                    return data ? $('<table/>').append(data) : false;
+                }
+            }
+        },
         colReorder: true,
-        columnDefs: [{ responsivePriority: 1, targets: 0, "width": "30%" }, { responsivePriority: 1, targets: 0, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "10%" }, { responsivePriority: 2, targets: -1, "width": "15%" }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }, { responsivePriority: 2, targets: 0, "width": "5%", "orderable": false }],
         language: {
 
             "sProcessing": "Traitement en cours...",
@@ -42813,36 +42887,251 @@ $(document).ready(function () {
                 }
             }
         },
-        "autoWidth": false
+        "autoWidth": true,
 
-    }, _defineProperty(_$$DataTable, 'columnDefs', [{
-        "visible": false,
-        "targets": 2
+        "columnDefs": [{ "visible": false, "targets": [1, 2] }, { "orderable": false, "targets": [0, 1, 4, 6, 7] }],
 
-    }]), _defineProperty(_$$DataTable, "order", [[2, 'asc']]), _defineProperty(_$$DataTable, "displayLength", 5), _defineProperty(_$$DataTable, "drawCallback", function drawCallback(settings) {
-        var api = this.api();
-        var rows = api.rows({
-            page: 'current'
-        }).nodes();
-        var last = null;
-        api.column(2, {
-            page: 'current'
-        }).data().each(function (group, i) {
-            if (last !== group) {
-                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                last = group;
-            }
-        });
-    }), _$$DataTable));
+        "order": [[1, 'asc'], [3, 'asc']],
+        "displayLength": 10,
+        "drawCallback": function drawCallback(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var last = null;
+
+            api.column(1, {
+                page: 'current'
+            }).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    last = group;
+                }
+            });
+        }
+    });
     // Order by the grouping
-    // $('#example tbody').on('click', 'tr.group', function() {
-    //     var currentOrder = table.order()[0];
-    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-    //         table.order([2, 'desc']).draw();
-    //     } else {
-    //         table.order([2, 'asc']).draw();
-    //     }
-    // });
+    //  $('#eggsTable tbody').on('click', 'tr.group', function() {
+    //      var currentOrder = table.order()[0];
+    //      if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+    //          table.order([2, 'desc']).draw();
+    //      } else {
+    //          table.order([2, 'asc']).draw();
+    //      }
+    //  });
+    //  table.columns.adjust().draw();
+});
+
+$("#newEggModal").on("hidden.bs.modal", function () {
+    // put your default event here
+    $('#addEgg').trigger("reset");
+});
+
+$('#btnCloseNewEggModal').on('click', function () {
+    $('#newEggModal').modal("hide");
+    $('#addEgg').trigger("reset");
+});
+
+$('#newEggModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var idCouple = button.val(); // Extract info from data-* attributes
+    console.log('alert: ' + idCouple);
+    $('#idCouple').text(idCouple);
+    $('#idCoupleHidden').val(idCouple);
+});
+
+$('#btnAddEgg').on('click', function () {
+    alert('click');
+    $('.idCoupleGroupe').toggle();
+    $('.selectCoupleGroupe').toggle();
+    $('#selectCouple').prop('required');
+});
+
+$('#selectCouple').on('change', function () {
+    console.log('select', $(this).val());
+    $('#idCoupleHidden').val($(this).val());
+});
+
+$('.fertControlCheck').on('click', function () {
+    var id = $(this).attr('id').substr(3);
+    console.log(id);
+    $('#fcg' + id).toggle();
+    $('#ses' + id).toggle();
+    $('#set' + id).toggle();
+});
+
+$(".returnFertBtnEggTab").click(function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('this: ', id);
+    $('#fcg' + id).toggle();
+    $('#ses' + id).toggle();
+    $('#set' + id).toggle();
+});
+
+$("button[name='fertCheck']").click(function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('this: ', id);
+    $('#ffc' + id).toggle();
+    $('#sec' + id).toggle();
+    $('#seb' + id).toggle();
+});
+
+$(".returnFertBtnEggCard").click(function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('this: ', id);
+    $('#ffc' + id).toggle();
+    $('#sec' + id).toggle();
+    $('#seb' + id).toggle();
+});
+
+$("button[name='hatchNotCheck']").click(function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('this: ', id);
+    $('#bnc' + id).toggle();
+    $('#bhc' + id).toggle();
+    $('#swc' + id).toggle();
+    $('#swb' + id).toggle();
+});
+
+$('.returnHatBtnEggCard').on('click', function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('return: ', id);
+    $('#bnc' + id).toggle();
+    $('#bhc' + id).toggle();
+    $('#swb' + id).toggle();
+    $('#swc' + id).toggle();
+});
+
+$('.selectEggfertility').on('change', function () {
+    var id = $(this).attr('id').substr(3);
+    var val = $(this).val();
+    updateFertility(id, val);
+});
+
+function updateFertility(id, data) {
+    if (confirm(Lang.get('alerts.frontend.confirm.fecundity') + Lang.get('labels.frontend.eggs.' + data))) {
+        $.get('/ajax/setFertility?id=' + id + '&val=' + data, function (res) {
+            console.log(res);
+            location.reload();
+        });
+    }
+}
+
+$('.birdHatchedCheck').on('click', function () {
+    var id = $(this).attr('id').substr(3);
+    console.log(id);
+    updateHatching(id, 'hatched');
+});
+
+$('.birdNotHatchedCheck').on('click', function () {
+    var id = $(this).attr('id').substr(3);
+    console.log(id);
+    $('#bnh' + id).toggle();
+    $('#bhd' + id).toggle();
+    $('#swn' + id).toggle();
+    $('#sss' + id).toggle();
+});
+
+$('.returnhatchBtnEggTab').on('click', function () {
+    var id = $(this).attr('id').substr(3);
+    console.log('return: ', id);
+    $('#bnh' + id).toggle();
+    $('#bhd' + id).toggle();
+    $('#swn' + id).toggle();
+    $('#sss' + id).toggle();
+});
+
+$('.selectWhyNotHatched').on('change', function () {
+    var id = $(this).attr('id').substr(3);
+    var val = $(this).val();
+    updateHatching(id, val);
+});
+
+function updateHatching(id, data) {
+    if (confirm(Lang.get('alerts.frontend.confirm.fecundity') + Lang.get('labels.frontend.eggs.' + data))) {
+        $.get('/ajax/updateHatching?id=' + id + '&val=' + data, function (res) {
+            console.log(res);
+            location.reload();
+        });
+    }
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/frontend/app/indexBird.js":
+/***/ (function(module, exports) {
+
+
+$(document).ready(function () {
+    console.log('indexBird');
+
+    var table = $('#example').DataTable({
+        "lengthMenu": [5, 10, 25, 50, 100],
+        responsive: true,
+        colReorder: true,
+        columnDefs: [{ responsivePriority: 1, targets: 0, "width": "10%", "orderable": false }, { responsivePriority: 1, targets: 1, "width": "25%" }, { responsivePriority: 2, targets: 2, "visible": false }, { responsivePriority: 2, targets: 3, "width": "20%" }, { responsivePriority: 2, targets: 4, "width": "15%" }, { responsivePriority: 3, targets: 5, "width": "15%" }, { responsivePriority: 3, targets: 6, "width": "10%" }, { responsivePriority: 4, targets: 7, "width": "10%" }, { responsivePriority: 1, targets: 8, "orderable": false }],
+        language: {
+
+            "sProcessing": "Traitement en cours...",
+            "sSearch": Lang.get('labels.frontend.table.sSearch'),
+            "sLengthMenu": Lang.get('labels.frontend.table.sLengthMenu'),
+            "sInfo": Lang.get('labels.frontend.table.sInfo'),
+            "sInfoEmpty": Lang.get('labels.frontend.table.sInfoEmpty'),
+            "sInfoFiltered": Lang.get('labels.frontend.table.sInfoFiltered'),
+            "sInfoPostFix": "",
+            "sLoadingRecords": Lang.get('labels.frontend.table.sLoadingRecords'),
+            "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+            "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sPrevious": "Pr&eacute;c&eacute;dent",
+                "sNext": "Suivant",
+                "sLast": "Dernier"
+            },
+            "oAria": {
+                "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+            },
+            "select": {
+                "rows": {
+                    _: "%d lignes séléctionnées",
+                    0: "Aucune ligne séléctionnée",
+                    1: "1 ligne séléctionnée"
+                }
+            }
+        },
+        "autoWidth": false,
+
+        // "columnDefs": [
+        //     {"visible": false, "targets": [2,8]},
+        // ],
+        "order": [[2, 'asc']],
+        "displayLength": 25,
+        "drawCallback": function drawCallback(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var last = null;
+            api.column(2, {
+                page: 'current'
+            }).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                    last = group;
+                }
+            });
+        }
+    });
+    // Order by the grouping
+    $('#example tbody').on('click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
+        } else {
+            table.order([2, 'asc']).draw();
+        }
+    });
     table.columns.adjust().draw();
 });
 

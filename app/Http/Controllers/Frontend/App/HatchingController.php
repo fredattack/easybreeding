@@ -1,8 +1,11 @@
 <?php 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend\App;
 
+use App\Hatching;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class HatchingController extends Controller 
 {
@@ -14,7 +17,8 @@ class HatchingController extends Controller
    */
   public function index()
   {
-    
+    $hatchings=Hatching::with('couple')->get();
+    dd($hatchings);
   }
 
   /**

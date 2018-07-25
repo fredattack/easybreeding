@@ -11,6 +11,15 @@ class Couple extends Model
     protected $table = 'Couples';
     public $timestamps = true;
 
+    public function specie()
+    {
+        return $this->belongsTo(Specie::class, 'specieId','customId');
+    }
+
+    public function customSpecie()
+    {
+        return $this->belongsTo(CustomSpecie::class, 'specieId','customId');
+    }
     public function male()
     {
         return $this->belongsTo(Bird::class, 'maleId','id');
@@ -25,5 +34,7 @@ class Couple extends Model
     {
         return $this->hasOne('Cage');
     }
+
+
 
 }

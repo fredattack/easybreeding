@@ -61,23 +61,23 @@
                 </div>
                 <hr>
                 <div class="row infoLine">
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.order')</label>
                         <h3  id="orderText"></h3>
                     </div>
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.familly')</label>
                         <h3  id="famillyText"></h3>
                     </div>
                 </div>
                 <div class="row infoLine">
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.incubation')</label>
                        <h4 class="modalText" id="incubationText"></h4>
                        <input type="text" class="form-control" placeholder="XX" name="incubation" id="incubationInput"  value="">
 
                     </div>
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.fertilityControl')</label>
                         <h4 class="modalText" id="fertilityControlText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="fertilityControlInput" value="">
@@ -85,13 +85,13 @@
                     </div>
                 </div>
                 <div class="row infoLine">
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.spawningInterval')</label>
                         <h4 class="modalText" id="spawningIntervalText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="spawningInterval" id="spawningIntervalInput" value="">
 
                     </div>
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.outOfNest')</label>
                         <h4 class="modalText" id="outOfNestText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="outOfNest" id="outOfNestInput" value="">
@@ -99,13 +99,13 @@
                     </div>
                 </div>
                 <div class="row infoLine">
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.weaning')</label>
                         <h4 class="modalText" id="weaningText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="weaning" id="weaningInput" value="">
 
                     </div>
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.sexualMaturity')</label>
                         <h4 class="modalText" id="sexMatText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="sexualMaturity" id="sexualMaturityInput" value="">
@@ -113,10 +113,10 @@
                     </div>
                 </div>
                 <div class="row infoLine">
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <button id="updateSpecieBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
                     </div>
-                    <div class="form-group col-md-6 text-center">
+                    <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.girdleDate')</label>
                         <h4 class="modalText" id="girdleDateText"></h4>
                         <input type="text" class="form-control" placeholder="XX" name="girdleDate" id="girdleDateInput" value="">
