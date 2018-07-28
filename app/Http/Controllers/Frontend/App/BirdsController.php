@@ -25,36 +25,17 @@ class BirdsController extends Controller
 {
 
 
+    /********************************************
+     * Description: return view Bird.index with all birds
+     * Parameters: NULL
+     * Return view with compact params
+     *********************************************/
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
+        $birds=Bird::getAllofUser();
 
-        $data=[];
-        $birds=Bird::orderBy('species_id', 'desc')->where('userId','=',Auth::id())->get();
-
-        foreach ($birds as $bird)
-        {
-            $temp=[$bird];
-            if(str_contains($bird->species_id, '_')) {
-                $specie=CustomSpecie::where('customId',$bird->species_id)->first();
-
-            }
-            else {
-                $specieId= intval($bird->species_id);
-                $specie=Specie::where('id','=',$specieId)->first();
-
-
-            }
-            array_push($temp,$specie);
-            array_push($data,$temp);
-
-        }
+        $data=$this->getRightSpecies($birds);
 
         $customSpecies= (array)$this->getUsersSpecies();
 
@@ -193,16 +174,7 @@ class BirdsController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
 
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -311,7 +283,7 @@ class BirdsController extends Controller
         $specie= new CustomSpecie();
 
 // CustomSpecie::where('idReferedSpecies','=',$id)->firstOrFail();
-        dd($specie);
+//        dd($specie);
     }
 
     public function getUsersSpecies()
@@ -339,6 +311,31 @@ class BirdsController extends Controller
             }
         }
         return $customSpecies;
+    }
+
+    /********************************************
+     * Description: return the specie or CustomSpecie of each Birds
+     * Parameters: $birds a list of bird
+     * Return $data
+     *********************************************/
+    public function getRightSpecies($birds)
+    {
+        $data=[];
+        foreach ($birds as $bird) {
+            $temp = [$bird];
+            if (str_contains($bird->species_id, '_')) {
+                $specie = CustomSpecie::getModelById($bird->species_id);
+
+            } else {
+                $specie = Specie::getModelById($bird->species_id);
+
+
+            }
+            array_push($temp, $specie);
+            array_push($data, $temp);
+
+        }
+        return $data;
     }
 
 }

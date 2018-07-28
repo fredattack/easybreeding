@@ -23,4 +23,16 @@ class Specie extends Model
         return $this->belongsTo(Famille::class, 'Id_famillie','id');
     }
 
+    /********************************************
+     * Description: return a Model where id = $id
+     * Parameters: $id
+     * Return $specie
+     *********************************************/
+
+        public static function getModelById($id)
+        {
+            $specie = Specie::where('customId',$id)->first();
+            return $specie;
+        }
+
 }

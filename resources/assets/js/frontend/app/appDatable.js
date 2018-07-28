@@ -24,6 +24,7 @@ require('../global/parsley');
 require('./custom.min.js');
 require('./createBird.js');
 require('./indexBird');
+require('./indexNestling');
 require('./specieModale');
 require('./birdModale');
 require('./eggsIndex');

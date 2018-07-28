@@ -1,4 +1,4 @@
-
+{{--//@todo design --}}
 <div class="card customCard">
 
     <div class="card-body">
@@ -47,7 +47,7 @@
         <div class="bottomCard">
 
             <div class="row">
-                  <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewCoupleDetails')}}">
+                  <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBirdDetails')}}">
                     <button  id="showBirdBtn" type="button" class="btn btn-small btn-circle btn-table btCardPlus"   value="{{preg_replace('/[^A-Za-z0-9\-]/', '', $bird->id)}}" >
                         <i class="fa fa-plus"></i>
                     </button>

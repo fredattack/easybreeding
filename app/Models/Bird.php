@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
 
 class Bird extends Model 
 {
@@ -14,8 +16,21 @@ class Bird extends Model
 
     public function specie()
     {
-        return $this->belongsTo(Specie::class, 'species_id','id');
+        return $this->belongsTo(Specie::class, 'species_id','customId');
     }
+
+    public function customSpecie()
+    {
+        return $this->belongsTo(CustomSpecie::class, 'species_id','customId');
+    }
+
+    public static function getAllofUser(){
+                $birds=Bird::with(['customSpecie','specie'])->orderBy('species_id', 'desc')->where('userId','=',Auth::id())->get();
+                return $birds;
+
+    }
+
+
 
 
 }

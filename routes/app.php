@@ -33,6 +33,6 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
 
 
 
-//    Route::get('/test/{test}', "Frontend\App\EggController@controlHatchingStatus")->name('test');
+    Route::get('/test/{test}', "Frontend\App\NestlingController@createNestling")->name('test');
 });
 

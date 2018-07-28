@@ -11180,7 +11180,8 @@ button:disabled {
 }
 
 #displayBlock,
-.infoCard {
+.infoCard,
+.infoCouples {
   display: none;
 }
 

@@ -68,6 +68,7 @@ return [
         'couplepeoplesguen'=>'couplepeoplesguen',
         'separateCouple'=>'Séparer le couple',
         'viewcoupleDetails'=>'Afficher les détails de ce couple',
+        'viewBirdDetails'=>"Afficher les détails de l'oiseau",
         'vieweggsDetails'=>'Afficher les détails de cet œuf',
         "addEggs"=>"Ajouter un œuf",
         "coupleHistory"=>"Historique du Couple",

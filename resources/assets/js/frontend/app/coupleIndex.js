@@ -108,7 +108,7 @@ $(document).ready(function () {
 
 
 $('.btCardPlus').on('click',function () {
-   $("#details"+$(this).val()).toggle();
+   $("#details"+$(this).val()).fadeToggle();
    $(this).find('i').toggleClass('fa-plus fa-minus');
 
 });

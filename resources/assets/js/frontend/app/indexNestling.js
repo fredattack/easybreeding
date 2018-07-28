@@ -1,8 +1,8 @@
 
 $(document).ready(function() {
-    console.log('indexBird');
+    console.log('indexNestling');
 
-    var table = $('#example').DataTable({
+    var table = $('#nestlingTable').DataTable({
         "lengthMenu": [ 5,10, 25, 50, 100 ],
         responsive:true,
         colReorder: true,
@@ -12,10 +12,7 @@ $(document).ready(function() {
         { responsivePriority: 2, targets: 2,"visible":false },
         { responsivePriority: 2, targets: 3 ,"width": "20%" },
         { responsivePriority: 2, targets: 4 ,"width": "15%" },
-        { responsivePriority: 3, targets: 5 ,"width": "15%" },
         { responsivePriority: 3, targets: 6,"width": "10%" },
-        { responsivePriority: 4, targets: 7,"width": "10%"},
-        { responsivePriority: 1, targets: 8, "orderable": false}
     ],
         language: {
 
@@ -73,7 +70,7 @@ $(document).ready(function() {
         }
     });
     // Order by the grouping
-    $('#example tbody').on('click', 'tr.group', function() {
+    $('#nestlingTable tbody').on('click', 'tr.group', function() {
         var currentOrder = table.order()[0];
         if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
             table.order([2, 'desc']).draw();
@@ -84,16 +81,16 @@ $(document).ready(function() {
     table.columns.adjust().draw();
 });
 
-$('#btnBlock').on('click',function () {
-    console.log('btnblock');
-    $('#displayBlock').fadeToggle();
-    $('#displayList').fadeToggle();
-
-});
-
-$('#btnList').on('click',function () {
-    console.log('btnList');
-    $('#displayBlock').fadeToggle();
-    $('#displayList').fadeToggle();
-
-});
+// $('#btnBlock').on('click',function () {
+//     console.log('btnblock');
+//     $('#displayBlock').fadeToggle();
+//     $('#displayList').fadeToggle();
+//
+// });
+//
+// $('#btnList').on('click',function () {
+//     console.log('btnList');
+//     $('#displayBlock').fadeToggle();
+//     $('#displayList').fadeToggle();
+//
+// });

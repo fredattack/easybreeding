@@ -96,20 +96,24 @@ class EggController extends Controller
         $val = Input::get('val');
 
         if (Egg::where('id', $id)->update(['hatched' => $val])) {
+
             if ($val == 'hatched') $this->newBirdy($id);
             Egg::where('id', $id)->update(['status' => 0]);
             $this->controlHatchingStatus($id);
-
-            return 'update done!!';
         }
 
-
+         return 'Haching  done!!';
     }
 
     public function newBirdy($id): void
     {
         $egg = Egg::where('id', $id)->first();
-///@todo: create Birdy
+        Log::info('coupleId :'.$id);
+
+        $newBird= app('App\Http\Controllers\Frontend\App\NestlingController')->createNestling($egg->hatching->couple_id);
+        $this->controlHatchingStatus($id);
+
+
 
     }
 

@@ -9,6 +9,8 @@ class Couple extends Model
 {
 
     protected $table = 'Couples';
+    protected $visible= ['id','created_at','updated_at','maleId','femaleId','cage_Id','separetad_id','specieId','userId','customId'];
+    protected $fillable= ['id','created_at','updated_at','maleId','femaleId','cage_Id','separetad_id','specieId','userId','customId'];
     public $timestamps = true;
 
     public function specie()
