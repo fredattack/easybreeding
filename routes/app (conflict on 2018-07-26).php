@@ -28,12 +28,11 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
     Route::get('/hatchings', "Frontend\App\HatchingController@index")->name('frontend.app.indexHatchings');
 
     Route::get('/nestlings', "Frontend\App\NestlingController@index")->name('frontend.app.nestlings');
-    Route::post('/updateNestling/{id}', "Frontend\App\NestlingController@update")->name('frontend.app.updateNestling');
 
 
 
 
 
-    Route::get('/test/{test}', "Frontend\App\NestlingController@createNestling")->name('test');
+//    Route::get('/test/{test}', "Frontend\App\EggController@controlHatchingStatus")->name('test');
 });
 

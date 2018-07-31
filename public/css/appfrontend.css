@@ -173,7 +173,7 @@
 }
 
 
-    #birdModal .row input{
+    #birdModal .row input,#nestlingModal .row input{
         display: none;
         width:95%;
         text-align: center;
@@ -187,7 +187,7 @@
     width: 20%;
 
     }
-#birdModal .row select{
+#birdModal .row select,#nestlingModal .row select{
         display: none;
         width:95%;
         text-align: center;
@@ -195,25 +195,25 @@
         border-left: none;
         border-right: none;
     }
-   #birdModal .radio-list{
+   #birdModal .radio-list,#nestlingModal .radio-list{
         display: none;
     }
-    #birdModal .control-label,#specieModal .control-label{
+    #birdModal .control-label,#specieModal .control-label,#nestlingModal .control-label{
        font-size: 120%;
     }
-    #birdModal input ::-webkit-input-placeholder{
+    #birdModal input ::-webkit-input-placeholder,#specieModal input ::-webkit-input-placeholder,#nestlingModal input ::-webkit-input-placeholder{
         text-align: center;
 
     }
-    #birdModal input :-ms-input-placeholder{
+    #birdModal input :-ms-input-placeholder,#specieModal input :-ms-input-placeholder,#nestlingModal input :-ms-input-placeholder{
         text-align: center;
 
     }
-    #birdModal input ::-ms-input-placeholder{
+    #birdModal input ::-ms-input-placeholder,#specieModal input ::-ms-input-placeholder,#nestlingModal input ::-ms-input-placeholder{
         text-align: center;
 
     }
-    #birdModal input ::placeholder{
+    #birdModal input ::placeholder,#specieModal input ::placeholder,#nestlingModal input ::placeholder{
         text-align: center;
 
     }
@@ -227,7 +227,8 @@
         }
     }
 
-    #updateBirdBtn{
+    #updateBirdBtn,#updateSpecieBtn,
+    #returnNestlingBtn,#updateNestlingBtn{
         display: none;
     }
     .buttonRow{
@@ -11370,6 +11371,11 @@ table#couplesTable tr.even {
   #example > tbody > tr > td:nth-child(1) {
     font-size: 75%;
   }
+}
+
+#nestlingTable > tbody > tr {
+  line-height: 3em;
+  text-align: center;
 }
 
 #couplesTable > tbody > tr > td:nth-child(7) {

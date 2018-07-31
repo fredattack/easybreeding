@@ -218,8 +218,7 @@ class BirdsController extends Controller
      */
     public function update(Request $request)
     {
-//        dd($request);
-        $bird=Bird::with('specie')->where('id','=',$request->id)->firstOrFail();
+        $bird=Bird::with('specie')->where('id','=',$request->id)->first();
 
         $bird->sexe=$request->sexe;
         $bird->sexingMethode=$request->sexingMethode;
@@ -231,6 +230,7 @@ class BirdsController extends Controller
         $bird->breederId=$request->breederId;
         $bird->disponibility=$request->disponibility;
         $bird->status=$request->status;
+
         $bird->save();
 
         return $request->id;

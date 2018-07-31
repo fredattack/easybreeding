@@ -26,6 +26,8 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::get('/setFertility', "Frontend\App\EggController@setFertility")->name('frontend.app.setFertility');
     Route::get('/updateHatching', "Frontend\App\EggController@updateHatching")->name('frontend.app.updateHatching');
 
+    Route::get('/getNestling', "Frontend\App\NestlingController@getNestling")->name('frontend.app.getNestling');
+    Route::post('/setNestling', "Frontend\App\NestlingController@update")->name('frontend.app.setNestling');
 
 
 });

@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+{{--@todo  search in all block --}}
     <div class="row page-titles">
         {{--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.2/b-flash-1.5.2/b-html5-1.5.2/datatables.min.js"></script>--}}
         <div class="col-md-5 align-self-center">
@@ -39,7 +39,7 @@
                 {{ session('info') }}
             </div>
         @endif
-        @include('frontend.app.modales.bird')
+        @include('frontend.app.modales.nestlingModale')
         @include('frontend.app.modales.specieModale')
 {{--        @include('frontend.app.modales.newCouplesModal',$customSpecies)--}}
 
@@ -125,12 +125,22 @@
 
                                             <td class="text-center btnTab">
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
-                                                    <button  id="showBirdBtn{{$nestling->id}}" type="button" class="btn btn-small btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$nestling->id}}" >
+                                                    <button  id="showBirdBtn{{$nestling->id}}" type="button" class="btn btn-small btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#nestlingModal"   value="{{$nestling->id}}" >
                                                         <i class="mdi mdi-linux"></i>
                                                     </button>
                                                 </span>
                                             {{--</td>--}}
                                             {{--<td class="text-center">--}}
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.nestlingDead')}}" data-placement="bottom">
+                                                    <button href="#" id="setDeadBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+                                                        <i class="mdi  mdi-close-outline"></i>
+                                                    </button>
+                                                </span>
+                                                <span data-toggle="tooltip"  title="{{__('alerts.frontend.outOfNest')}}" data-placement="bottom">
+                                                    <button href="#" id="outOfNestBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+                                                        <i class="mdi  mdi-inbox"></i>
+                                                    </button>
+                                                </span>
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
                                                     <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$nestling->species_id}}">
                                                         <i class="mdi  mdi-eye"></i>
@@ -162,11 +172,7 @@
                             <div id="displayBlock">
                                     @foreach($couples as $couple)
                                         <div class="row specieTitle">
-                                            <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
-                                                <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-lg btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$couple['id']}}">
-                                                    <i class="mdi  mdi-eye"></i>
-                                                </button>
-                                            </span>
+
                                          <h2>{{$couple['customId']}}</h2>
                                         </div>
                                     <div class="row">
@@ -177,7 +183,7 @@
                                         ?>
                                     @if($nestling->couple_id == $couple['customId'])
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                        @include('frontend.app.nestling.nestlingCard',[$nestling,$theSpecie])
+                                        @include('frontend.app.nestling.nestlingCard',[$nestling,$theSpecie,$couple])
                                         </div>
                                     @endif
                                     @endforeach

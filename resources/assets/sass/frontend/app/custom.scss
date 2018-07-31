@@ -189,6 +189,11 @@ table#couplesTable tr.odd,table#couplesTable tr.even {
 }
 }
 
+#nestlingTable > tbody > tr {
+      line-height: 3em;
+    text-align: center;
+
+}
 #couplesTable > tbody > tr > td:nth-child(7){
   display: inline-flex;
 }
@@ -228,5 +233,6 @@ $greyborder : rgba(0, 0, 0, 0.1);
 .coupleTitle{
   margin-left: 3em;
 }
+
 
 

@@ -12,9 +12,28 @@
         </div>
         <hr>
         <div class="row">
+
             <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
-                <button  id="showBirdBtn{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$nestling->id}}" >
+                <button  id="showBirdBtn{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#nestlingModal"   value="{{$nestling->id}}" >
                     <i class="mdi mdi-linux"></i>
+                </button>
+            </span>
+
+             <span data-toggle="tooltip"  title="{{__('alerts.frontend.nestlingDead')}}" data-placement="bottom">
+                <button href="#" id="setDeadBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+                    <i class="mdi  mdi-close-outline"></i>
+                </button>
+            </span>
+
+            <span data-toggle="tooltip"  title="{{__('alerts.frontend.outOfNest')}}" data-placement="bottom">
+                <button href="#" id="outOfNestBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+                    <i class="mdi  mdi-inbox"></i>
+                </button>
+            </span>
+
+            <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-lg btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$couple['specieId']}}">
+                    <i class="mdi  mdi-eye"></i>
                 </button>
             </span>
         </div>

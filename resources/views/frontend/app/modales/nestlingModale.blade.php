@@ -1,45 +1,42 @@
 <!-- The Modal -->
 
-
-    <div class="modal left fade" id="birdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ">
+    <div class="modal left fade" id="nestlingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <div class="container"> <img class="d-block img-fluid" src="/images/big/img1.jpg" alt="First slide"></div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="container"><img class="d-block img-fluid" src="/images/big/img2.jpg" alt="Second slide"></div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="container"><img class="d-block img-fluid" src="/images/big/img3.jpg" alt="Third slide"></div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
-                    </div>
+                    {{--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">--}}
+                        {{--<div class="carousel-inner" role="listbox">--}}
+                            {{--<div class="carousel-item active">--}}
+                                {{--<div class="container"> <img class="d-block img-fluid" src="/images/big/img1.jpg" alt="First slide"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="carousel-item">--}}
+                                {{--<div class="container"><img class="d-block img-fluid" src="/images/big/img2.jpg" alt="Second slide"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="carousel-item">--}}
+                                {{--<div class="container"><img class="d-block img-fluid" src="/images/big/img3.jpg" alt="Third slide"></div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>--}}
+                        {{--<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>--}}
+                    {{--</div>--}}
                 </div>
 
                 <div class="modal-body">
                     <div class="row infoLine buttonRow">
-                        <div class="col-md-10">
-                        </div>
                         <div class="col-md-2 pull-right">
                            <span>
-                             <a href="" class="btn btn-lg btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom" id="editBirdBtn">
+                             <a href="" class="btn btn-lg btn-circle btn-success" data-toggle="tooltip" title="{{__('alerts.frontend.editBird')}}" data-placement="bottom" id="editNestlingBtn">
                                  <i class="mdi mdi-grease-pencil"></i>
                             </a>
                            </span>
                             <span>
-                                <a href="#" class="btn btn-circle btn-lg btn-success" id="returnBirdBtn" title="{{__('alerts.frontend.goBack')}}" data-toggle="tooltip" data-placement="bottom">
+                                <a href="#" class="btn btn-circle btn-lg btn-success" id="returnNestlingBtn" title="{{__('alerts.frontend.goBack')}}" data-toggle="tooltip" data-placement="bottom">
                                     <i class="fa fa-rotate-left"></i>
                                 </a>
                             </span>
                         </div>
                     </div>
-        {!! Form::open(array('route' => ['frontend.app.updateBird',0], 'method' => 'POST','id'=>'UpdateBirdForm','onkeypress'=>"return event.keyCode != 13")) !!}
+        {!! Form::open(array('route' => ['frontend.app.updateNestling',0], 'method' => 'POST','id'=>'UpdateNestlingForm','onkeypress'=>"return event.keyCode != 13")) !!}
                 <input type="hidden" name="id" id="idInput" value="">
 
                     <div class="row infoLine">
@@ -54,7 +51,7 @@
                             <input type="text"  class="form-control mydatepicker"  name="dateOfBirth" id="dateOfBirthInput">
                         </div>
                     </div>
-<hr>
+                <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.usualName')</label>
@@ -70,7 +67,7 @@
                         <div class="form-group col-md-12 col-lg-6">
                             <label class="control-label text-center ">@lang('labels.frontend.birds.sexingMethode')</label>
                             <h4  class="modalText"  id="sexingMethodeText"></h4>
-                            <select class="form-control custom-select" name="sexingMethode" id="sexingMethodeSelect">
+                            <select class="form-control custom-select" name="sexingMethod" id="sexingMethodeSelect">
                                <option value="noOne" selected>@lang('labels.frontend.birds.noOne')</option>
                                <option value="DNA">@lang('labels.frontend.birds.DNA')</option>
                                <option value="endoscopy">@lang('labels.frontend.birds.endoscopy')</option>
@@ -135,83 +132,79 @@
                                 <input type="text" class="form-control" placeholder="ABC1234" name="idNum" id="idNumInput"  >
                         </div>
                     </div>
-                    <hr>
-                    <div class="row infoLine">
-                        <div class="form-group col-md-12 col-lg-6">
-                            <label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>
-                            <h4  class="modalText"  id="originText"></h4>
-                             <select class="form-control custom-select" name="origin" id="originSelect">
-                                <option value="thisElevage" @if(isset($bird) && $bird->origin="thisElevage") checked @endif>@lang('labels.frontend.birds.thisElevage')</option>
-                                <option value="advertencie" @if(isset($bird) && $bird->origin="advertencie") checked @endif>@lang('labels.frontend.birds.advertencie')</option>
-                                <option value="friend" @if(isset($bird) && $bird->origin="friend") checked @endif>@lang('labels.frontend.birds.friend')</option>
-                                <option value="expo" @if(isset($bird) && $bird->origin="expo") checked @endif>@lang('labels.frontend.birds.expo')</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-12 col-lg-6" id="breederGroup">
-                            <label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>
-                            <h4  class="modalText"  id="breederText"></h4>
-                            <input type="text" class="form-control" placeholder="Coco123" name="breederId" id="breederIdInput">
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row infoLine">
-                        <div class="form-group col-md-12 col-lg-6">
-                            <label class="control-label text-center ">@lang('labels.frontend.birds.disponibility')</label>
-                            <h4  class="modalText"  id="disponibilityText"></h4>
-                            <div class="radio-list pull-center">
-                                        <label class="custom-control custom-radio">
-                                            <input id="disponible" name="disponibility" type="radio"  class="custom-control-input" value="disponible" @if((isset($bird) && $bird->disponibility=="disponible")|| !isset($bird)) checked @endif>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.disponible')</span>
-                                        </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="toBeSale" name="disponibility" type="radio" class="custom-control-input" value="toBeSale" @if(isset($bird) && $bird->disponibility=="toBeSale") checked @endif >
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.toBeSale')</span>
-                                        </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="reserved" name="disponibility" type="radio" class="custom-control-input" value="reserved" @if(isset($bird) && $bird->disponibility=="reserved") checked @endif >
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.reserved')</span>
-                                        </label>
-                                    </div>
-                        </div>
-                        <div class="form-group col-md-12 col-lg-6">
-                            <label class="control-label text-center ">@lang('labels.frontend.birds.status')</label>
-                            <h4  class="modalText"  id="statusText"></h4>
-                            <div class="radio-list pull-center">
-                                        <label class="custom-control custom-radio">
-                                            <input id="single" name="status" type="radio" checked="true" class="custom-control-input" value="single">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.single')</span>
-                                        </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="coupled" name="status" type="radio" class="custom-control-input" value="coupled">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.coupled')</span>
-                                        </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="rest" name="status" type="radio" class="custom-control-input" value="rest">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">@lang('labels.frontend.birds.rest')</span>
-                                        </label>
-                                    </div>
-                        </div>
-                    </div>
+                    {{--<hr>--}}
+                    {{--<div class="row infoLine">--}}
+                        {{--<div class="form-group col-md-12 col-lg-6">--}}
+                            {{--<label class="control-label text-center ">@lang('labels.frontend.birds.origin')</label>--}}
+                            {{--<h4  class="modalText"  id="originText"></h4>--}}
+                             {{--<select class="form-control custom-select" name="origin" id="originSelect">--}}
+                                {{--<option value="thisElevage" @if(isset($bird) && $bird->origin="thisElevage") checked @endif>@lang('labels.frontend.birds.thisElevage')</option>--}}
+                                {{--<option value="advertencie" @if(isset($bird) && $bird->origin="advertencie") checked @endif>@lang('labels.frontend.birds.advertencie')</option>--}}
+                                {{--<option value="friend" @if(isset($bird) && $bird->origin="friend") checked @endif>@lang('labels.frontend.birds.friend')</option>--}}
+                                {{--<option value="expo" @if(isset($bird) && $bird->origin="expo") checked @endif>@lang('labels.frontend.birds.expo')</option>--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group col-md-12 col-lg-6" id="breederGroup">--}}
+                            {{--<label class="control-label text-center ">@lang('labels.frontend.birds.infoBreeder')</label>--}}
+                            {{--<h4  class="modalText"  id="breederText"></h4>--}}
+                            {{--<input type="text" class="form-control" placeholder="Coco123" name="breederId" id="breederIdInput">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<hr>--}}
+                    {{--<div class="row infoLine">--}}
+                        {{--<div class="form-group col-md-12 col-lg-6">--}}
+                            {{--<label class="control-label text-center ">@lang('labels.frontend.birds.disponibility')</label>--}}
+                            {{--<h4  class="modalText"  id="disponibilityText"></h4>--}}
+                            {{--<div class="radio-list pull-center">--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="disponible" name="disponibility" type="radio"  class="custom-control-input" value="disponible" @if((isset($bird) && $bird->disponibility=="disponible")|| !isset($bird)) checked @endif>--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.disponible')</span>--}}
+                                        {{--</label>--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="toBeSale" name="disponibility" type="radio" class="custom-control-input" value="toBeSale" @if(isset($bird) && $bird->disponibility=="toBeSale") checked @endif >--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.toBeSale')</span>--}}
+                                        {{--</label>--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="reserved" name="disponibility" type="radio" class="custom-control-input" value="reserved" @if(isset($bird) && $bird->disponibility=="reserved") checked @endif >--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.reserved')</span>--}}
+                                        {{--</label>--}}
+                                    {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group col-md-12 col-lg-6">--}}
+                            {{--<label class="control-label text-center ">@lang('labels.frontend.birds.status')</label>--}}
+                            {{--<h4  class="modalText"  id="statusText"></h4>--}}
+                            {{--<div class="radio-list pull-center">--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="single" name="status" type="radio" checked="true" class="custom-control-input" value="single">--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.single')</span>--}}
+                                        {{--</label>--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="coupled" name="status" type="radio" class="custom-control-input" value="coupled">--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.coupled')</span>--}}
+                                        {{--</label>--}}
+                                        {{--<label class="custom-control custom-radio">--}}
+                                            {{--<input id="rest" name="status" type="radio" class="custom-control-input" value="rest">--}}
+                                            {{--<span class="custom-control-indicator"></span>--}}
+                                            {{--<span class="custom-control-description">@lang('labels.frontend.birds.rest')</span>--}}
+                                        {{--</label>--}}
+                                    {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <hr>
                     <div class="row infoLine">
                         <div class="form-group col-md-8">
                          </div>
                         <div class="form-group col-md-4 text-center">
-                            <button id="updateBirdBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
+                            <button id="updateNestlingBtn" type="submit" class="btn btn-lg btn-success text-center">@lang('labels.general.submit')</button>
                          </div>
                     </div>
                         {!! Form::close() !!}
-                    <div class="row infoLine" id="historyGroup">
-                        <div class="form-group col-md-12 col-lg-6">
-                            <h2>@lang('labels.frontend.birds.history')</h2>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="modal-footer">
@@ -225,9 +218,3 @@
             </div>
         </div>
     </div>
-
-
-<style>
-
-
-</style>
