@@ -62,9 +62,9 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 <li class="two-column">
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-infinity"></i><span class="hide-menu">@lang('custom.couples')</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('frontend.app.couples')}}">@lang('navs.frontend.couples')</a></li>
+                    <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.couples')}}" aria-expanded="false"><i class="mdi mdi-infinity"></i><span class="hide-menu">@lang('custom.couples')</span></a>
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li><a href="{{route('frontend.app.couples')}}">@lang('navs.frontend.couples')</a></li>--}}
 
                         {{--<li><a href="pages-profile.html">Profile page</a></li>--}}
                         {{--<li><a href="pages-animation.html">Animation</a></li>--}}
@@ -98,7 +98,7 @@
                                 {{--<li><a href="pages-recover-password.html">Recover password</a></li>--}}
                             {{--</ul>--}}
                         {{--</li>--}}
-                    </ul>
+                    {{--</ul>--}}
                 </li>
                 {{--<li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>--}}
                 {{--<li class="two-column"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>--}}
@@ -123,7 +123,7 @@
                         {{--<li><a href="form-tinymce.html">Tinymce Editor</a></li>--}}
                     {{--</ul>--}}
                 {{--</li>--}}
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-inbox"></i><span class="hide-menu">@lang('custom.hatchings')</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.indexHatchings')}}" aria-expanded="false"><i class="mdi mdi-inbox"></i><span class="hide-menu">@lang('custom.hatchings')</span></a>
                     {{--<ul aria-expanded="false" class="collapse">--}}
                         {{--<li><a href="table-basic.html">Basic Tables</a></li>--}}
                         {{--<li><a href="table-layout.html">Table Layouts</a></li>--}}

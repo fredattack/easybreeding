@@ -51,33 +51,9 @@
 
                         <!--region ToolBar-->
                         <div class="row">
-                            <div class="col-12" id="toolBar">
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                       <div class="row">
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnList">
-                                                    <i class="fa fa-th-list"></i>
-                                               </button>
-
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayBlock')}}" data-placement="bottom" id="btnBlock">
-                                                    <i class="fa  fa-th-large"></i>
-                                               </button>
-
-                                       </div>
-                                    </div>
-                                <div class="col-md-3"></div>
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-3">
-                                        <span >
-                                            <a href="#" class="btn btn-circle btn-lg btn-success pull-right" data-toggle="modal" data-target="#newCoupleModal" title="{{__('alerts.frontend.addBird')}}" data-placement="bottom">
-                                                <i class="fa fa-plus" data-toggle="tooltip"  title="{{__('alerts.frontend.addCouple')}}" data-placement="bottom"></i>
-                                            </a>
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </div>
+                            <?php $type ='couples';
+                            $table='couplesTable';?>
+                            @include('frontend.component.app.toolBar',[$customSpecies,$type,$table])
                         </div>
                         <!--endregion-->
 
@@ -96,7 +72,7 @@
                             @if(count($data)!=0)
                             <div id="displayList" >
                                 {{--<div class="">--}}
-                                    <table id="couplesTable" class="table display table-bordered" data-filtering="true" data-paging="true" >
+                                    <table id="couplesTable" class="table" data-filtering="true" data-paging="true" >
                                         <thead>
                                         <tr>
                                             <th data-priority = "1"></th>
@@ -123,15 +99,14 @@
 
                                         <tr>
                                             <td></td>
-                                            <td >
+                                            <td>
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
-                                                    <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-small btn-circle btn-table "
+                                                    <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-circle btn-table "
                                                             data-toggle="modal" data-target="#specieModal" value="{{$couple['0']->customId}}">
                                                         <i class="mdi  mdi-eye"></i>
                                                     </button>
                                                 </span>
                                                      <span class="specieName">{{$couple['0']->commonName}}</span>
-
                                             </td>
                                              <td>{{$couple['1']->customId}}</td>
                                             <td class="maleCol">
@@ -141,7 +116,7 @@
                                                         <i class="mdi mdi-linux"></i>
                                                     </button>
                                                 </div>
-                                                <div>{{$couple['1']->male->personal_id}}</div>
+                                                {{$couple['1']->male->personal_id}}
 
                                             </td>
 
@@ -155,7 +130,7 @@
                                                 <div>{{$couple['1']->female->personal_id}}</div>
 
                                             </td>
-                                            <td>{{$couple['1']->created_at}}</td>
+                                            <td>{{$couple['1']->created_at->format('d/m/Y')}}</td>
                                             <td>cage</td>
                                             <td>
                                                 <div data-toggle="tooltip"  title="{{__('alerts.frontend.viewHatching')}}">
@@ -183,7 +158,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td>{{$couple['1']->separeted_at}}</td>
+                                            <td>{{($couple['1']->separeted_at != null) ? $couple['1']->separeted_at->format('d/m/Y'):''}}</td>
                                             <td>
                                                 @if($couple['1']->separeted_at==null)
                                                 {!! Form::open(array('route' => 'frontend.app.separateCouple', 'method' => 'get','id'=>'separateCoupleForm','onkeypress'=>"return event.keyCode != 13")) !!}

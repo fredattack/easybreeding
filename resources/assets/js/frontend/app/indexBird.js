@@ -1,21 +1,24 @@
-
+let birdsList;
+let table;
 $(document).ready(function() {
     console.log('indexBird');
 
-    var table = $('#example').DataTable({
+    table = $('#birdsIndex').DataTable({
         "lengthMenu": [ 5,10, 25, 50, 100 ],
         responsive:true,
         colReorder: true,
         columnDefs: [
-        { responsivePriority: 1, targets: 0 ,"width": "10%", "orderable": false},
-        { responsivePriority: 1, targets: 1 ,"width": "25%" },
-        { responsivePriority: 2, targets: 2,"visible":false },
-        { responsivePriority: 2, targets: 3 ,"width": "20%" },
-        { responsivePriority: 2, targets: 4 ,"width": "15%" },
-        { responsivePriority: 3, targets: 5 ,"width": "15%" },
-        { responsivePriority: 3, targets: 6,"width": "10%" },
-        { responsivePriority: 4, targets: 7,"width": "10%"},
-        { responsivePriority: 1, targets: 8, "orderable": false}
+            { "defaultContent": "", "targets": "_all" } ,
+        { responsivePriority: 1,"data":"none", targets: 0 , "orderable": false},
+        { responsivePriority: 1,"data":"id", targets: 1  },
+        { responsivePriority: 2,"data":"speciesName", targets: 2,"visible":false },
+        { responsivePriority: 2,"data":"personal_id", targets: 3  },
+        { responsivePriority: 2,"data":"sexe", targets: 4  },
+        { responsivePriority: 2,"data":"dateOfBirth", targets: 5  },
+        { responsivePriority: 3,"data":"idNum", targets: 6  },
+        { responsivePriority: 3,"data":"status", targets: 7 },
+        { responsivePriority: 4,"data":"disponibility", targets: 8},
+        { responsivePriority: 1,"data":"button", targets: 9, "orderable": false}
     ],
         language: {
 
@@ -49,9 +52,7 @@ $(document).ready(function() {
     },
         "autoWidth": false,
 
-        // "columnDefs": [
-        //     {"visible": false, "targets": [2,8]},
-        // ],
+
         "order": [
             [2, 'asc']
         ],
@@ -66,14 +67,14 @@ $(document).ready(function() {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                    $(rows).eq(i).before('<tr class="group"><td colspan="10">' + group + '</td></tr>');
                     last = group;
                 }
             });
         }
     });
     // Order by the grouping
-    $('#example tbody').on('click', 'tr.group', function() {
+    $('#birdsIndex tbody').on('click', 'tr.group', function() {
         var currentOrder = table.order()[0];
         if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
             table.order([2, 'desc']).draw();
@@ -82,7 +83,20 @@ $(document).ready(function() {
         }
     });
     table.columns.adjust().draw();
+
+   getBirdsList();
+
+    console.log('birdsList');
 });
+
+function getBirdsList() {
+
+    $.get('/ajax/getBirdsList',function (data) {
+        console.log(data);
+        birdsList = data;
+    });
+    //
+}
 
 $('#btnBlock').on('click',function () {
     console.log('btnblock');
@@ -93,7 +107,93 @@ $('#btnBlock').on('click',function () {
 
 $('#btnList').on('click',function () {
     console.log('btnList');
+    $('.TableFilter').fadeToggle();
     $('#displayBlock').fadeToggle();
     $('#displayList').fadeToggle();
 
 });
+
+$('#toolBar select').on('change',function (){
+    console.log('select',$(this).val());
+    let table = $('#'+$(this).data('table')).DataTable();
+    let column = $(this).data('column');
+    console.log('table: ',$(this).data('table'));
+    console.log('column: ',column);
+    if($(this).val()==='' )
+    {
+        table   .column(column)
+                .search($(this).val() )
+                .draw();
+
+        $(this).val('0').prop('selected',true);
+    }else{
+
+        table.column(column)
+            .search($(this).val() )
+            .draw();
+    }
+});
+//
+// $.fn.dataTable.ext.search.push(
+//     function( settings, data, dataIndex ) {
+//         var min = parseInt( $('#start').val(), 10 );
+//         var max = parseInt( $('#end').val(), 10 );
+//         var age = parseFloat( data[4] ) || 0; // use data for the age column
+//
+//         if ( ( isNaN( min ) && isNaN( max ) ) ||
+//             ( isNaN( min ) && age <= max ) ||
+//             ( min <= age   && isNaN( max ) ) ||
+//             ( min <= age   && age <= max ) )
+//         {
+//             return true;
+//         }
+//         return false;
+//     }
+// );
+//
+// $(document).ready(function() {
+//     var table = $('#birdsIndex').DataTable();
+//
+//     // Event listener to the two range filtering inputs to redraw on input
+//     $('#start, #end').keyup( function() {
+//         table.draw();
+//     } );
+// } );
+
+// Date Picker
+jQuery('#min').datepicker({
+    format: 'dd/mm/yyyy',
+    endDate:'+1d',
+    weekStart:'1',
+    "onSelect": function(date) {
+        minDateFilter = new Date(date).getTime();
+        table.fnDraw();
+    }
+    // language:'fr'
+});
+//
+// $(document).ready(function () {
+//        $.fn.dataTable.ext.search.push(
+//           function (settings, data, dataIndex) {
+//         var min = $('#min').datepicker("getDate");
+//         var max = $('#max').datepicker("getDate");
+//         var startDate = new Date(data[5]);
+//         if (min == null && max == null) { return true; }
+//         if (min == null && startDate <= max) { return true;}
+//         if(max == null && startDate >= min) {return true;}
+//         if (startDate <= max && startDate >= min) { return true; }
+//         return false;
+//     }
+//     );
+//
+//
+//         $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//         $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//
+//         var table = $('#birdsIndex').DataTable();
+//
+//         // Event listener to the two range filtering inputs to redraw on input
+//         $('#min, #max').change(function () {
+//             table.draw();
+//         });
+//     });

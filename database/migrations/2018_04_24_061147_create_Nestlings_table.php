@@ -10,12 +10,14 @@ class CreateNestlingsTable extends Migration {
 		Schema::create('Nestlings', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->integer('species_id')->unsigned();
+			$table->string('species_id');
 			$table->enum('sexe', array('male', 'female', 'unknow'));
 			$table->string('sexingMethod');
 			$table->string('idType');
 			$table->string('idNum');
+			$table->string('couple_id');
 			$table->string('personal_id');
+			$table->string('userId');
 			$table->string('dateOfBirth');
 
 			$table->integer('father_id')->unsigned()->nullable();

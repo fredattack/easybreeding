@@ -14,7 +14,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                         <h2>@lang('labels.frontend.birds.createCouples')</h2>
-                        <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnCloseNewCoupleModal">
+                        <button type="button" class="btn btn-circle btn-xl btn-table" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnCloseNewCoupleModal">
                             <i class="mdi mdi-close"></i>
                        </button>
 

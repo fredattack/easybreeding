@@ -8,6 +8,7 @@ require('../global/jquery.min.js');
 require('../global/popper.min.js');
 require('../global/bootstrap.js');
 
+
 require('../global/jquery.sparkline.min');
 require('../global/jQuery.style.switcher');
 require('../global/sticky-kit.min');

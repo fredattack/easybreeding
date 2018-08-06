@@ -84,8 +84,19 @@
 }
 
 .modal-header img{
-    margin:1em 1em;
     max-height: 400px;
+}
+#UpdateSpecieForm > div:nth-child(4){
+   background:#E9EEEC;
+  .text-center{
+    margin: auto 0;
+
+    h2{
+      font-size:32px;
+      font-weight: 400;
+    }
+  }
+
 }
 
 .modal-footer{
@@ -168,15 +179,15 @@
 }
 
 
-    #birdModal .row input,#nestlingModal .row input{
-        display: none;
-        width:95%;
-        text-align: center;
-        border-top: none;
-        border-left: none;
-        border-right: none;
+#birdModal .row input,#nestlingModal .row input{
+    display: none;
+    width:95%;
+    text-align: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 
-    }
+}
 #birdModal .row input:nth-child(1){
         color:red;
     width: 20%;
@@ -190,51 +201,56 @@
         border-left: none;
         border-right: none;
     }
-   #birdModal .radio-list,#nestlingModal .radio-list{
-        display: none;
-    }
-    #birdModal .control-label,#specieModal .control-label,#nestlingModal .control-label{
-       font-size: 120%;
-    }
-    #birdModal input ::placeholder,#specieModal input ::placeholder,#nestlingModal input ::placeholder{
-        text-align: center;
+#birdModal .radio-list,#nestlingModal .radio-list{
+    display: none;
+}
+#birdModal .control-label,#specieModal .control-label,#nestlingModal .control-label{
+   font-size: 120%;
+    font-weight: bold;
+}
+#birdModal input ::placeholder,#specieModal input ::placeholder,#nestlingModal input ::placeholder{
+    text-align: center;
 
-    }
-    @media all and(max-width: 780px) {
-            #birdModal .modal-body .form-group,
-            #birdModal .control-label,#specieModal .control-label{
-            margin-bottom:1em;
-        }
+}
+@media all and(max-width: 780px) {
+        #birdModal .modal-body .form-group,
         #birdModal .control-label,#specieModal .control-label{
-            font-weight: 600;
-        }
+        margin-bottom:1em;
     }
+    #birdModal .control-label,#specieModal .control-label{
+        font-weight: bold;
+    }
+}
 
-    #updateBirdBtn,#updateSpecieBtn,
-    #returnNestlingBtn,#updateNestlingBtn{
-        display: none;
-    }
-    .buttonRow{
-        min-height: 5em;
-    }
+#editCustomSpecieBtn{
+    margin:20px 0;
+}
 
-    .personal_idInput{
-        line-height: 36px;
-        font-size: 24px;
-    }
+#updateBirdBtn,#updateSpecieBtn,
+#returnNestlingBtn,#updateNestlingBtn{
+    display: none;
+}
+.buttonRow{
+    min-height: 5em;
+}
 
-    #newCoupleModal .modal-footer .row,#newEggModal .modal-footer .row{
-        margin: auto;
-    }
+.personal_idInput{
+    line-height: 36px;
+    font-size: 24px;
+}
 
+#newCoupleModal .modal-footer .row,#newEggModal .modal-footer .row{
+    margin: auto;
+}
+
+#newCoupleModal .modal-content,#newEggModal .modal-content{
+    width: 500px;
+}
+@media (max-width: 500px) {
     #newCoupleModal .modal-content,#newEggModal .modal-content{
-        width: 500px;
-    }
-    @media (max-width: 500px) {
-        #newCoupleModal .modal-content,#newEggModal .modal-content{
-        width: 100%;
-    }
-    }
+    width: 100%;
+}
+}
 
 
 #newCoupleModal .modal-content,#newEggModal .modal-content{

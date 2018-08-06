@@ -74,6 +74,9 @@ return [
         "coupleHistory"=>"Historique du Couple",
         "viewHatching"=>"Voir la couvée en cours",
         'noEggs'    => "Vous n'avez pas encore ajouter d'œufs.",
+        'nestlingDead' => 'Le jeune est mort',
+        'outOfNest' => 'Sortie du nid/sevrage',
+        'dateRange' => 'choisissez une période'
 
 
     ],

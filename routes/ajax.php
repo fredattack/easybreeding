@@ -17,6 +17,7 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::get('/autocomplete',"Frontend\App\BirdsController@ajaxData");
 //    Route::get('/createBird', "Frontend\App\BirdsController@create")->name('frontend.app.birdCreate');
     Route::get('/getBird', "Frontend\App\BirdsController@getBird")->name('frontend.app.getBird');
+    Route::get('/getBirdsList', "Frontend\App\BirdsController@getBirdsList")->name('frontend.app.getBirdsList');
     Route::get('/getSpecie', "CustomSpecieController@getSpecie")->name('frontend.app.getSpecie');
     Route::post('/setSpecie', "CustomSpecieController@update")->name('frontend.app.setSpecie');
     Route::post('/setBird', "Frontend\App\BirdsController@update")->name('frontend.app.setBird');
@@ -28,6 +29,9 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
 
     Route::get('/getNestling', "Frontend\App\NestlingController@getNestling")->name('frontend.app.getNestling');
     Route::post('/setNestling', "Frontend\App\NestlingController@update")->name('frontend.app.setNestling');
+    Route::get('/moveOutOfNest', "Frontend\App\NestlingController@moveOutOfNest")->name('frontend.app.moveOutOfNest');
+    Route::get('/setDead', "Frontend\App\NestlingController@setDead")->name('frontend.app.setDead');
+
 
 
 });

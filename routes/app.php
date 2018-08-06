@@ -30,6 +30,7 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
     Route::get('/nestlings', "Frontend\App\NestlingController@index")->name('frontend.app.nestlings');
     Route::post('/updateNestling/{id}', "Frontend\App\NestlingController@update")->name('frontend.app.updateNestling');
 
+    Route::get('/zoneAndCage', "Frontend\App\CageController@index")->name('frontend.app.zoneAndCage');
 
 
 

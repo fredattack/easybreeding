@@ -2049,7 +2049,11 @@ Table-Data Table
 ******************/
 
 .dataTables_wrapper {
-    padding-top: 10px
+    padding-top: 10px;
+    @media(max-width:500px) {
+       text-align: center;
+    }
+
 }
 
 .dt-buttons {
@@ -2150,8 +2154,8 @@ table.dataTable thead .sorting:after {
 }
 
 .dataTables_wrapper .dataTables_paginate {
-    float: right;
-    text-align: right;
+    //float: right;
+    text-align: center;
     padding-top: 0.25em
 }
 
@@ -2167,6 +2171,8 @@ table.dataTable thead .sorting:after {
     color: $bodytext;
     border: 1px solid #ddd;
 }
+
+
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {

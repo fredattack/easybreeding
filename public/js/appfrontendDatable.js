@@ -42097,11 +42097,15 @@ module.exports = function(module) {
 * Import jsFiles for app side
 *
  */
-
+/* global dep
+ */
 __webpack_require__("./resources/assets/js/frontend/global/jquery.min.js");
 __webpack_require__("./resources/assets/js/frontend/global/popper.min.js");
 __webpack_require__("./resources/assets/js/frontend/global/bootstrap.js");
 
+/*
+.plugins
+ */
 __webpack_require__("./resources/assets/js/frontend/global/jquery.sparkline.min.js");
 __webpack_require__("./resources/assets/js/frontend/global/jQuery.style.switcher.js");
 __webpack_require__("./resources/assets/js/frontend/global/sticky-kit.min.js");
@@ -42113,6 +42117,10 @@ __webpack_require__("./resources/assets/js/frontend/global/jquery.easy-autocompl
 __webpack_require__("./resources/assets/js/frontend/global/jquery.dataTables.min.js");
 __webpack_require__("./resources/assets/js/frontend/global/parsley.js");
 
+/*
+custom js files
+ */
+
 __webpack_require__("./resources/assets/js/frontend/app/custom.min.js");
 __webpack_require__("./resources/assets/js/frontend/app/createBird.js");
 __webpack_require__("./resources/assets/js/frontend/app/indexBird.js");
@@ -42121,6 +42129,7 @@ __webpack_require__("./resources/assets/js/frontend/app/specieModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/birdModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/nestlingModale.js");
 __webpack_require__("./resources/assets/js/frontend/app/eggsIndex.js");
+__webpack_require__("./resources/assets/js/frontend/app/hatchingsIndex.js");
 __webpack_require__("./resources/assets/js/frontend/app/coupleIndex.js");
 
 /*
@@ -42314,17 +42323,7 @@ $(document).ready(function () {
 
     var table = $('#couplesTable').DataTable({
         "lengthMenu": [5, 10, 25],
-        responsive: {
-            details: {
-                renderer: function renderer(api, rowIdx, columns) {
-                    var data = $.map(columns, function (col, i) {
-                        return col.hidden ? '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' + '<td>' + col.title + ':' + '</td> ' + '<td>' + col.data + '</td>' + '</tr>' : '';
-                    }).join('');
-
-                    return data ? $('<table/>').append(data) : false;
-                }
-            }
-        },
+        responsive: true,
         colReorder: true,
         language: {
 
@@ -42373,7 +42372,7 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function (group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="8">' + group + '</td> </tr>');
                     last = group;
                 }
             });
@@ -42906,7 +42905,7 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function (group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="8">' + group + '</td> </tr>');
                     last = group;
                 }
             });
@@ -42943,7 +42942,7 @@ $('#newEggModal').on('show.bs.modal', function (event) {
 });
 
 $('#btnAddEgg').on('click', function () {
-    alert('click');
+
     $('.idCoupleGroupe').toggle();
     $('.selectCoupleGroupe').toggle();
     $('#selectCouple').prop('required');
@@ -42996,6 +42995,7 @@ $("button[name='hatchNotCheck']").click(function () {
 });
 
 $('.returnHatBtnEggCard').on('click', function () {
+
     var id = $(this).attr('id').substr(3);
     console.log('return: ', id);
     $('#bnc' + id).toggle();
@@ -43020,6 +43020,7 @@ function updateFertility(id, data) {
 }
 
 $('.birdHatchedCheck').on('click', function () {
+    $(this).attr('disabled', 'disabled');
     var id = $(this).attr('id').substr(3);
     console.log(id);
     updateHatching(id, 'hatched');
@@ -43060,18 +43061,18 @@ function updateHatching(id, data) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/frontend/app/indexBird.js":
+/***/ "./resources/assets/js/frontend/app/hatchingsIndex.js":
 /***/ (function(module, exports) {
 
 
-$(document).ready(function () {
-    console.log('indexBird');
 
-    var table = $('#example').DataTable({
-        "lengthMenu": [5, 10, 25, 50, 100],
+$(document).ready(function () {
+    console.log('hatchingsIndex');
+
+    var table = $('#hatchingsTable').DataTable({
+        "lengthMenu": [5, 10, 25],
         responsive: true,
         colReorder: true,
-        columnDefs: [{ responsivePriority: 1, targets: 0, "width": "10%", "orderable": false }, { responsivePriority: 1, targets: 1, "width": "25%" }, { responsivePriority: 2, targets: 2, "visible": false }, { responsivePriority: 2, targets: 3, "width": "20%" }, { responsivePriority: 2, targets: 4, "width": "15%" }, { responsivePriority: 3, targets: 5, "width": "15%" }, { responsivePriority: 3, targets: 6, "width": "10%" }, { responsivePriority: 4, targets: 7, "width": "10%" }, { responsivePriority: 1, targets: 8, "orderable": false }],
         language: {
 
             "sProcessing": "Traitement en cours...",
@@ -43104,9 +43105,106 @@ $(document).ready(function () {
         },
         "autoWidth": false,
 
-        // "columnDefs": [
-        //     {"visible": false, "targets": [2,8]},
-        // ],
+        "columnDefs": [{ "targets": 0, "orderable": false }, { "targets": 1 }, { "targets": 2, 'visible': false }, { "targets": 3 }, { "targets": 4, "data": "status", "orderable": false, 'visible': false }, { "targets": 5 }, { "targets": 6 }, { "targets": 7 }, { "targets": 8 }, { "targets": 9 }, { "targets": 10 }, { "targets": 11 }, { "targets": 12 }],
+
+        "order": [[1, 'asc'], [3, 'asc']],
+        "displayLength": 10,
+        "drawCallback": function drawCallback(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var last = null;
+
+            api.column(2, {
+                page: 'current'
+            }).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="12">' + group + '</td> </tr>');
+                    last = group;
+                }
+            });
+        }
+    });
+
+    //Order by the grouping
+    //  $('#hatchingsTable tbody').on('click', 'tr.group', function() {
+    //      var currentOrder = table.order()[0];
+    //      if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+    //          table.order([2, 'desc']).draw();
+    //      } else {
+    //          table.order([2, 'asc']).draw();
+    //      }
+    //  });
+    //  table.columns.adjust().draw();
+
+    searStatus(table, 'still');
+});
+
+$('input[type=radio][name=status]').change(function (data) {
+    var table = $('#hatchingsTable').DataTable();
+
+    var val = this.value;
+    searStatus(table, val);
+});
+
+function searStatus(table, val) {
+    if (val == 'still') {
+        table.column(4).search('1').draw();
+    } else if (val == 'finish') {
+        table.column(4).search('0').draw();
+    } else {
+        table.column(4).search('').draw();
+    }
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/frontend/app/indexBird.js":
+/***/ (function(module, exports) {
+
+var birdsList = void 0;
+var table = void 0;
+$(document).ready(function () {
+    console.log('indexBird');
+
+    table = $('#birdsIndex').DataTable({
+        "lengthMenu": [5, 10, 25, 50, 100],
+        responsive: true,
+        colReorder: true,
+        columnDefs: [{ "defaultContent": "", "targets": "_all" }, { responsivePriority: 1, "data": "none", targets: 0, "orderable": false }, { responsivePriority: 1, "data": "id", targets: 1 }, { responsivePriority: 2, "data": "speciesName", targets: 2, "visible": false }, { responsivePriority: 2, "data": "personal_id", targets: 3 }, { responsivePriority: 2, "data": "sexe", targets: 4 }, { responsivePriority: 2, "data": "dateOfBirth", targets: 5 }, { responsivePriority: 3, "data": "idNum", targets: 6 }, { responsivePriority: 3, "data": "status", targets: 7 }, { responsivePriority: 4, "data": "disponibility", targets: 8 }, { responsivePriority: 1, "data": "button", targets: 9, "orderable": false }],
+        language: {
+
+            "sProcessing": "Traitement en cours...",
+            "sSearch": Lang.get('labels.frontend.table.sSearch'),
+            "sLengthMenu": Lang.get('labels.frontend.table.sLengthMenu'),
+            "sInfo": Lang.get('labels.frontend.table.sInfo'),
+            "sInfoEmpty": Lang.get('labels.frontend.table.sInfoEmpty'),
+            "sInfoFiltered": Lang.get('labels.frontend.table.sInfoFiltered'),
+            "sInfoPostFix": "",
+            "sLoadingRecords": Lang.get('labels.frontend.table.sLoadingRecords'),
+            "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+            "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sPrevious": "Pr&eacute;c&eacute;dent",
+                "sNext": "Suivant",
+                "sLast": "Dernier"
+            },
+            "oAria": {
+                "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+            },
+            "select": {
+                "rows": {
+                    _: "%d lignes séléctionnées",
+                    0: "Aucune ligne séléctionnée",
+                    1: "1 ligne séléctionnée"
+                }
+            }
+        },
+        "autoWidth": false,
+
         "order": [[2, 'asc']],
         "displayLength": 25,
         "drawCallback": function drawCallback(settings) {
@@ -43119,14 +43217,14 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function (group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                    $(rows).eq(i).before('<tr class="group"><td colspan="10">' + group + '</td></tr>');
                     last = group;
                 }
             });
         }
     });
     // Order by the grouping
-    $('#example tbody').on('click', 'tr.group', function () {
+    $('#birdsIndex tbody').on('click', 'tr.group', function () {
         var currentOrder = table.order()[0];
         if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
             table.order([2, 'desc']).draw();
@@ -43135,7 +43233,20 @@ $(document).ready(function () {
         }
     });
     table.columns.adjust().draw();
+
+    getBirdsList();
+
+    console.log('birdsList');
 });
+
+function getBirdsList() {
+
+    $.get('/ajax/getBirdsList', function (data) {
+        console.log(data);
+        birdsList = data;
+    });
+    //
+}
 
 $('#btnBlock').on('click', function () {
     console.log('btnblock');
@@ -43145,9 +43256,90 @@ $('#btnBlock').on('click', function () {
 
 $('#btnList').on('click', function () {
     console.log('btnList');
+    $('.TableFilter').fadeToggle();
     $('#displayBlock').fadeToggle();
     $('#displayList').fadeToggle();
 });
+
+$('#toolBar select').on('change', function () {
+    console.log('select', $(this).val());
+    var table = $('#' + $(this).data('table')).DataTable();
+    var column = $(this).data('column');
+    console.log('table: ', $(this).data('table'));
+    console.log('column: ', column);
+    if ($(this).val() === '') {
+        table.column(column).search($(this).val()).draw();
+
+        $(this).val('0').prop('selected', true);
+    } else {
+
+        table.column(column).search($(this).val()).draw();
+    }
+});
+//
+// $.fn.dataTable.ext.search.push(
+//     function( settings, data, dataIndex ) {
+//         var min = parseInt( $('#start').val(), 10 );
+//         var max = parseInt( $('#end').val(), 10 );
+//         var age = parseFloat( data[4] ) || 0; // use data for the age column
+//
+//         if ( ( isNaN( min ) && isNaN( max ) ) ||
+//             ( isNaN( min ) && age <= max ) ||
+//             ( min <= age   && isNaN( max ) ) ||
+//             ( min <= age   && age <= max ) )
+//         {
+//             return true;
+//         }
+//         return false;
+//     }
+// );
+//
+// $(document).ready(function() {
+//     var table = $('#birdsIndex').DataTable();
+//
+//     // Event listener to the two range filtering inputs to redraw on input
+//     $('#start, #end').keyup( function() {
+//         table.draw();
+//     } );
+// } );
+
+// Date Picker
+jQuery('#min').datepicker({
+    format: 'dd/mm/yyyy',
+    endDate: '+1d',
+    weekStart: '1',
+    "onSelect": function onSelect(date) {
+        minDateFilter = new Date(date).getTime();
+        table.fnDraw();
+    }
+    // language:'fr'
+});
+//
+// $(document).ready(function () {
+//        $.fn.dataTable.ext.search.push(
+//           function (settings, data, dataIndex) {
+//         var min = $('#min').datepicker("getDate");
+//         var max = $('#max').datepicker("getDate");
+//         var startDate = new Date(data[5]);
+//         if (min == null && max == null) { return true; }
+//         if (min == null && startDate <= max) { return true;}
+//         if(max == null && startDate >= min) {return true;}
+//         if (startDate <= max && startDate >= min) { return true; }
+//         return false;
+//     }
+//     );
+//
+//
+//         $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//         $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//
+//         var table = $('#birdsIndex').DataTable();
+//
+//         // Event listener to the two range filtering inputs to redraw on input
+//         $('#min, #max').change(function () {
+//             table.draw();
+//         });
+//     });
 
 /***/ }),
 
@@ -43162,7 +43354,7 @@ $(document).ready(function () {
         "lengthMenu": [5, 10, 25, 50, 100],
         responsive: true,
         colReorder: true,
-        columnDefs: [{ responsivePriority: 1, targets: 0, "width": "10%", "orderable": false }, { responsivePriority: 1, targets: 1, "width": "25%" }, { responsivePriority: 2, targets: 2, "visible": false }, { responsivePriority: 2, targets: 3, "width": "20%" }, { responsivePriority: 2, targets: 4, "width": "15%" }, { responsivePriority: 3, targets: 6, "width": "10%" }],
+        columnDefs: [{ responsivePriority: 1, targets: 0, "orderable": false }, { responsivePriority: 1, targets: 1 }, { responsivePriority: 2, targets: 2, "visible": false }, { responsivePriority: 2, targets: 3 }, { responsivePriority: 2, targets: 4 }, { responsivePriority: 3, targets: 6 }],
         language: {
 
             "sProcessing": "Traitement en cours...",
@@ -43195,10 +43387,7 @@ $(document).ready(function () {
         },
         "autoWidth": false,
 
-        // "columnDefs": [
-        //     {"visible": false, "targets": [2,8]},
-        // ],
-        "order": [[2, 'asc']],
+        "order": [[2, 'asc'], [1, 'asc']],
         "displayLength": 25,
         "drawCallback": function drawCallback(settings) {
             var api = this.api();
@@ -43210,7 +43399,7 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function (group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                    $(rows).eq(i).before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
                     last = group;
                 }
             });
@@ -43228,19 +43417,45 @@ $(document).ready(function () {
     table.columns.adjust().draw();
 });
 
-// $('#btnBlock').on('click',function () {
-//     console.log('btnblock');
-//     $('#displayBlock').fadeToggle();
-//     $('#displayList').fadeToggle();
-//
-// });
-//
-// $('#btnList').on('click',function () {
-//     console.log('btnList');
-//     $('#displayBlock').fadeToggle();
-//     $('#displayList').fadeToggle();
-//
-// });
+$('.outOfNestBtn').on('click', function () {
+    $(this).attr('disabled', 'disabled');
+    var id = $(this).attr('id').substr(3);
+    setNestlingOutOfNest(id);
+});
+
+function setNestlingOutOfNest(id) {
+    $.get('/ajax/moveOutOfNest?id=' + id, function (data) {
+        alert('job Done');
+        location.reload();
+    });
+    //
+}
+
+$('.setDeadBtn').on('click', function () {
+    console.log($(this).attr('id'));
+    var id = $(this).attr('id').substr(3);
+
+    $('.nestBtn' + id).fadeToggle();
+});
+
+$('.returnDeadBtnNestTab').on('click', function () {
+    console.log($(this).attr('id'));
+    var id = $(this).attr('id').substr(3);
+
+    $('.nestBtn' + id).fadeToggle();
+});
+
+$('.selectWhyDead').on('change', function () {
+    var id = $(this).attr('id').substr(3);
+    var val = $(this).val();
+    if (confirm(Lang.get('alerts.frontend.confirm.whyDead'))) updateNestling(id, val);
+});
+
+function updateNestling(id, val) {
+    $.get('/ajax/setDead?id=' + id + '&reason=' + val, function (data) {
+        location.reload();
+    });
+}
 
 /***/ }),
 

@@ -11,6 +11,8 @@ class Hatching extends Model
 
     protected $table = 'Hatchings';
     public $timestamps = true;
+    protected $dates = ['created_at', 'updated_at'];
+
 
     public function couple()
     {

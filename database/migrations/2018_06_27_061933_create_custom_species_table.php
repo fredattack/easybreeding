@@ -8,7 +8,7 @@ class CreateCustomSpeciesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *todo updates all migrations
      * @return void
      */
     public function up()

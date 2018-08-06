@@ -3,11 +3,15 @@
 * Import jsFiles for app side
 *
  */
-
+/* global dep
+ */
 require('../global/jquery.min.js');
 require('../global/popper.min.js');
 require('../global/bootstrap.js');
 
+/*
+.plugins
+ */
 require('../global/jquery.sparkline.min');
 require('../global/jQuery.style.switcher');
 require('../global/sticky-kit.min');
@@ -19,7 +23,9 @@ require('../global/jquery.easy-autocomplete');
 require('../global/jquery.dataTables.min');
 require('../global/parsley');
 
-
+/*
+custom js files
+ */
 
 require('./custom.min.js');
 require('./createBird.js');
@@ -29,6 +35,7 @@ require('./specieModale');
 require('./birdModale');
 require('./nestlingModale');
 require('./eggsIndex');
+require('./hatchingsIndex');
 require('./coupleIndex');
 
 /*

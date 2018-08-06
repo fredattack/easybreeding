@@ -131,20 +131,18 @@ button:disabled{
     display: none;
   }
 
-  .newBirdBlock,.newSpecieBlock,.specieBlock{
-    padding: 1em 1em;
-    border: 1px solid #dedede;
-    border-radius: 4px;
-    margin-bottom: 1em;
-    transition: 2s;
-  }
+.newBirdBlock,.newSpecieBlock,.specieBlock{
+  padding: 1em 1em;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  transition: 2s;
+}
 
 
 .specieTitle{
   padding: 1em 0;
 }
-
-
 
 .zoneTable{
   padding-left: auto;
@@ -162,36 +160,36 @@ button:disabled{
   font-weight: 500;
 }
 
-table#couplesTable tr td:first-child{
-@media(max-width:500px) {
-  font-size: 13px;
+
+#couplesTable > tbody > tr > td{
+  text-align: center;
+  line-height: 3em;
+  //width:100%;
+  //display: inline-grid;
 }
-  text-align: left;
-  padding-left: 2em;
-
-}
-
-
 table#couplesTable tr.odd,table#couplesTable tr.even {
   height: 4em;
-
 }
+
+
+
 
 #couplesTable > tbody > tr > td:nth-child(2),
 #couplesTable > tbody > tr > td:nth-child(9),
 #couplesTable > tbody > tr > td:nth-child(6),
 #couplesTable > tbody > tr > td:nth-child(7),
-#example > tbody > tr > td:nth-child(1){
-      line-height: 4em;
-    text-align: center;
-@media(max-width:500px) {
-  font-size: 75%;
+//#birdsIndex > tbody > tr > td:nth-child(1),
+#birdsIndex > tbody > tr > td:nth-child(2){
+  line-height: 4em;
+  text-align: center;
+    @media(max-width:500px) {
+      //font-size: 12px;
+    }
 }
-}
-
-#nestlingTable > tbody > tr {
-      line-height: 3em;
-    text-align: center;
+//.card-body
+#nestlingTable > tbody > tr,#birdsIndex > tbody > tr {
+  height: 4em;
+  text-align: center;
 
 }
 #couplesTable > tbody > tr > td:nth-child(7){
@@ -234,5 +232,45 @@ $greyborder : rgba(0, 0, 0, 0.1);
   margin-left: 3em;
 }
 
+.returnDeadBtnNestTab{
+  display:none;
+}
 
+.selectWhyDead{
+  display:none;
+  width:50%;
+}
 
+#birdsIndex > tbody > tr.child > td > ul > li:nth-child(7) > span.dtr-title{
+  display: none;
+}
+#birdsIndex button,#nestlingTable button,#couplesTable button{
+  margin : 0 1em;
+  i{
+    font-size: 20px;
+  }
+}
+#birdsIndex > tbody > tr.child > td > ul > li,
+#couplesTable > tbody > tr.child > td > ul > li,
+#eggsTable > tbody > tr.child > td > ul > li,
+#nestlingTable > tbody > tr.child > td > ul > li{
+  @media(max-width:600px){
+    display:inline-grid;
+    width: 100%;
+  }
+}
+
+#birdsIndex > tbody > tr > td,
+#couplesTable > tbody > tr > td:nth-child(1),
+#couplesTable > tbody > tr > td:nth-child(2),
+#couplesTable > tbody > tr > td:nth-child(5),
+#couplesTable > tbody > tr > td:nth-child(6) {
+  vertical-align: middle;
+}
+#birdsIndex > tbody > tr.group,
+#eggsTable > tbody > tr.group,
+#nestlingTable > tbody > tr.group,
+#hatchingsTable > tbody > tr.group,
+#couplesTable > tbody > tr.group{
+  Background:#EDF4F8;
+}

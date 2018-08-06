@@ -21,6 +21,8 @@ $.grayLighter =   '#d1d4d7';
 $.grayLightest =  '#f8f9fa';
 
 'use strict';
+require('before');
+require('after');
 
 /****
  * MAIN NAVIGATION

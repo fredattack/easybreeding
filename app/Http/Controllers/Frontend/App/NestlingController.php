@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\App;
 use App\Specie;
 use App\Nestling;
 use App\Couple;
+use App\Bird;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class NestlingController extends Controller
 
         $data=app('App\Http\Controllers\Frontend\App\BirdsController')->getRightSpecies($nestlings);
 
-        $couples = Couple::where('userId', Auth::id())->get();
+        $couples=Couple::getAllOfUser();
 
         return view('frontend.app.nestling.nestlingsIndex',compact(['nestlings','data','couples']));
     }
@@ -31,10 +32,6 @@ class NestlingController extends Controller
     public function getNestling(){
         $id = Input::get('id');
         $nestling = Nestling::where('id','=',$id)->first();
-//        $date=Carbon::createFromDate($nestling->dateOfBirth);
-//        $date=Carbon::createFromFormat('m/d/Y', $nestling->dateOfBirth);
-//        $date=($nestling->dateOfBirth)->toDateString();;
-//        $nestling->dateOfBirth=$date;
         $specie = Specie::where('id','=',$nestling->species_id)->first();
         $data=[$nestling,$specie];
         return response()->json($data);
@@ -58,17 +55,42 @@ class NestlingController extends Controller
     }
 
     public function update(Request $request){
-//    dd($request);
-
-       if( Nestling::where( 'id', $request->id)->update([
-                            'sexe' => $request->sexe,
-                            'sexingMethod' => $request->sexingMethod,
-                            'dateOfBirth' => $request->dateOfBirth,
-                            'idType' => $request->idType,
-                            'idNum' => $request->idNum,
-                            'personal_id' => $request->personal_id,
-                            ]))return 'true';
+    if( Nestling::updateModel($request))return 'true';
        else return 'error';
+
+    }
+
+    public function moveOutOfNest()
+    {
+        $id = Input::get('id');
+        $nestling = Nestling::getModel($id);
+        Log:info('authId: '.Auth::id());
+        $newBird = Bird::create([
+            'sexe'         => $nestling['sexe'],
+            'sexingMethode' => $nestling['sexingMethod'],
+            'origin' => 'thisElevage',
+            'personal_id'=> $nestling['personal_id'],
+            'idType'=> $nestling['idType'],
+            'disponibility'=> 'disponible',
+            'status'=> 'single',
+            'idNum'   => $nestling['idNum'],
+            'species_id'   => $nestling['species_id'],
+            'father_id'    => $nestling['maleId'],
+            'dateOfBirth'    => $nestling['dateOfBirth'],
+            'mother_id'    => $nestling['femaleId'],
+            'couple_id'    => $nestling['customId'],
+            'userId'       => Auth::id()
+        ]);
+        Nestling::setOutOfNest($id);
+        return 'done';
+    }
+
+    public function setDead()
+    {
+        $id = Input::get('id');
+        $reason= Input::get('reason');
+
+        if(Nestling::setDead($id,$reason)) return 'done';
 
     }
 

@@ -38,7 +38,7 @@ class BirdsController extends Controller
         $data=$this->getRightSpecies($birds);
 
         $customSpecies= (array)$this->getUsersSpecies();
-
+//dd($customSpecies);
         return view('frontend.app.bird.birdsIndex',compact(['data','customSpecies']));
     }
 
@@ -236,16 +236,7 @@ class BirdsController extends Controller
         return $request->id;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
 
-    }
     public function generateFamillies(){
         $orderId = Input::get('orderId');
         $famillies = Famille::where('orderId','=',$orderId)->get();
@@ -275,6 +266,13 @@ class BirdsController extends Controller
         return response()->json($data);
     }
 
+    public function getBirdsList()
+    {
+        Log::info('in getBirdsList');
+        $data=Bird::getAllofUser();
+        Log::info($data);
+        return response()->json($data);
+    }
 
 
     public function editCustomSpecie($id)

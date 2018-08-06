@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\App;
 
+use App\Couple;
 use App\Hatching;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,8 +18,12 @@ class HatchingController extends Controller
    */
   public function index()
   {
-    $hatchings=Hatching::with('couple')->get();
-    dd($hatchings);
+    $hatchings=Hatching::with(['couple','eggs'])->orderBy('status','desc')->get();
+//dd($hatchings);
+    $couples=Couple::getAllOfUser();
+    $customSpecies = app('App\Http\Controllers\Frontend\App\BirdsController')->getUsersSpecies();
+
+    return view('frontend.app.hatching.hatchingsIndex',compact(['hatchings','couples','customSpecies']));
   }
 
   /**

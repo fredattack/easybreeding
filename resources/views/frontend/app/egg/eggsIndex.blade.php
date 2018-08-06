@@ -52,31 +52,10 @@
                         <!--region ToolBar-->
                         <div class="row">
                             <div class="col-12" id="toolBar">
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                       <div class="row">
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnList">
-                                                    <i class="fa fa-th-list"></i>
-                                               </button>
-
-                                               <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayBlock')}}" data-placement="bottom" id="btnBlock">
-                                                    <i class="fa  fa-th-large"></i>
-                                               </button>
-
-                                       </div>
-                                    </div>
-                                <div class="col-md-3"></div>
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-3">
-                                        <span >
-                                            <a href="#" class="btn btn-circle btn-lg btn-success pull-right" id="btnAddEgg" data-toggle="modal" data-target="#newEggModal" title="{{__('alerts.frontend.addEgg')}}" data-placement="bottom">
-                                                <i class="fa fa-plus" data-toggle="tooltip"  title="{{__('alerts.frontend.addEgg')}}" data-placement="bottom"></i>
-                                            </a>
-                                        </span>
-
-                                    </div>
-                                </div>
+                                <?php $type = "eggs";
+                                $table='eggsTable';
+                                $customSpecies=$speciesHatchings?>
+                                @include('frontend.component.app.toolBar',[$customSpecies,$couples,$type,$table])
                             </div>
                         </div>
                         <!--endregion-->
@@ -96,7 +75,7 @@
                             @if(count($eggs)!=0)
                             <div id="displayList">
                                 {{--<div class="">--}}
-                                    <table id="eggsTable" class="table display table-bordered" data-filtering="true" data-paging="true" >
+                                    <table id="eggsTable" class="table" data-filtering="true" data-paging="true" >
                                         <thead>
                                             <tr>
                                                 <th data-priority = "1"></th>
@@ -117,14 +96,25 @@
 
                                         <tr>
                                             <td></td>
-                                            <td><span data-toggle="tooltip"  title="{{__('alerts.frontend.coupleHistory')}}">
-                                                    <button  id="showBirdBtn{{$egg->hatching->couple->customId}}" type="button" class="btn btn-small btn-circle btn-table"
-                                                             data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$egg->hatching->couple->customId}}" >
-                                                        <i class="mdi mdi-book-open-variant"></i>
-                                                    </button>
-                                                </span>
-                                                <span class="specieName">{{$egg->hatching->couple->customId}}
-                                                    ({{$speciesHatchings[$egg->hatching->couple->specieId]}})</span>
+                                            <td>
+                                                <div class="tableGroup">
+                                                    <div data-toggle="tooltip"  title="{{__('alerts.frontend.coupleHistory')}}">
+                                                        <button  id="showBirdBtn{{$egg->hatching->couple->customId}}" type="button" class="btn btn-lg btn-circle btn-table"
+                                                                 data-placement="bottom" data-toggle="modal" data-target="#birdModal"   value="{{$egg->hatching->couple->customId}}" >
+                                                            <i class="mdi mdi-book-open-variant"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="d-20"><h2>{{$egg->hatching->couple->customId}}</h2></div>
+                                                    <div class="specieName">
+                                                         <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
+                                                            <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-lg btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$egg->hatching->couple->specieId}}">
+                                                                <i class="mdi  mdi-eye"></i>
+                                                            </button>
+                                                        </span>
+                                                      <small>({{($egg->hatching->couple->specie==null)? $egg->hatching->couple->customSpecie->commonName : $egg->hatching->couple->specie->commonName }})</small>
+
+                                                    </div>
+                                                </div>
                                             </td>
 {{--                                            <td>{{$egg->hatching->couple->customId}}</td>--}}
                                             <td ></td>
@@ -181,11 +171,11 @@
                                                    <option value="fertilized" >@lang('labels.frontend.eggs.fertilized')</option>
                                                    <option value="white">@lang('labels.frontend.eggs.white')</option>
                                                    <option value="deadInEgg">@lang('labels.frontend.eggs.deadInEgg')</option>
-                                                   <option value="damaged">@lang('labels.frontend.eggs.damaged')</option>
-                                               </select>
+                                                    <option value="abandoned">@lang('labels.frontend.eggs.abandoned')</option>
+                                                    <option value="damaged">@lang('labels.frontend.eggs.damaged')</option>
+                                                </select>
                                                 <select class="form-control custom-select selectWhyNotHatched" id='swn{{$egg->id}}' name="state" required>
-                                                   <option value="" disabled selected>@lang('labels.frontend.eggs.selectReasonNotHatched')</option>
-                                                    <option value="unknow" >@lang('labels.frontend.birds.unknow')</option>
+                                                    <option value="" disabled selected>@lang('labels.frontend.eggs.selectReasonNotHatched')</option>
                                                     <option value="deadInEgg">@lang('labels.frontend.eggs.deadInEgg')</option>
                                                     <option value="abandoned">@lang('labels.frontend.eggs.abandoned')</option>
                                                     <option value="damaged">@lang('labels.frontend.eggs.damaged')</option>
@@ -216,19 +206,19 @@
                             <div id="displayBlock">
 
 
-                                    @foreach($speciesHatchings as $k=>$v)
+                                    @foreach($speciesHatchings as $speciesHatching)
                                 <div class="row specieTitle">
                                                 <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
                                                     <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-large btn-circle btn-table "
-                                                            data-toggle="modal" data-target="#specieModal" value="{{$k}}">
+                                                            data-toggle="modal" data-target="#specieModal" value="{{$speciesHatching['id']}}">
                                                         <i class="mdi  mdi-eye"></i>
                                                     </button>
                                                 </span>
-                                                <h2>{{$v}}</h2>
+                                                <h2>{{$speciesHatching['name']}}}</h2>
                                 </div>
 
                                      @foreach($couples as $couple)
-                                         @if($couple->specieId==$k)
+                                         @if($couple->specieId==$speciesHatching['id'])
                                             <div class="row coupleTitle">
                                                 <div data-toggle="tooltip"  data-placement="bottom" title="{{__('alerts.frontend.coupleHistory')}}">
                                                     <button  id="showBirdBtn{{$egg->hatching->couple->customId}}" type="button" class="btn btn-large btn-circle btn-table"

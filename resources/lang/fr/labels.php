@@ -169,7 +169,8 @@ return [
             'birthDate' => 'Date de Naissance',
             'age' => 'Age',
             'idType' => "Type d'identifiant",
-            'idPerso' => 'Identifiant Personnel',
+            'idPerso' => 'Id Perso',
+            'id' => 'Identifiant',
             'idNummer' => "Numéro d'identifiant",
             'origin' => "Origine",
             'status' => 'Status',
@@ -220,6 +221,16 @@ return [
             'selectMale'=>'Choisissez un Mâle',
             'selectFemale'=>'Choisissez une Femelle',
             'selectCouple'=>'Choisissez un Couple',
+            'filterBySpecie'=>'Filtrer par Espèce',
+            'filterByStatus'=>'Filtrer par Status',
+            'filterByCouple'=>'Filtrer par Couple',
+            'filterByDisponibility'=>'Filtrer par Disponibilité',
+            'filterBySexe'=>'Filtrer par Sexe',
+            'all'=>'Tout',
+            'filterByMale'=>'Filtrez par Mâle',
+            'filterByFemale'=>'Filtrez par femelle',
+
+
 
 
         ],
@@ -247,7 +258,29 @@ return [
             "selectReasonNotHatched" => "Cause",
             "hatched" => "Ėclos",
             "hatching" => "Ėclosion",
+            "eatByParent" => "Mangé par les parents"
 
+        ],
+        'hatchings'=>[
+            'start'=>'Debut',
+            'end'=>'Fin',
+            'status' => 'status',
+            'still'=>'En cours',
+            'finish'=>'Terminées',
+            'eggsCount'=>'Nbr. Oeufs',
+            'whiteCount'=>'Oeufs Blanc',
+            'flabbyCount'=>'Oeufs mou',
+            'brokenCount'=>'Oeufs cassé',
+            'hatchedCount'=>'Oeufs éclos',
+            'deadCount'=>'Mort Dans l\'oeuf',
+            'abandonedCount'=>'Abandonné par les parents',
+            'eatCount'=>'Tué par les parents',
+        ],
+        'ZoneAndCage'=>[
+            'name' => 'Nom',
+            'long' => 'Longueur',
+            'large' => 'Largeur',
+            'height' => 'Hauteur'
         ],
         'table'=>[
                 "sProcessing" =>    "Traitement en cours...",

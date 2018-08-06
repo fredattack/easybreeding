@@ -13,27 +13,38 @@
         <hr>
         <div class="row">
 
-            <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
-                <button  id="showBirdBtn{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table"   data-placement="bottom" data-toggle="modal" data-target="#nestlingModal"   value="{{$nestling->id}}" >
+              <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBird')}}">
+                <button  id="shc{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table {{'nestBtn'.$nestling->id}}"   data-placement="bottom" data-toggle="modal" data-target="#nestlingModal"   value="{{$nestling->id}}" >
                     <i class="mdi mdi-linux"></i>
                 </button>
             </span>
 
-             <span data-toggle="tooltip"  title="{{__('alerts.frontend.nestlingDead')}}" data-placement="bottom">
-                <button href="#" id="setDeadBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+            <span data-toggle="tooltip"  title="{{__('alerts.frontend.nestlingDead')}}" data-placement="bottom">
+                <button href="#" id="sdc{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table nestBtn{{$nestling->id}} setDeadBtn"   value="{{$nestling->id}}">
                     <i class="mdi  mdi-close-outline"></i>
                 </button>
             </span>
-
             <span data-toggle="tooltip"  title="{{__('alerts.frontend.outOfNest')}}" data-placement="bottom">
-                <button href="#" id="outOfNestBtn" type="button" class="btn btn-small btn-circle btn-table "   value="{{$nestling->id}}">
+                <button href="#" id="ooc{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table nestBtn{{$nestling->id}} outOfnestBtn{{$nestling->id}}"   value="{{$nestling->id}}">
                     <i class="mdi  mdi-inbox"></i>
                 </button>
             </span>
 
             <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewSpecie')}}" data-placement="bottom">
-                <button href="#" id="showSpecieBtnIndex" type="button" class="btn btn-lg btn-circle btn-table "  data-toggle="modal" data-target="#specieModal" value="{{$couple['specieId']}}">
+                <button href="#" id="ssc{{$nestling->id}}" type="button" class="btn btn-lg btn-circle btn-table nestBtn{{$nestling->id}} "  data-toggle="modal" data-target="#specieModal" value="{{$couple['specieId']}}">
                     <i class="mdi  mdi-eye"></i>
+                </button>
+            </span>
+
+            <select class="form-control custom-select selectWhyDead deadBtn nestBtn{{$nestling->id}}" id='swc{{$nestling->id}}' name="state" required>
+                <option value="" disabled selected>@lang('labels.frontend.eggs.selectReasonNotHatched')</option>
+                <option value="unknow" >@lang('labels.frontend.birds.unknow')</option>
+                <option value="eatByParent">@lang('labels.frontend.eggs.eatByParent')</option>
+                <option value="abandoned">@lang('labels.frontend.eggs.abandoned')</option>
+            </select>
+            <span title="{{__('alerts.frontend.goBack')}}" class="deadBtn" data-toggle="tooltip" data-placement="bottom">
+                <button class="btn btn-circle btn-lg btn-table returnDeadBtnNestTab deadBtn nestBtn{{$nestling->id}}" id="rec{{$nestling->id}}" >
+                    <i class="fa fa-rotate-left"></i>
                 </button>
             </span>
         </div>
@@ -52,7 +63,7 @@
 
             <div class="row">
                   <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewBirdDetails')}}">
-                    <button  id="showBirdBtn" type="button" class="btn btn-small btn-circle btn-table btCardPlus"   value="{{preg_replace('/[^A-Za-z0-9\-]/', '', $nestling->id)}}" >
+                    <button  id="showBirdBtn" type="button" class="btn btn-lg btn-circle btn-table btCardPlus"   value="{{preg_replace('/[^A-Za-z0-9\-]/', '', $nestling->id)}}" >
                         <i class="fa fa-plus"></i>
                     </button>
                  </span>

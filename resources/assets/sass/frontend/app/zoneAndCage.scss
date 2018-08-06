@@ -1,0 +1,25 @@
+.zoneAndCageCard{
+  .lineZone{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-main{
+    background: #f62d51;
+    ///* border-color: #1976d2; */
+  }
+
+  //.infoCard{
+  //  width: 45%;
+  //}
+
+  .card-customDark{
+    background: #272c33;
+
+  }
+  input{
+    width: 150px ;
+  }
+}

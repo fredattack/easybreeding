@@ -7,12 +7,12 @@ $(document).ready(function() {
         responsive:true,
         colReorder: true,
         columnDefs: [
-        { responsivePriority: 1, targets: 0 ,"width": "10%", "orderable": false},
-        { responsivePriority: 1, targets: 1 ,"width": "25%" },
+        { responsivePriority: 1, targets: 0 , "orderable": false},
+        { responsivePriority: 1, targets: 1 },
         { responsivePriority: 2, targets: 2,"visible":false },
-        { responsivePriority: 2, targets: 3 ,"width": "20%" },
-        { responsivePriority: 2, targets: 4 ,"width": "15%" },
-        { responsivePriority: 3, targets: 6,"width": "10%" },
+        { responsivePriority: 2, targets: 3 },
+        { responsivePriority: 2, targets: 4 },
+        { responsivePriority: 3, targets: 6},
     ],
         language: {
 
@@ -46,11 +46,8 @@ $(document).ready(function() {
     },
         "autoWidth": false,
 
-        // "columnDefs": [
-        //     {"visible": false, "targets": [2,8]},
-        // ],
         "order": [
-            [2, 'asc']
+            [2, 'asc'],[1, 'asc']
         ],
         "displayLength": 25,
         "drawCallback": function(settings) {
@@ -63,7 +60,7 @@ $(document).ready(function() {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                    $(rows).eq(i).before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
                     last = group;
                 }
             });
@@ -81,16 +78,46 @@ $(document).ready(function() {
     table.columns.adjust().draw();
 });
 
-// $('#btnBlock').on('click',function () {
-//     console.log('btnblock');
-//     $('#displayBlock').fadeToggle();
-//     $('#displayList').fadeToggle();
-//
-// });
-//
-// $('#btnList').on('click',function () {
-//     console.log('btnList');
-//     $('#displayBlock').fadeToggle();
-//     $('#displayList').fadeToggle();
-//
-// });
+$('.outOfNestBtn').on('click',function () {
+    $(this).attr('disabled', 'disabled');
+    let id = $(this).attr('id').substr(3);
+    setNestlingOutOfNest(id)
+});
+
+function setNestlingOutOfNest(id) {
+    $.get('/ajax/moveOutOfNest?id='+id,function (data) {
+        alert('job Done');
+        location.reload();
+    });
+    //
+}
+
+$('.setDeadBtn').on('click',function () {
+    console.log($(this).attr('id'));
+    let id = $(this).attr('id').substr(3);
+
+
+    $('.nestBtn'+id).fadeToggle();
+
+
+});
+
+$('.returnDeadBtnNestTab').on('click',function () {
+    console.log($(this).attr('id'));
+    let id = $(this).attr('id').substr(3);
+
+    $('.nestBtn'+id).fadeToggle();
+
+});
+
+$('.selectWhyDead').on('change',function () {
+    let id = $(this).attr('id').substr(3);
+    let val =$(this).val();
+    if(confirm(Lang.get('alerts.frontend.confirm.whyDead')))updateNestling(id,val);
+});
+
+function updateNestling(id,val) {
+    $.get('/ajax/setDead?id='+id+'&reason='+val,function (data) {
+        location.reload()
+    });
+}

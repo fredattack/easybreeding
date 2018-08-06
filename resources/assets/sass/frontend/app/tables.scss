@@ -1,0 +1,22 @@
+table{
+  .tableGroup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+
+  #birdsIndex tr td:first-child,
+  #nestlingTable tr td:first-child,
+  #eggsTable tr td:first-child,
+  #couplesTable tr td:first-child,
+  #hatchingsTable tr td:first-child{
+    @media(max-width:500px) {
+      font-size: 13px;
+    }
+    text-align: left;
+    padding-left: 2em;
+  }
+
+
+}

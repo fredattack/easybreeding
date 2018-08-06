@@ -37,9 +37,11 @@ class CoupleController extends Controller
 
       $distinctSpecies=$this->getDistinctSpeciesOfCouples($customSpecies);
 
-      $couples=Couple::where('userId',Auth::id())->get();
+      $couples=Couple::getAllOfUser();
 
-    return view('frontend.app.couple.couplesIndex',compact(['data','customSpecies','distinctSpecies','couples']));
+      $birds=Bird::getAllofUser();
+
+    return view('frontend.app.couple.couplesIndex',compact(['data','customSpecies','distinctSpecies','couples','birds']));
   }
 
 

@@ -36,9 +36,9 @@
         <!-- Scripts -->
         @stack('before-scripts')
 
-        <script type="text/javascript" src="{{mix('js/frontend.js')}}"></script>
-        <script type="text/javascript" src="{{mix('/js/react.js')}}"></script>
-        <script type="text/javascript" src="{{mix('/message.js')}}"></script>
+        <script type="text/javascript" src="{{mix('/js/appfrontend.js')}}"></script>
+        {{--<script type="text/javascript" src="{{mix('/js/react.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('/messages.js')}}"></script>
 
         @stack('after-scripts')
 

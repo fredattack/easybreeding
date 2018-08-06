@@ -43,12 +43,14 @@ class EggController extends Controller
             foreach ($hatchings as $hatching) {
                 if ($allCustomSpecy['id'] == $hatching->couple->specieId) {
                     if (!array_has($speciesHatchings, $allCustomSpecy)) {
-                        $speciesHatchings[$allCustomSpecy['id']] = $allCustomSpecy['name'];
+                        $newhatched['id']=$allCustomSpecy['id'];
+                        $newhatched['name']=$allCustomSpecy['name'];
+                        array_push($speciesHatchings,$newhatched);
                     }
                 }
             }
         }
-
+//        dd($speciesHatchings);
         return view('frontend.app.egg.eggsIndex', compact(['eggs', 'hatchings', 'speciesHatchings', 'couples']));
 
     }

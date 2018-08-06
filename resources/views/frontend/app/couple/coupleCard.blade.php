@@ -15,7 +15,7 @@
                 {!! Form::open(array('route' => ['frontend.app.separateCouple','rtb'=>'true'], 'method' => 'get','id'=>'separateCoupleForm','onkeypress'=>"return event.keyCode != 13")) !!}
 
                 <span data-toggle="tooltip" title="{{__('alerts.frontend.separateCouple')}}" data-placement="bottom">
-                    <button class="btn btn-small btn-circle btn-table  separeCouple"   type="submit" name="coupleId" value="{{$couple->customId}}" >
+                    <button class="btn btn-lg btn-circle btn-table  separeCouple"   type="submit" name="coupleId" value="{{$couple->customId}}" >
                         <i class="mdi mdi-arrow-expand"></i>
                     </button>
                 </span>
@@ -43,7 +43,7 @@
     <div class="bottomCard">
               <div class="row">
                   <span data-toggle="tooltip"  title="{{__('alerts.frontend.viewCoupleDetails')}}">
-                    <button  id="showBirdBtn" type="button" class="btn btn-small btn-circle btn-table btCardPlus"   value="{{preg_replace('/[^A-Za-z0-9\-]/', '', $couple->customId)}}" >
+                    <button  id="showBirdBtn" type="button" class="btn btn-lg btn-circle btn-table btCardPlus"   value="{{preg_replace('/[^A-Za-z0-9\-]/', '', $couple->customId)}}" >
                         <i class="fa fa-plus"></i>
                     </button>
                  </span>

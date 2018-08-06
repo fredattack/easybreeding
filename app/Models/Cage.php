@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
 
 class Cage extends Model 
 {
@@ -14,7 +16,20 @@ class Cage extends Model
 
     public function zone()
     {
-        return $this->hasOne('App\Zone', 'idZone');
+        return $this->hasOne(Zone::class, 'idZone','id');
+
     }
+
+
+    public static function getAllOfUser()
+    {
+        $list = Cage::with(['specie','customSpecie'])
+            ->where('userId','=',Auth::id())
+            ->get();
+        return $list;
+    }
+
+
+
 
 }

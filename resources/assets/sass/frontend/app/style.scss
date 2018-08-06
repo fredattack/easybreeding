@@ -20,13 +20,16 @@ File: scss
 @import 'variable';
 @import '../global/bootstrap.min.css';
 @import '../global/app';
-@import 'pages';
+@import 'pages'; /* datatables style sheet*/
 @import 'sidebar';
 @import "_global";
 @import "/colors/global.scss";
 @import "/customMobile";
 @import "/custom";
-@import '/icons/font-awesome/css/font-awesome.min.css';
+@import "/tables";
+@import "/zoneAndCage";
+@import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
+@import "/icons/font-awesome/css/font-awesome.min.css";
 @import '/icons/simple-line-icons/css/simple-line-icons.css';
 @import '/icons/weather-icons/css/weather-icons.min.css';
 @import '/icons/linea-icons/linea.css';
@@ -37,13 +40,14 @@ File: scss
 @import '../global/grid';
 @import 'responsive';
 @import 'material';
-@import "modale.css";
+@import "modale";
+@import "toolbar";
 @import '../global/spinners.css';
 @import '../global/animate.css';
 @import '../global/bootstrap-datepicker.min.css';
 @import '../global/easy-autocomplete.css';
 @import '../global/easy-autocomplete.themes.css';
-@import '../global/jquery.dataTables.min.css';
+//@import '../global/jquery.dataTables.min.css'; last comment test if necessary
 @import '../global/datatable.responsive.css';
 @import '../global/parsley.css';
 

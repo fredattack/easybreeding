@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Bird;
+use Illuminate\Support\Facades\Auth;
 
 class Couple extends Model 
 {
@@ -12,6 +12,8 @@ class Couple extends Model
     protected $visible= ['id','created_at','updated_at','maleId','femaleId','cage_Id','separetad_id','specieId','userId','customId'];
     protected $fillable= ['id','created_at','updated_at','maleId','femaleId','cage_Id','separetad_id','specieId','userId','customId'];
     public $timestamps = true;
+    protected $dates = ['created_at', 'updated_at', 'separeted_at'];
+
 
     public function specie()
     {
@@ -35,6 +37,14 @@ class Couple extends Model
     public function cage()
     {
         return $this->hasOne('Cage');
+    }
+
+    public static function getAllOfUser()
+    {
+        $list = Couple::with(['specie','customSpecie'])
+            ->where('userId','=',Auth::id())
+            ->get();
+        return $list;
     }
 
 

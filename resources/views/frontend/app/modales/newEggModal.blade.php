@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                         <h2>@lang('alerts.frontend.addEggs')</h2>
-                        <button type="button" class="btn btn-circle btn-xl btn-default" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnCloseNewEggModal">
+                        <button type="button" class="btn btn-circle btn-xl btn-table" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnCloseNewEggModal">
                             <i class="mdi mdi-close"></i>
                        </button>
 

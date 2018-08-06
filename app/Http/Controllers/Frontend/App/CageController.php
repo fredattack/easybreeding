@@ -1,8 +1,12 @@
-<?php 
+<?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend\App;
 
+use App\Cage;
+use App\Zone;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class CageController extends Controller 
 {
@@ -14,7 +18,9 @@ class CageController extends Controller
    */
   public function index()
   {
-    
+    $zones=Zone::getAllOfUser();
+    $cages=Cage::getAllOfUser();
+    return view('frontend.app.zoneAndCage.zoneCageIndex',compact(['cages','zones']));
   }
 
   /**

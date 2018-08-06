@@ -14,24 +14,7 @@ $(document).ready(function () {
 
     let table = $('#couplesTable').DataTable({
         "lengthMenu": [ 5,10, 25],
-        responsive: {
-        details: {
-            renderer: function ( api, rowIdx, columns ) {
-                var data = $.map( columns, function ( col, i ) {
-                    return col.hidden ?
-                        '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
-                            '<td>'+col.title+':'+'</td> '+
-                            '<td>'+col.data+'</td>'+
-                        '</tr>' :
-                        '';
-                } ).join('');
-
-                return data ?
-                    $('<table/>').append( data ) :
-                    false;
-            }
-        }
-    },
+        responsive: true,
         colReorder: true,
         language: {
 
@@ -86,7 +69,7 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="8">' + group + '</td> </tr>');
                     last = group;
                 }
             });

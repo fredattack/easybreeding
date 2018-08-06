@@ -292,7 +292,6 @@
                                            <div class="radio-list pull-center">
                                                <label class="custom-control custom-radio">
                                                    <input id="sexe1" name="sexe" type="radio" value='male' class="custom-control-input">
-                                                   <span class="custom-control-indicator"></span>
                                                    <span class="custom-control-description">@lang('labels.frontend.birds.male')</span>
                                                </label>
                                                <label class="custom-control custom-radio">

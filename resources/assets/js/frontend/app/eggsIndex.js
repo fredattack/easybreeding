@@ -85,7 +85,7 @@ $(document).ready(function () {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
-                    $(rows).eq(i).before('<tr class="group"> <td colspan="6">' + group + '</td> </tr>');
+                    $(rows).eq(i).before('<tr class="group"> <td colspan="8">' + group + '</td> </tr>');
                     last = group;
                 }
             });
@@ -122,7 +122,7 @@ $('#btnCloseNewEggModal').on('click',function () {
  });
 
  $('#btnAddEgg').on('click',function () {
-     alert('click');
+
      $('.idCoupleGroupe').toggle();
      $('.selectCoupleGroupe').toggle();
      $('#selectCouple').prop('required',);
@@ -177,6 +177,7 @@ $('#btnCloseNewEggModal').on('click',function () {
 });
 
  $('.returnHatBtnEggCard').on('click',function () {
+
      let id = $(this).attr('id').substr(3);
     console.log('return: ',id);
     $('#bnc'+id).toggle();
@@ -201,7 +202,8 @@ function updateFertility(id,data) {
 }
 
  $('.birdHatchedCheck').on('click',function () {
-    let id = $(this).attr('id').substr(3);
+     $(this).attr('disabled', 'disabled');
+     let id = $(this).attr('id').substr(3);
     console.log(id);
     updateHatching(id,'hatched');
  });
