@@ -125,11 +125,7 @@
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">@lang('labels.frontend.birds.closedRings')</span>
                                 </label>
-                                {{--<label class="custom-control custom-radio">--}}
-                                    {{--<input id="idType3" name="idType" type="radio" class="custom-control-input" value="other">--}}
-                                    {{--<span class="custom-control-indicator"></span>--}}
-                                    {{--<span class="custom-control-description">@lang('labels.frontend.birds.other')</span>--}}
-                                {{--</label>--}}
+
                                 <label class="custom-control custom-radio">
                                     <input id="noOne" name="idType" type="radio" class="custom-control-input" value="noOne"  >
                                     <span class="custom-control-indicator"></span>
@@ -215,20 +211,15 @@
                          </div>
                     </div>
                         {!! Form::close() !!}
-                    <div class="row infoLine" id="historyGroup">
-                        <div class="form-group col-md-12 col-lg-6">
-                            <h2>@lang('labels.frontend.birds.history')</h2>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="modal-footer">
-                                            <div class="form-group col-md-10">
-                                            </div>
-                                            <div class="form-group col-md-2">
-
-                  <button type="button"  class="btn btn-lg btn-circle btn-success " id="closeModalBtn" data-dismiss="modal">X</button>
-                                            </div>
+                    <div class="form-group col-md-10">
+                    </div>
+                    <div class="form-group col-md-2">
+                         <button type="button"  class="btn btn-lg btn-circle btn-success " id="closeModalBtn" data-dismiss="modal">X</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -59,6 +59,8 @@
     "babel-preset-stage-1": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "before": "0.0.1",
+    "fullcalendar": "^3.9.0",
+    "moment": "^2.22.2",
     "npm": "^6.3.0"
   }
 }

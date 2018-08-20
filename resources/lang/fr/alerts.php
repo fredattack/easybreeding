@@ -76,7 +76,14 @@ return [
         'noEggs'    => "Vous n'avez pas encore ajouter d'œufs.",
         'nestlingDead' => 'Le jeune est mort',
         'outOfNest' => 'Sortie du nid/sevrage',
-        'dateRange' => 'choisissez une période'
+        'dateRange' => 'choisissez une période',
+        'newZone' => 'Ajouter une zone',
+        'newCage' => 'Ajouter une cage',
+        'editCage' => 'Modifier la cage',
+        'birdOutOfCage' => "retirer l'oiseau de cette cage",
+        'eggNum' => 'oeuf n° ',
+        'dataMissing' => "Certaines données telle que la durée d'incubation ou la durée avant le contrôle de fécondité ne sont pas renseignés pour cette espèce, 
+                            afin de profiter au maximum de cette application, il est conseillé de les renseigner."
 
 
     ],

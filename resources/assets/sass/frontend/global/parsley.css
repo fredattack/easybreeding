@@ -1,5 +1,5 @@
 input.parsley-error {
-  color: #B94A48 !important;
+  color: transparent !important;
   background-color: #F2DEDE !important;
   border: 1px solid #EED3D7 !important; }
 
@@ -27,4 +27,5 @@ input[type='file'].parsley-error {
 .parsley-errors-list li.parsley-required {
     color:#f62d51;
     list-style: none;
+    font-size: 75%;
 }

@@ -1,11 +1,29 @@
-<?php 
+<?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend\App;
 
+use App\Http\Controllers\Controller;
+use Grimthorr\LaravelUserSettings\Setting;
 use Illuminate\Http\Request;
 
 class UserController extends Controller 
 {
+
+    public function saveSettings($name,$value)
+    {
+        // Set 'example' setting to 'hello world'
+
+        \Setting::set($name, $value);
+//        \Setting::set('category.default', '#26DAD2');
+//        \Setting::set('category.laying', '#F62D51');
+//        \Setting::set('category.nestling', '#1976D2');
+//        \Setting::set('category.controlFecundity', '#FFB22B');
+
+// Save to database
+        \Setting::save();
+
+        echo 'done!!';
+    }
 
   /**
    * Display a listing of the resource.

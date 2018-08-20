@@ -20,7 +20,7 @@
             </div>
 
             <div class="modal-body">
-                {!! Form::open(array('route' => ['frontend.app.updateBird',0], 'method' => 'POST','id'=>'UpdateSpecieForm','onkeypress'=>"return event.keyCode != 13")) !!}
+                {!! Form::open(array('route' => ['frontend.app.updateBird',0], 'method' => 'POST','id'=>'UpdateSpecieForm','onkeypress'=>"return event.keyCode != 13","data-parsley-validate"=>"")) !!}
 
                 <input type="hidden" name="specieId" id="idInputSpecie" value="">
                 <input type="hidden" name="id_famillie" id="id_famillieInput" value="">
@@ -74,13 +74,13 @@
                     <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.incubation')</label>
                        <h4 class="modalText" id="incubationText"></h4>
-                       <input type="text" class="form-control" placeholder="XX" name="incubation" id="incubationInput"  value="">
+                       <input type="text" class="form-control" placeholder="XX" name="incubation" id="incubationInput"  value="" required>
 
                     </div>
                     <div class="form-group col-md-12 col-lg-6 text-center">
                         <label class="control-label text-center ">@lang('labels.frontend.birds.fertilityControl')</label>
                         <h4 class="modalText" id="fertilityControlText"></h4>
-                        <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="fertilityControlInput" value="">
+                        <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="fertilityControlInput" value="" required>
 
                     </div>
                 </div>

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
 
 class Specie extends Model 
 {
@@ -35,4 +37,36 @@ class Specie extends Model
             return $specie;
         }
 
+         /********************************************
+              * Description: return all species and custom species of this user
+              * Parameters: none
+              * Return $customSpecies
+              *********************************************/
+
+    public static function getUsersSpecies()
+    {
+        $customSpecies = [];
+
+        $speciesId = Bird::where('userId', '=', Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
+
+
+        foreach ($speciesId as $specieId) {
+            $newcustomSpecies = [];
+            if (!str_contains($specieId, '_')) {
+                $newSpecieName = Specie::where('id', $specieId)->first()->commonName;
+                $newcustomSpecies['id'] = $specieId;
+                $newcustomSpecies['name'] = $newSpecieName;
+                array_push($customSpecies, $newcustomSpecies);
+            } else {
+
+                $newSpecieName = CustomSpecie::where('customId', $specieId)->first()->commonName;
+                $newcustomSpecies['id'] = $specieId;
+                $newcustomSpecies['name'] = $newSpecieName;
+
+                array_push($customSpecies, $newcustomSpecies);
+
+            }
+        }
+        return $customSpecies;
+    }
 }

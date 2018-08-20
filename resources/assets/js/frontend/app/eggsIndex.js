@@ -123,9 +123,9 @@ $('#btnCloseNewEggModal').on('click',function () {
 
  $('#btnAddEgg').on('click',function () {
 
-     $('.idCoupleGroupe').toggle();
-     $('.selectCoupleGroupe').toggle();
-     $('#selectCouple').prop('required',);
+     $('.idCoupleGroupe').css('display','none');
+     $('.selectCoupleGroupe').css('display','block');
+     $('#selectCouple').prop('required',true);
  });
 
  $('#selectCouple').on('change',function () {

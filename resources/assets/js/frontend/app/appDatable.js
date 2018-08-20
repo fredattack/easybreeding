@@ -3,16 +3,24 @@
 * Import jsFiles for app side
 *
  */
+
+
+
 /* global dep
  */
 require('../global/jquery.min.js');
 require('../global/popper.min.js');
 require('../global/bootstrap.js');
 
-/*
+/*Npm module*/
+require('moment');
+require('fullCalendar');
+
+/*npm install fullcalendar
 .plugins
  */
 require('../global/jquery.sparkline.min');
+require('../global/spectrum');
 require('../global/jQuery.style.switcher');
 require('../global/sticky-kit.min');
 require('../global/jquery.slimscroll.js');
@@ -22,6 +30,15 @@ require('../global/bootstrap-datepicker.min');
 require('../global/jquery.easy-autocomplete');
 require('../global/jquery.dataTables.min');
 require('../global/parsley');
+require('../global/gridstack');
+require('../global/jquery.sparkline.min');
+require('../global/morris');
+// require('../global/lang-all');
+require('../global/jquery-clockpicker');
+
+
+// require('../global/gridstack.jQueryUI');
+
 
 /*
 custom js files
@@ -37,6 +54,8 @@ require('./nestlingModale');
 require('./eggsIndex');
 require('./hatchingsIndex');
 require('./coupleIndex');
+require('./zoneAndCage');
+require('./dashboard');
 
 /*
 *

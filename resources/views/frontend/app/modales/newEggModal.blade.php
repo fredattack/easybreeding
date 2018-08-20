@@ -15,7 +15,7 @@
                 <div class="modal-body">
 
                    {!! Form::open(array('route' => 'frontend.app.storeEgg',
-                                        'method' => 'POST',
+                                        'method' => 'GET',
                                         'id'=>'addEgg',
                                         'onkeypress'=>"return event.keyCode != 13",
                                         "data-parsley-validate"=>"")) !!}
@@ -30,7 +30,7 @@
                         <div class="form-group row selectCoupleGroupe">
                            <div class="col-12">
                            {{--<label class="control-label ">@lang('labels.frontend.birds.idCouples')</label>--}}
-                            <select class="form-control custom-select" name="couple" id="selectCouple" >
+                            <select class="form-control custom-select" name="couple" id="selectCouple">
                                <option value="" disabled selected>@lang('labels.frontend.birds.selectCouple')</option>
                                @foreach($couples as $couple)
                                <option value="{{$couple->customId}}">{{$couple->customId}}</option>

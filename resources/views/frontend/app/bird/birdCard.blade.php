@@ -70,11 +70,11 @@
             <label>@lang('labels.frontend.birds.status'): </label><p><b>@lang('labels.frontend.birds.'.$bird->status)</b></p>
             <label>@lang('labels.frontend.birds.origin'): </label><p><b>@lang('labels.frontend.birds.'.$bird->origin)</b></p>
             {{--<label>@lang('labels.frontend.birds.age'): </label><p><b>{{$displayYear}} @lang('labels.frontend.date.year'), {{$displayMonth}} @lang('labels.frontend.date.month') </b></p>--}}
-            {{--<label>@lang('labels.frontend.birds.species'): </label><p><b>{{$bird->specie->scientificName}}</b></p>--}}
             <label>@lang('labels.frontend.birds.idType'): </label><p><b>@lang('labels.frontend.birds.'.$bird->idType)</b></p>
-            <label>@lang('labels.frontend.birds.idNummer'): </label>
+                <label>@lang('labels.frontend.birds.idNummer'): </label>
             @if($bird->idNummer!=null)<p><b>{{$bird->idNummer}}</b></p>@else<p><b>@lang('labels.frontend.birds.noOne')</b></p>@endif
-            <label>@lang('labels.frontend.birds.disponibility'): </label><p><b>@lang('labels.frontend.birds.'.$bird->disponibility)</b></p>
+                <label>@lang('labels.frontend.ZoneAndCage.cage'): </label><p><b>{{($bird->cageId==0)?__('labels.frontend.birds.noOne'):$bird->cage->name}}</b></p>
+                <label>@lang('labels.frontend.birds.disponibility'): </label><p><b>@lang('labels.frontend.birds.'.$bird->disponibility)</b></p>
             </div>
         </div>
 

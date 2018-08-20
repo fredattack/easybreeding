@@ -1,5 +1,6 @@
 let birdsList;
 let table;
+
 $(document).ready(function() {
     console.log('indexBird');
 
@@ -86,7 +87,6 @@ $(document).ready(function() {
 
    getBirdsList();
 
-    console.log('birdsList');
 });
 
 function getBirdsList() {
@@ -95,7 +95,7 @@ function getBirdsList() {
         console.log(data);
         birdsList = data;
     });
-    //
+
 }
 
 $('#btnBlock').on('click',function () {
@@ -133,34 +133,13 @@ $('#toolBar select').on('change',function (){
             .draw();
     }
 });
-//
-// $.fn.dataTable.ext.search.push(
-//     function( settings, data, dataIndex ) {
-//         var min = parseInt( $('#start').val(), 10 );
-//         var max = parseInt( $('#end').val(), 10 );
-//         var age = parseFloat( data[4] ) || 0; // use data for the age column
-//
-//         if ( ( isNaN( min ) && isNaN( max ) ) ||
-//             ( isNaN( min ) && age <= max ) ||
-//             ( min <= age   && isNaN( max ) ) ||
-//             ( min <= age   && age <= max ) )
-//         {
-//             return true;
-//         }
-//         return false;
-//     }
-// );
-//
-// $(document).ready(function() {
-//     var table = $('#birdsIndex').DataTable();
-//
-//     // Event listener to the two range filtering inputs to redraw on input
-//     $('#start, #end').keyup( function() {
-//         table.draw();
-//     } );
-// } );
 
-// Date Picker
+ /********************************************
+* Description: initialise Datepicker
+* Parameters: none
+* Return none
+*********************************************/
+
 jQuery('#min').datepicker({
     format: 'dd/mm/yyyy',
     endDate:'+1d',
@@ -171,29 +150,3 @@ jQuery('#min').datepicker({
     }
     // language:'fr'
 });
-//
-// $(document).ready(function () {
-//        $.fn.dataTable.ext.search.push(
-//           function (settings, data, dataIndex) {
-//         var min = $('#min').datepicker("getDate");
-//         var max = $('#max').datepicker("getDate");
-//         var startDate = new Date(data[5]);
-//         if (min == null && max == null) { return true; }
-//         if (min == null && startDate <= max) { return true;}
-//         if(max == null && startDate >= min) {return true;}
-//         if (startDate <= max && startDate >= min) { return true; }
-//         return false;
-//     }
-//     );
-//
-//
-//         $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-//         $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-//
-//         var table = $('#birdsIndex').DataTable();
-//
-//         // Event listener to the two range filtering inputs to redraw on input
-//         $('#min, #max').change(function () {
-//             table.draw();
-//         });
-//     });

@@ -33,5 +33,15 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::get('/setDead', "Frontend\App\NestlingController@setDead")->name('frontend.app.setDead');
 
 
+    Route::get('/setBirdCage', "Frontend\App\BirdsController@setBirdCage")->name('frontend.app.setBirdCage');
+
+    /*
+     * Dashboard
+     * */
+    Route::get('/getStats', "Frontend\App\BirdsController@getStats")->name('frontend.app.getStats');
+    Route::get('/createCategory', "Frontend\App\CategoryController@createCategory")->name('frontend.app.createCategory');
+
+
+
 
 });

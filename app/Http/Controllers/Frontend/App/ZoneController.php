@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\App;
 
+use App\Zone;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 
 class ZoneController extends Controller 
 {
@@ -34,7 +37,10 @@ class ZoneController extends Controller
    */
   public function store(Request $request)
   {
-    
+//      dd('store');
+
+      if($newZone = Zone::createModel($request)) return redirect()->route('frontend.app.zoneAndCage');
+
   }
 
   /**

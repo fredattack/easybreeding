@@ -110,11 +110,42 @@ return [
         'date' =>[
             'year'    => 'an',
             'years'    => 'ans',
-            'month'       => 'mois',
-            'week'       => 'semaine',
+            'month'       => 'Mois',
+            'week'       => 'Semaine',
             'weeks'       => 'semaines',
-            'day'       => 'jour',
+            'day'       => 'Jour',
+            'today'  => "Aujourd'hui",
             'days'       => 'jours',
+            'list'       => 'Liste',
+            'months' =>[
+                "January"=> "Janvier",
+                "February"=> "Février",
+                "March"=> "Mars",
+                "April"=> "Avril",
+                "May"=> "Mai",
+                "June"=> "Juin",
+                "July"=> "Juillet",
+                "August"=> "Août",
+                "September"=> "Septembre",
+                "October"=> "Octobre",
+                "November"=> "Novembre",
+                "December"=> "Décembre"
+            ],
+        ],
+        'calendar'=>[
+            'noEvents'=>'Aucune tâche à afficher',
+            'colorCategory' => 'Définir la couleur',
+            'saveCategory' => 'Enregistrer cette catégorie',
+            'chooseCategory'  =>  'Choisir une catégorie',
+            'AddNewCategory'  =>  'Ajouter une catégorie',
+            'AddNewEvent'  =>  'Ajouter un évènement',
+            'cancel'  =>  'Annuler',
+            'allDay'  =>  'Toute la journée',
+            'addTitle'  =>  'Ajouter un titre',
+            'title'  =>  'Titre',
+            'mm/dd/yyyy'  =>  'jj/mm/aaaa',
+            'name'  =>  'Nom',
+
         ],
         'auth' => [
             'login_box_title'    => 'Connexion',
@@ -123,6 +154,9 @@ return [
             'register_box_title' => "S'enregistrer",
             'register_button'    => 'Créer le compte',
             'remember_me'        => 'Se souvenir de moi',
+            'signIn'             => ' Se connecter',
+            'noAccount'  =>   'Pas encore de compte?',
+            'signUp'    =>      "S'enregistrer",
         ],
 
         'contact' => [
@@ -229,6 +263,8 @@ return [
             'all'=>'Tout',
             'filterByMale'=>'Filtrez par Mâle',
             'filterByFemale'=>'Filtrez par femelle',
+            'eggsStat'=>"Statistiques de ponte" ,
+            'layingStat'=>"Statistiques d' éclosion" ,
 
 
 
@@ -278,9 +314,13 @@ return [
         ],
         'ZoneAndCage'=>[
             'name' => 'Nom',
+            'cage' => 'cage',
             'long' => 'Longueur',
             'large' => 'Largeur',
-            'height' => 'Hauteur'
+            'height' => 'Hauteur',
+            'zone' => 'Zone',
+            'description' =>'Description',
+            '²' =>'Description',
         ],
         'table'=>[
                 "sProcessing" =>    "Traitement en cours...",

@@ -50,7 +50,7 @@
 
                         <!--region fromCreate-->
 
-                            {!! Form::open(array('route' => 'frontend.app.storeBird', 'method' => 'POST','id'=>'createBird','onkeypress'=>"return event.keyCode != 13")) !!}
+                            {!! Form::open(array('route' => 'frontend.app.storeBird', 'method' => 'POST','id'=>'createBird','onkeypress'=>"return event.keyCode != 13","data-parsley-validate"=>"")) !!}
                         <input type="hidden" name="type" id="type" value="specie">
                         @if ($query!=null)
                         <input type="hidden" name="nbfc" id="type" value="specie">
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <div class="col-md-8">
                                     <div class="input-group text-center searchBox" >
-                                        <input type="text" placeholder="{{__('alerts.frontend.searchSpecie')}}" id="basics" name="searchBox">
+                                        <input type="text" placeholder="{{__('alerts.frontend.searchSpecie')}}" id="searchinput" name="searchBox">
                                         <span class="input-group-btn">
                                                     <button class="btn btn-success" type="button" id="goButton" disabled>Go!</button>
                                                 </span>
@@ -133,7 +133,7 @@
                                                     <option value="{{$order->id}}" selected>{{$order->orderName}}</option>
                                                 @endif
                                             </select>
-                                            {{--<small class="form-control-feedback"> Select your gender. </small>--}}
+                                            {{----}}
                                         </div>
                                     </div>
 
@@ -176,7 +176,6 @@
                                     <label class="control-label col-md-4">@lang('labels.frontend.birds.usualName')</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" placeholder="Coco" name="commonName" id="commonName" readonly @if(isset($bird)) value="{{$specie->commonName}}" @endif >
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
 
@@ -193,7 +192,6 @@
                                     <label class="control-label col-md-4" style="width: 100%">@lang('labels.frontend.birds.usualName')</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.usualName')" name="newCommonName" id="newusualNameInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +201,6 @@
                                     <label class="control-label col-md-4">@lang('labels.frontend.birds.species')</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" placeholder="@lang('labels.frontend.birds.species')" name="newScientificName" id="newscientificNameInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -213,22 +210,19 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.incubation')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="XX" name="incubation" id="newincubationInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
+                                        <input type="text" class="form-control" placeholder="XX" name="incubation" id="newincubationInput"  value="" disabled required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.fertilityControl')</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="newfertilityControlInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
+                                        <input type="text" class="form-control" placeholder="XX" name="fertilityControl" id="newfertilityControlInput"  value="" disabled required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.outOfNest')</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder="XX" name="outOfNest" id="newoutOfNestInput"  value=""  disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -238,14 +232,12 @@
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.weaning')</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder="XX" name="weaning" id="newweaningInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.sexualMaturity')</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder="XX" name="newScientificName" id="newsexualMaturityInput" value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -255,14 +247,12 @@
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.girdleDate')</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder="XX" name="girdleDate" id="newgirdleDateInput"  value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-8">@lang('labels.frontend.birds.spawningInterval')</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder="XX" name="spawningInterval" id="newspawningIntervalInput" value="" disabled>
-                                        {{--<small class="form-control-feedback"> This is inline help </small> </div>--}}
                                     </div>
                                 </div>
 
@@ -292,6 +282,7 @@
                                            <div class="radio-list pull-center">
                                                <label class="custom-control custom-radio">
                                                    <input id="sexe1" name="sexe" type="radio" value='male' class="custom-control-input">
+                                                   <span class="custom-control-indicator"></span>
                                                    <span class="custom-control-description">@lang('labels.frontend.birds.male')</span>
                                                </label>
                                                <label class="custom-control custom-radio">
@@ -319,7 +310,7 @@
                                                <option value="supposed">@lang('labels.frontend.birds.supposed')</option>
                                                <option value="dymorphism">@lang('labels.frontend.birds.dymorphism')</option>
                                            </select>
-                                           <small class="form-control-feedback"> Select your gender. </small>
+                                           
                                        </div>
                                    </div>
 
@@ -329,7 +320,7 @@
                                        <div class="col-md-8">
                                            @php($today = date('d/m/Y'))
                                            <input type="text"  class="form-control mydatepicker" @if(isset($bird)) value="{{$bird->dateOfBirth}}" @else value="{{$today}}" @endif name="dateOfBirth">
-                                           <small class="form-control-feedback"> This is inline help </small> </div>
+                                            </div>
                                    </div>
                                     <div class="form-group row">
                                         <label class="control-label col-md-4">@lang('labels.frontend.birds.idType')</label>
@@ -364,14 +355,27 @@
                                         <label class="control-label col-md-4">@lang('labels.frontend.birds.idNummer')</label>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control" placeholder="ABC1234" name="idNum" @if(isset($bird) && $bird->idNum != null) value="{{$bird->idNum}}" @endif >
-                                            <small class="form-control-feedback"> This is inline help </small> </div>
+                                             </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="control-label col-md-4">@lang('labels.frontend.birds.idPerso')</label>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control" placeholder="Coco123" name="personal_id" @if(isset($bird)) value="{{$bird->personal_id}}" @endif >
-                                            <small class="form-control-feedback"> This is inline help </small> </div>
+                                             </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4">@lang('labels.frontend.ZoneAndCage.cage')</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control custom-select" name="cageId">
+                                                <option value="0" checked >@lang('labels.frontend.birds.noOne')</option>
+                                             @foreach($cages as $cage)
+                                                    <option value="{{$cage->id}}" >{{$cage->name}} <sup>({{$cage->zone->name}})</sup></option>
+                                             @endforeach
+                                            </select>
+                                            
+                                        </div>
                                     </div>
                                </div>
 
@@ -390,14 +394,14 @@
                                         <option value="expo" @if(isset($bird) && $bird->origin="expo") checked @endif>@lang('labels.frontend.birds.expo')</option>
 
                                     </select>
-                                    <small class="form-control-feedback"> Select your gender. </small>
+                                    
                                 </div>
                             </div>
                             <div class="form-group row" id="infoBreeder">
                                 <label class="control-label col-md-4">@lang('labels.frontend.birds.infoBreeder')</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" placeholder="Coco123" name="breederId">
-                                    <small class="form-control-feedback"> This is inline help </small>
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -455,7 +459,7 @@
 
 
                                         </select>
-                                        <small class="form-control-feedback"> Select your gender. </small>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -465,7 +469,7 @@
                                             <option value="1">@lang('labels.frontend.birds.unknow')</option>
 
                                         </select>
-                                        <small class="form-control-feedback"> Select your gender. </small>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -33,7 +33,7 @@ class CoupleController extends Controller
   {
       $data=$this->getMixSpeciesAndCustomSpecies();
 
-      $customSpecies=app('App\Http\Controllers\Frontend\App\BirdsController')->getUsersSpecies();
+      $customSpecies= (array)Specie::getUsersSpecies();
 
       $distinctSpecies=$this->getDistinctSpeciesOfCouples($customSpecies);
 

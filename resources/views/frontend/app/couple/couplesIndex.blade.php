@@ -37,6 +37,11 @@
             <div class="alert alert-success">
                 {{ session('info') }}
             </div>
+         @endif
+        @if(session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
         @endif
         @include('frontend.app.modales.bird')
         @include('frontend.app.modales.specieModale')

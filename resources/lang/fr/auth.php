@@ -20,4 +20,5 @@ return [
     ],
     'throttle' => 'Vous avez effectué trop de tentatives de connexion. Veuillez ré-essayer dans :seconds secondes.',
     'unknown'  => 'Une erreur inconnue est survenue.',
+
 ];

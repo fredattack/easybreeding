@@ -102,7 +102,7 @@ return [
     | by the Carbon library when setting Carbon's localization.
     |
     */
-    'locale_php' => env('APP_LOCALE_PHP', 'en_US'),
+    'locale_php' => env('APP_LOCALE_PHP', 'fr_FR'),
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,9 @@ return [
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Grimthorr\LaravelUserSettings\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -247,7 +250,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Setting' => Grimthorr\LaravelUserSettings\Facade::class,
         /*
          * Package Aliases
          */

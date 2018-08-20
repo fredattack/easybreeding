@@ -2,6 +2,7 @@
     <div class="row">
         {{--Col1--}}
         <div class="col-md-auto col-s-12">
+            @if($type!='eggs')
             <div class="row">
                 <button type="button" class="btn btn-circle btn-lg btn-table" data-toggle="tooltip" title="{{__('alerts.frontend.displayList')}}" data-placement="bottom" id="btnList">
                     <i class="fa fa-th-list"></i>
@@ -10,6 +11,7 @@
                     <i class="fa  fa-th-large"></i>
                 </button>
             </div>
+            @endif
         </div>
         {{--Col2--}}
         <div class="col-md-auto col-s-12">

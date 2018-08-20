@@ -5,12 +5,12 @@
 @section('content')
     <section id="wrapper">
         @php( $x=DIRECTORY_SEPARATOR)
-        <div class="login-register" style="background-image:url({{URL::asset('storage/images/rainbow-lorikeet.jpg')}}">
+        <div class="login-register" style="background-image:url({{URL::asset('/images/background/login-bg.jpg')}}">
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" method="post" action="{{route('frontend.auth.login.post')}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <h3 class="box-title m-b-20">Sign In</h3>
+                        {{--<h3 class="box-title m-b-20">@lang('labels.frontend.auth.signIn')</h3>--}}
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 {{ html()  ->email('email')
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">@lang('labels.frontend.auth.signIn')</button>
                             </div>
                         </div>
                         <div class="row">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group m-b-0">
                             <div class="col-sm-12 text-center">
-                                <div>Don't have an account? <a href="pages-register.html" class="text-info m-l-5"><b>Sign Up</b></a></div>
+                                <div>@lang('labels.frontend.auth.noAccount') <a href="pages-register.html" class="text-info m-l-5"><b>@lang('labels.frontend.auth.signUp')</b></a></div>
                             </div>
                         </div>
                     </form>

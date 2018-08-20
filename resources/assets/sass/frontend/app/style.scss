@@ -16,7 +16,9 @@ File: scss
  *	7. Widgets
  *	8. Custom Templates
  */
- 
+
+
+@import "spectrum";
 @import 'variable';
 @import '../global/bootstrap.min.css';
 @import '../global/app';
@@ -28,7 +30,12 @@ File: scss
 @import "/custom";
 @import "/tables";
 @import "/zoneAndCage";
+@import "/dashboard";
+
+
 @import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css');
+
 @import "/icons/font-awesome/css/font-awesome.min.css";
 @import '/icons/simple-line-icons/css/simple-line-icons.css';
 @import '/icons/weather-icons/css/weather-icons.min.css';
@@ -36,20 +43,25 @@ File: scss
 @import '/icons/themify-icons/themify-icons.css';
 @import '/icons/flag-icon-css/flag-icon.min.css';
 @import "/icons/material-design-iconic-font/css/materialdesignicons.min.css";
-@import '../global/widgets';
-@import '../global/grid';
+
 @import 'responsive';
 @import 'material';
 @import "modale";
 @import "toolbar";
+
+
+@import '../global/widgets';
+@import '../global/grid';
 @import '../global/spinners.css';
 @import '../global/animate.css';
 @import '../global/bootstrap-datepicker.min.css';
+//@import '../global/bootstrap-timepicker.min.css';
+@import '../global/jquery-clockpicker.css';
 @import '../global/easy-autocomplete.css';
 @import '../global/easy-autocomplete.themes.css';
-//@import '../global/jquery.dataTables.min.css'; last comment test if necessary
 @import '../global/datatable.responsive.css';
 @import '../global/parsley.css';
+//@import '../global/fullcalendar.css';
 
 
 

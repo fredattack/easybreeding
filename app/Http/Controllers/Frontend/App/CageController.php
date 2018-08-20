@@ -4,12 +4,19 @@ namespace App\Http\Controllers\Frontend\App;
 
 use App\Cage;
 use App\Zone;
+use App\Bird;
+use App\Specie;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class CageController extends Controller 
+/**
+ * Class CageController
+ * @package App\Http\Controllers\Frontend\App
+ */
+class CageController extends Controller
 {
+
 
   /**
    * Display a listing of the resource.
@@ -20,18 +27,12 @@ class CageController extends Controller
   {
     $zones=Zone::getAllOfUser();
     $cages=Cage::getAllOfUser();
-    return view('frontend.app.zoneAndCage.zoneCageIndex',compact(['cages','zones']));
+    $birds=Bird::getAllOfUser();
+    $customSpecies= (array)Specie::getUsersSpecies();
+//    dd($zones);
+    return view('frontend.app.zoneAndCage.zoneCageIndex',compact(['cages','zones','birds','customSpecies']));
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
 
   /**
    * Store a newly created resource in storage.
@@ -40,53 +41,20 @@ class CageController extends Controller
    */
   public function store(Request $request)
   {
-    
+      if($newCage=Cage::createModel($request)) return redirect()->route('frontend.app.zoneAndCage');
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
+  public function edit($id, Request $request)
   {
-    
+//      dd($request);
+      if($cage=Cage::updateModel($id,$request)) {
+
+          return redirect()->to(route('frontend.app.zoneAndCage').'#zone'.$cage->zone->id);
+//       return redirect()->route(['frontend.app.zoneAndCage','#zone'.$cage->zone->id]);
+      }
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
-  
 }
 
 ?>

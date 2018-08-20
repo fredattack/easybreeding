@@ -94,4 +94,40 @@ class NestlingController extends Controller
 
     }
 
+    /********************************************
+     * Description: generate stats for eggs laying for last 12 month
+     * Parameters: $eggs + relations
+     * Return $eggsStats
+     *********************************************/
+    public function generateLayingStats()
+    {
+
+        $monthsd=[];
+        $cpt=1;
+        for ($i = 1; $i <= 12; $i++) {
+            $ind=$i;
+            Carbon::setlocale(LC_TIME,'fr');
+            $date =Carbon::now();
+
+            $monthsd[$cpt]=$date->subMonth($ind)->format('F'); // July
+            $cpt++;
+        }
+
+
+        $retval= [];
+        $nestlingsPerMonth= array();
+        for ($i=1; $i<=12; $i++){
+             $nestlingsPerMonth[$i] = Nestling::where('userId',Auth::id())->whereMonth('dateOfBirth', date('m',strtotime('-'.$i.' month')))->count();
+
+        }
+//        dd($nestlingsPerMonth);
+        $input=array_reverse($nestlingsPerMonth);
+        $month=array_reverse($monthsd);
+
+        array_push($retval,$input);
+        array_push($retval,$month);
+        return $retval;
+
+//
+    }
 }

@@ -42305,7 +42305,7 @@ jQuery(document).ready(function ($) {
         $('input[name="searchBox"]').val('');
         generateFamillies(e.target.value);
     });
-    // $('#hiddenTable').dataTable();
+
     function generateFamillies(id) {
 
         $.get('/ajax/generateFamillies?orderId=' + id, function (data) {
@@ -42351,7 +42351,7 @@ jQuery(document).ready(function ($) {
     function generateUsualName(id) {
 
         $.get('/ajax/generateUsualName?specieId=' + id, function (data) {
-            console.log('usualName:' + data);
+            console.log('usualName:', data);
             $('input[name="commonName"]').val(data.commonName);
             // $('#species').append('<option value="'+speciesObs.id+'">'+speciesObs.scientificName+'</option>');
         });
@@ -42415,23 +42415,23 @@ jQuery(document).ready(function ($) {
     function addaptSpecieFields() {
         $('#showSpecieBtn').val($('#species').val());
         $('#showSpecieBtn').css('display', 'inline-flex');
-        // $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+        // $('input[name="commonName"]').val($("#searchinput").getSelectedItemData().name_FR);
         $('#returnSpecieBtn').css('display', 'inline-flex');
         $('#customSpecieBtn').css('display', 'none');
         $('#addSpecieBtn').css('display', 'none');
     }
 
     function displaySpecieAttribut() {
-        var ordreSearched = $("#basics").getSelectedItemData().ordre;
-        var famille = $("#basics").getSelectedItemData().famillie;
-        console.log(ordreSearched);
-        var latin = $("#basics").getSelectedItemData().latin;
-        generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-        generateSpecies($("#basics").getSelectedItemData().Id_famille);
-        $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
-        setTimeout(function () {
+        console.log('displaySpecieAttribut');
+        var ordreSearched = $("#searchinput").getSelectedItemData().ordre;
+        var famille = $("#searchinput").getSelectedItemData().famillie;
+        console.log('ici', ordreSearched);
+        var latin = $("#searchinput").getSelectedItemData().latin;
+        generateFamillies($("#searchinput").getSelectedItemData().id_Ordre);
+        generateSpecies($("#searchinput").getSelectedItemData().Id_famille);
+        $('input[name="commonName"]').val($("#searchinput").getSelectedItemData().name_FR);
 
-            // Something you want delayed.
+        setTimeout(function () {
 
             $(function () {
                 $('[name=orderId] option').filter(function () {
@@ -42453,10 +42453,10 @@ jQuery(document).ready(function ($) {
                     return $(this).text() == latin;
                 }).prop('selected', true);
             });
-        }, 500);
+        }, 1500);
         setTimeout(function () {
             addaptSpecieFields();
-        }, 500);
+        }, 1500);
     }
 
     //AutoComplete
@@ -42482,7 +42482,7 @@ jQuery(document).ready(function ($) {
         }
     };
 
-    $("#basics").easyAutocomplete(options, "minLength", 3);
+    $("#searchinput").easyAutocomplete(options, "minLength", 3);
 
     // create Specie
 
@@ -42493,7 +42493,7 @@ jQuery(document).ready(function ($) {
         $('.newSpecieBlock input').prop('disabled', false);
         $('.specieBlock input').prop('disabled', true);
 
-        $('#basics').prop('disabled', true);
+        $('#searchinput').prop('disabled', true);
         $('#newusualNameInput').prop('required', true);
         $('#type').val('newSpecie');
         $('#returnSpecieBtn').css('display', 'inline-flex');
@@ -42535,7 +42535,7 @@ jQuery(document).ready(function ($) {
         $('.specieBlock').css('display', 'none');
         $('.specieBlock input').prop('disabled', true);
         $('#type').val('userSpecie');
-        $('#basics').css('display', 'none');
+        $('#searchinput').css('display', 'none');
         $('#returnSpecieBtn').css('display', 'inline-flex');
         $('#customSpecieBtn').css('display', 'none');
         $('#addSpecieBtn').css('display', 'none');
@@ -42543,7 +42543,7 @@ jQuery(document).ready(function ($) {
 
     $('#returnSpecieBtn').on('click', function () {
         $('#goButton').css('display', 'block');
-        $('#basics').css('display', 'block');
+        $('#searchinput').css('display', 'block');
         $('.easy-autocomplete').css('display', 'block');
         $('#speciesCustomSelect').css('display', 'none');
         $('#customSpecieBtn').css('display', 'inline-flex');

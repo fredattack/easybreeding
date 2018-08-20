@@ -20,7 +20,7 @@ return [
  * */
 
     'birds'         => 'Oiseaux',
-    'nestlings'         => 'Les Jeunes (au nid)',
+    'nestlings'         => 'Jeunes (au nid)',
     'birdsList'         => 'Les Oiseaux',
     'createBird'         =>'Ajouter un oiseau',
 

@@ -33,11 +33,11 @@ class Couple extends Model
     {
         return $this->belongsTo(Bird::class, 'femaleId','id');
     }
-
-    public function cage()
-    {
-        return $this->hasOne('Cage');
-    }
+//
+//    public function cage()
+//    {
+//        return $this->hasOne('Cage');
+//    }
 
     public static function getAllOfUser()
     {
@@ -47,6 +47,10 @@ class Couple extends Model
         return $list;
     }
 
+    public static function getModel($id){
+        $couple=Couple::with(['specie','customSpecie','male','female'])->where('id',$id)->first();
+        return $couple;
+    }
 
 
 }

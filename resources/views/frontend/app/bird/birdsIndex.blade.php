@@ -73,6 +73,7 @@
                                             <th>@lang('labels.frontend.birds.gender')</th>
                                             <th>@lang('labels.frontend.birds.birthDate')</th>
                                             <th>@lang('labels.frontend.birds.idNummer')</th>
+                                            <th>@lang('labels.frontend.ZoneAndCage.cage')</th>
                                             <th>@lang('labels.frontend.birds.status'):</th>
                                             <th>@lang('labels.frontend.birds.disponibility'):</th>
                                             <th></th>
@@ -103,8 +104,9 @@
                                             <td>@lang('labels.frontend.birds.'.$bird->sexe)</td>
                                             <td>{{$bird->dateOfBirth->format('d/m/Y')}}</td>
                                             <td>
-                                                @if($bird->idNum!=null)<p><b>{{$bird->idNum}}</b></p>@else<p><b>@lang('labels.frontend.birds.noOne')</b></p>@endif
+                                                @if($bird->idNum!=null){{$bird->idNum}}@else@lang('labels.frontend.birds.noOne')@endif
                                             </td>
+                                            <td>{{($bird->cageId==0)?__('labels.frontend.birds.noOne'):$bird->cage->name}}</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->status)</td>
                                             <td>@lang('labels.frontend.birds.'.$bird->disponibility)</td>
 
@@ -120,11 +122,11 @@
                                             {{--</td>--}}
                                             {{--<td class="text-center">--}}
                                                 @if($bird->status=='single' && $bird->sexe!='unknow')
-                                                <span data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
-                                                    <button href="#" class="btn btn-small btn-circle btn-table addBirdToCouple" type="button" value="{{$bird->id}}" >
-                                                        <i class="mdi mdi-infinity"></i>
-                                                    </button>
-                                                </span>
+                                                    <span data-toggle="tooltip" title="{{__('alerts.frontend.addCouples')}}" data-placement="bottom">
+                                                        <a href="{{route('frontend.app.couples', ['nbfc' => $bird->id])}}" class="btn btn-small btn-circle btn-table addBirdToCouple"  value="{{$bird->id}}" >
+                                                             <i class="mdi mdi-infinity"></i>
+                                                        </a>
+                                                    </span>
                                                 @elseif ($bird->status=='coupled')
                                                     <span data-toggle="tooltip" title="{{__('alerts.frontend.showCouples')}}" data-placement="bottom">
                                                         <button href="#" class="btn btn-small btn-circle btn-table coupleDetails" type="button" value="{{$bird->id}}">

@@ -30,7 +30,7 @@ class CustomSpecieController extends Controller
     public function updatecustomid()
     {
         $species= Specie::where('customId',null)->get();
-        dd($species);
+//        dd($species);
         $cpt=0;
         foreach($species as $specie){
             $specie->customId=$specie->id;
@@ -40,39 +40,6 @@ class CustomSpecieController extends Controller
 
         echo 'fin pour '.$cpt.' espéces';
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -188,7 +155,7 @@ class CustomSpecieController extends Controller
 
             $specie=Specie::where('id',$id)->first();
             $specie->customId=$specie->id;
-            Log::info('Is Normal : '.$specie);
+//            Log::info('Is Normal : ' .$specie);
             $famille=Famille::where('id',$specie->id_famillie)->first();
             $famillyName= $famille->name;
             $order=Order::where('id',$famille->orderId)->first();

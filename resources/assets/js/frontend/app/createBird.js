@@ -10,7 +10,7 @@ $('#order').on('change',function(e){
 
 
 });
-// $('#hiddenTable').dataTable();
+
 function generateFamillies(id) {
 
     $.get('/ajax/generateFamillies?orderId='+id,function (data) {
@@ -59,7 +59,7 @@ $('#species').on('change',function(e){
 function generateUsualName(id) {
 
     $.get('/ajax/generateUsualName?specieId='+id,function (data) {
-        console.log('usualName:'+data);
+        console.log('usualName:',data);
         $('input[name="commonName"]').val(data.commonName);
       // $('#species').append('<option value="'+speciesObs.id+'">'+speciesObs.scientificName+'</option>');
     });
@@ -127,7 +127,7 @@ $('select[name=origin]').change(function () {
 function addaptSpecieFields() {
     $('#showSpecieBtn').val($('#species').val());
     $('#showSpecieBtn').css('display', 'inline-flex');
-    // $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+    // $('input[name="commonName"]').val($("#searchinput").getSelectedItemData().name_FR);
      $('#returnSpecieBtn').css('display', 'inline-flex');
      $('#customSpecieBtn').css('display', 'none');
      $('#addSpecieBtn').css('display', 'none');
@@ -135,16 +135,18 @@ function addaptSpecieFields() {
 }
 
 function displaySpecieAttribut() {
-    let ordreSearched = $("#basics").getSelectedItemData().ordre;
-    let famille = $("#basics").getSelectedItemData().famillie;
-    console.log(ordreSearched);
-    let latin = $("#basics").getSelectedItemData().latin;
-    generateFamillies($("#basics").getSelectedItemData().id_Ordre);
-    generateSpecies($("#basics").getSelectedItemData().Id_famille);
-    $('input[name="commonName"]').val($("#basics").getSelectedItemData().name_FR);
+    console.log('displaySpecieAttribut');
+    let ordreSearched = $("#searchinput").getSelectedItemData().ordre;
+    let famille = $("#searchinput").getSelectedItemData().famillie;
+    console.log('ici',ordreSearched);
+    let latin = $("#searchinput").getSelectedItemData().latin;
+    generateFamillies($("#searchinput").getSelectedItemData().id_Ordre);
+    generateSpecies($("#searchinput").getSelectedItemData().Id_famille);
+    $('input[name="commonName"]').val($("#searchinput").getSelectedItemData().name_FR);
+
     setTimeout(function () {
 
-        // Something you want delayed.
+     
 
         $(function () {
             $('[name=orderId] option').filter(function () {
@@ -168,10 +170,10 @@ function displaySpecieAttribut() {
         });
 
 
-    }, 500);
+    }, 1500);
     setTimeout(function () {
         addaptSpecieFields();
-    }, 500);
+    }, 1500);
 }
 
 //AutoComplete
@@ -199,7 +201,7 @@ let options = {
     }
 };
 
-$("#basics").easyAutocomplete(options,"minLength", 3 );
+$("#searchinput").easyAutocomplete(options,"minLength", 3 );
 
 // create Specie
 
@@ -210,7 +212,7 @@ $('#addSpecieBtn').on('click',function () {
     $('.newSpecieBlock input').prop('disabled',false);
     $('.specieBlock input').prop('disabled',true);
 
-    $('#basics').prop('disabled',true);
+    $('#searchinput').prop('disabled',true);
     $('#newusualNameInput').prop('required',true);
     $('#type').val('newSpecie');
     $('#returnSpecieBtn').css('display', 'inline-flex');
@@ -256,7 +258,7 @@ $('#customSpecieBtn').on('click',function () {
     $('.specieBlock').css('display','none');
     $('.specieBlock input').prop('disabled',true);
     $('#type').val('userSpecie');
-    $('#basics').css('display','none');
+    $('#searchinput').css('display','none');
     $('#returnSpecieBtn').css('display', 'inline-flex');
     $('#customSpecieBtn').css('display', 'none');
     $('#addSpecieBtn').css('display', 'none');
@@ -265,7 +267,7 @@ $('#customSpecieBtn').on('click',function () {
 
 $('#returnSpecieBtn').on('click',function () {
     $('#goButton').css('display', 'block');
-    $('#basics').css('display','block');
+    $('#searchinput').css('display','block');
     $('.easy-autocomplete').css('display', 'block');
     $('#speciesCustomSelect').css('display', 'none');
     $('#customSpecieBtn').css('display', 'inline-flex');

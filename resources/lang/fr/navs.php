@@ -28,6 +28,8 @@ return [
         'couples'   => 'Les Couples',
         'eggs' => 'Les Oeufs',
         'hatchings' => 'Les Couvées',
+        'nestlings' => 'Les Jeunes(au nid)',
+        'zoneAndCage' => 'Les zones et les cages',
         'login'     => 'Connexion',
         'macros'    => 'Macros',
         'register'  => "S'enregistrer",

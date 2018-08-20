@@ -8,6 +8,8 @@ use App\Order;
 use App\Specie;
 use App\Famille;
 use App\BirdsAlpha;
+use App\Cage;
+use App\Egg;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use JavaScript;
@@ -17,6 +19,9 @@ use PHPUnit\Util\PHP\AbstractPhpProcess;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use DateTime;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * Class HomeController.
@@ -37,8 +42,8 @@ class BirdsController extends Controller
 
         $data=$this->getRightSpecies($birds);
 
-        $customSpecies= (array)$this->getUsersSpecies();
-//dd($customSpecies);
+        $customSpecies= (array)Specie::getUsersSpecies();
+//dd($birds);
         return view('frontend.app.bird.birdsIndex',compact(['data','customSpecies']));
     }
 
@@ -52,17 +57,27 @@ class BirdsController extends Controller
 
         $query =Input::get('nbfc');
 
-
-
         $orders=Order::get();
         $females = Bird::where('sexe','=','female')->get();
         $males = Bird::where('sexe','=','male')->get();
 
-        $customSpecies= $this->getUsersSpecies();
+        $customSpecies= (array)Specie::getUsersSpecies();
 
-        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males','customSpecies','query']));
+        $cages= Cage::getAllOfUser();
+        return view('frontend.app.bird.birdsCreate',compact(['orders','females','males','customSpecies','query','cages']));
     }
 
+    public function setBirdCage(){
+        $birdId =Input::get('birdId');
+        $cageId =Input::get('cageId');
+        ((Input::get('supp'))? $index=0 : $index=$cageId);
+
+        if(Bird::setBirdCage($birdId,$index)){
+            $bird=Bird::getModel($birdId);//
+            return response()->json($bird);
+        }
+
+    }
 
 
     public function ajaxData(){
@@ -130,11 +145,15 @@ class BirdsController extends Controller
         $bird->sexingMethode = $request->sexingMethode;
         $bird->origin = $request->origin;
         $bird->breederId = $request->breederId;
+        $bird->cageId = $request->cageId;
+
         $bird->idType = $request->idType;
         $bird->idNum = $request->idNum;
-        $date = DateTime::createFromFormat('d/m/Y',$request->dateOfBirth );
-        $convertDate=$date->format('d/m/Y');
-        $bird->dateOfBirth = $convertDate;
+//        $date = DateTime::createFromFormat('d/m/Y',$request->dateOfBirth );
+//        $convertDate=$date->format('d/m/Y');
+//        dd($request->dateOfBirth);
+        $bird->dateOfBirth = Carbon::createFromFormat('d/m/Y', $request->dateOfBirth);
+
         $bird->disponibility = $request->disponibility;
         $bird->status = $request->status;
 
@@ -174,38 +193,33 @@ class BirdsController extends Controller
 
     }
 
+    public function getStats(){
 
+        $stats['status']=$this->generateStatusStats(Bird::getAllofUser());
+        $stats['eggs']=app('App\Http\Controllers\Frontend\App\EggController')->generateEggsStats();
+        $stats['laying']=app('App\Http\Controllers\Frontend\App\NestlingController')->generateLayingStats();
+        return response()->json($stats);
+    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function edit($id)
     {
         $orders  = Order::get();
         $bird=Bird::where('id','=',$id)->first();
-//        dd($bird);
         $idSpecie=$bird->species_id;
+
         if(!str_contains($idSpecie, '_')){
             $specie  = Specie::where('id',$idSpecie)->first();
             $famille = Famille::where('id',$specie->id_famillie)->first();
             $order   = Order::where('id',$famille->orderId)->first();
-//            dd($order);
         }
         else{
             $specie  = CustomSpecie::where('customId',$idSpecie)->first();
-
             $idFamille = Specie::where('id',$specie->idReferedSpecies)->first()->id_famillie;
-//            dd($idFamille);
             Log::info('idFamille: '.$idFamille);
             ($idFamille!=null) ? $famille =Famille::where('id',$idFamille)->first() : $famille=null;
             ($famille!=null) ? $order =Order::where('id',$famille->orderId)->first() : $order=null;
-//            dd($order);
 
         }
-
 
         return view('frontend.app.bird.birdsEdit',compact(['bird','specie','order','orders','famille']));
     }
@@ -284,32 +298,7 @@ class BirdsController extends Controller
 //        dd($specie);
     }
 
-    public function getUsersSpecies()
-    {
-        $customSpecies = [];
 
-        $speciesId = Bird::where('userId', '=', Auth::id())->groupBy('species_id')->pluck('species_id')->toArray();
-
-
-        foreach ($speciesId as $specieId) {
-            $newcustomSpecies = [];
-            if (!str_contains($specieId, '_')) {
-                $newSpecieName = Specie::where('id', $specieId)->first()->commonName;
-                $newcustomSpecies['id'] = $specieId;
-                $newcustomSpecies['name'] = $newSpecieName;
-                array_push($customSpecies, $newcustomSpecies);
-            } else {
-
-                $newSpecieName = CustomSpecie::where('customId', $specieId)->first()->commonName;
-                $newcustomSpecies['id'] = $specieId;
-                $newcustomSpecies['name'] = $newSpecieName;
-
-                array_push($customSpecies, $newcustomSpecies);
-
-            }
-        }
-        return $customSpecies;
-    }
 
     /********************************************
      * Description: return the specie or CustomSpecie of each Birds
@@ -335,5 +324,23 @@ class BirdsController extends Controller
         }
         return $data;
     }
+
+    /**
+     * @param $birds
+     * @return $status
+     */
+    public function generateStatusStats($birds)
+    {
+        $status=[];
+        $nbrCoupled = $birds->where('status', '=', 'coupled')->count();
+        $status['coupled'] = $nbrCoupled;
+        $nbrSingle = $birds->where('status', 'single')->count();
+        $status['single'] = $nbrSingle;
+        $nbrRest = $birds->where('status', 'rest')->count();
+        $status['rest'] = $nbrRest;
+        return $status;
+    }
+
+
 
 }

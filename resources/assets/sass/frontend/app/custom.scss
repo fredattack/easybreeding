@@ -17,7 +17,10 @@
     border: 1px solid #26dad2 !important;
     background-color: #26dad2 !important;
 }
-
+  #birdsIndex > tbody > tr.child > td > ul > li > span.dtr-data > span:nth-child(2) > a
+  {
+    color: #000;
+  }
 .hiddenTable{
   th{
     display: none;
