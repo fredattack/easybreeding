@@ -37,20 +37,20 @@
 
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">@lang('custom.settings')</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">item 1.1</a></li>
-                        <li><a href="#">item 1.2</a></li>
-                        <li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">item 1.3.1</a></li>
-                                <li><a href="#">item 1.3.2</a></li>
-                                <li><a href="#">item 1.3.3</a></li>
-                                <li><a href="#">item 1.3.4</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">item 1.4</a></li>
-                    </ul>
+                <li> <a class="has-arrow waves-effect waves-dark" href="{{route('frontend.app.settings')}}" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">@lang('custom.settings')</span></a>
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li><a href="#">item 1.1</a></li>--}}
+                        {{--<li><a href="#">item 1.2</a></li>--}}
+                        {{--<li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>--}}
+                            {{--<ul aria-expanded="false" class="collapse">--}}
+                                {{--<li><a href="#">item 1.3.1</a></li>--}}
+                                {{--<li><a href="#">item 1.3.2</a></li>--}}
+                                {{--<li><a href="#">item 1.3.3</a></li>--}}
+                                {{--<li><a href="#">item 1.3.4</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li><a href="#">item 1.4</a></li>--}}
+                    {{--</ul>--}}
                 </li>
             </ul>
         </nav>

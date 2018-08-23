@@ -179,7 +179,8 @@ return [
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Grimthorr\LaravelUserSettings\ServiceProvider::class,
-
+        Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
+        PulkitJalan\Google\GoogleServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -252,13 +253,14 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Setting' => Grimthorr\LaravelUserSettings\Facade::class,
+        'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
         /*
          * Package Aliases
          */
         'Active' => HieuLe\Active\Facades\Active::class,
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+        'Google' => PulkitJalan\Google\Facades\Google::class,
     ],
 
 ];

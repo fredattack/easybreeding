@@ -276,29 +276,7 @@
                                        </div>
                                    </div>
 
-                                   <div class="form-group row">
-                                       <label class="control-label col-md-4">@lang('labels.frontend.birds.gender')</label>
-                                       <div class="col-md-8 text-center">
-                                           <div class="radio-list pull-center">
-                                               <label class="custom-control custom-radio">
-                                                   <input id="sexe1" name="sexe" type="radio" value='male' class="custom-control-input">
-                                                   <span class="custom-control-indicator"></span>
-                                                   <span class="custom-control-description">@lang('labels.frontend.birds.male')</span>
-                                               </label>
-                                               <label class="custom-control custom-radio">
-                                                   <input id="sexe2" name="sexe" type="radio" value="female" class="custom-control-input">
-                                                   <span class="custom-control-indicator"></span>
-                                                   <span class="custom-control-description">@lang('labels.frontend.birds.female')</span>
-                                               </label>
-                                               <label class="custom-control custom-radio">
-                                                   <input id="sexe3" name="sexe" type="radio" value="unknow" class="custom-control-input" checked>
-                                                   <span class="custom-control-indicator"></span>
-                                                   <span class="custom-control-description">@lang('labels.frontend.birds.unknow')</span>
-                                               </label>
-
-                                           </div>
-                                       </div>
-                                   </div>
+                                   ☺
 
                                    <div class="form-group row" id="sexMethod">
                                        <label class="control-label col-md-4">@lang('labels.frontend.birds.sexingMethode')</label>

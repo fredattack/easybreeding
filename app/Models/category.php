@@ -29,4 +29,16 @@ class category extends Model
                 'userId'    => Auth::id(),
             ])) return true;
         }
+
+    public static function getModel($id){
+    $cat=category::where('id',$id)->first();
+    return $cat;
+    }
+
+    public static function deleteModel($id){
+        $cat=category::where('id',$id)->first();
+        $name= $cat->name;
+        $cat->delete();
+        return $name;
+    }
 }

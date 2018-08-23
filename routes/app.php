@@ -10,6 +10,10 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
 {
     /*Dashboard*/
     Route::get('/', "Frontend\App\HomeController@index")->name('frontend.app.dashboard');
+    Route::get('/store', "Frontend\App\HomeController@store")->name('frontend.app.store');
+
+    /*Settings*/
+    Route::get('/settings', "Frontend\App\HomeController@settingsIndex")->name('frontend.app.settings');
 
     /*Birds*/
     Route::get('/birds', "Frontend\App\BirdsController@index")->name('frontend.app.birds');
@@ -47,7 +51,11 @@ Route::group(['prefix' => 'app',  'middleware' => 'auth'], function()
 
     /*Task - Calendar*/
     Route::get('/task', "Frontend\App\TasksController@store")->name('frontend.app.storeTask');
+    Route::get('/getAuth', "Frontend\App\gCalendarController@oauth")->name('frontend.app.getAuth');
+    Route::get('/gcalendar', "Frontend\App\gCalendarController@index")->name('frontend.app.gcalendar.index');
 
+//    Route::resource('gcalendar', 'Frontend\App\gCalendarController');
+    Route::get('oauth', ['as' => 'oauthCallback', 'uses' => 'Frontend\App\gCalendarController@oauth']);
 
 
     /*Test Route*/

@@ -135,6 +135,7 @@ return [
         'calendar'=>[
             'noEvents'=>'Aucune tâche à afficher',
             'colorCategory' => 'Définir la couleur',
+            'categories' => 'Catégories',
             'saveCategory' => 'Enregistrer cette catégorie',
             'chooseCategory'  =>  'Choisir une catégorie',
             'AddNewCategory'  =>  'Ajouter une catégorie',
@@ -145,6 +146,15 @@ return [
             'title'  =>  'Titre',
             'mm/dd/yyyy'  =>  'jj/mm/aaaa',
             'name'  =>  'Nom',
+            'defaultView'  =>  'Vue par défault',
+            'default'=>'Par default',
+            'laying'=>'Ponte',
+            'nestling'=>'Eclosion',
+            'controlFecundity'=>'Controle de fécondité',
+            'googleAccount'=>'Compte Google',
+            'googleInfo'=>'Vous avez la possibilité de synchroniser votre calendrier EasyBreeding avec vos calendrier google.
+                           Pour ce faire introduisez votre adresse email "@gmail.com" et suivez les instructions à l\'écran.'
+
 
         ],
         'auth' => [
@@ -347,6 +357,11 @@ return [
                 'rows1'=> "1 ligne séléctionnée"
 
         ],
+        'settings'=>[
+            'userProfil'=>"Profil utilisateur",
+            'general'=>"Paramètres généraux",
+            'calendar'=>"Paramètres du calendrier",
+        ]
 
 
     ],

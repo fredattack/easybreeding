@@ -10,6 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <meta name="google-site-verification" content="tZYDVb0mohan1T95VejQqSo4Fy5PNZoD9soKwFTLZlk" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>@yield('title', app_name())</title>

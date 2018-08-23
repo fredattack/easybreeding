@@ -56,6 +56,7 @@ require('./hatchingsIndex');
 require('./coupleIndex');
 require('./zoneAndCage');
 require('./dashboard');
+require('./settings');
 
 /*
 *

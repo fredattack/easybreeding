@@ -217,9 +217,8 @@
                                                                     <select class="form-control form-white categoryGroup" id="categorySelect" name="categoryId" required>
                                                                         <option value="" selected disabled >@lang("labels.frontend.calendar.chooseCategory")</option>
                                                                         @foreach($categories as $category)
-                                                                        <option value="{{$category->id}}" style="color:{{\Setting::get('category.'.$category->name)}}">&#xf192 {{$category->name}}</option>
+                                                                        <option value="{{$category->id}}" style="color:{{($default['category']==null)?$settings['category'][$category->name]:$default['category'][$category->name]}}">&#xf192 {{$category->name}}</option>
                                                                        @endforeach
-
                                                                     </select>
                                                                     <div class="input-group addCatGroup " id="addGroupCat">
                                                                         <input type="text" class="form-control" placeholder="@lang("labels.frontend.calendar.name")" id="newCategoryInput" >

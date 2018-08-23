@@ -250,9 +250,12 @@ $('.timeEvent,#startTime,#endTime').clockpicker({
 * Return none
 *********************************************/
 $('#saveCategory').on('click',function () {
-  let color=$("#full").spectrum('get').toHexString();
-  let title =$('#newCategoryInput').val();
-  createCategory(title,color);
+    if($('#newCategoryInput').val()==null) $('.form-control-feedback').css('display','block');
+    else {
+        let color = $("#full").spectrum('get').toHexString();
+        let title = $('#newCategoryInput').val();
+        createCategory(title, color);
+    }
 });
 
 /********************************************

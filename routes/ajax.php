@@ -41,6 +41,13 @@ Route::group(['prefix' => 'ajax',  'middleware' => 'auth'], function()
     Route::get('/getStats', "Frontend\App\BirdsController@getStats")->name('frontend.app.getStats');
     Route::get('/createCategory', "Frontend\App\CategoryController@createCategory")->name('frontend.app.createCategory');
 
+    /*
+     * Settings
+     *
+     *  */
+    Route::get('/updateCategoryColor', "Frontend\App\CategoryController@updateCategoryColor")->name('frontend.app.updateCategoryColor');
+    Route::get('/deleteCategory', "Frontend\App\CategoryController@deleteCategory")->name('frontend.app.deleteCategory');
+    Route::get('/updateDefaultView', "Frontend\App\TasksController@updateDefaultView")->name('frontend.app.updateDefaultView');
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\Uuid;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -57,11 +58,23 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','created_at','updated_at'];
 
     /**
      * The dynamic attributes from mutators that should be returned with the user object.
      * @var array
      */
     protected $appends = ['full_name'];
+
+    public static function getSettings(){
+        $settings=User::where('id','=',Auth::id())
+                ->first()->settings;
+        return $settings;
+    }
+
+    public static function getModel(){
+        $user=User::where('id','=',Auth::id())
+            ->first();
+        return $user;
+    }
 }
